@@ -8,7 +8,7 @@ version = "0.0.1"
 description = "An open early-warning observatory for runaway AI: Prophet null models, singularity detectors and a pre-registered forecast ledger."
 readme = "README.md"
 license = "Apache-2.0"
-license-files = ["LICENSE", "NOTICE"]
+license-files = ["LICENSE", "NOTICE", "LICENSE-DATA"]
 authors = [{ name = "guru-bharadwaj20" }]
 requires-python = ">=3.12,<3.13"
 keywords = ["forecasting", "prophet", "neuralprophet", "ai-safety", "singularity", "early-warning"]
