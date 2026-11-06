@@ -13,12 +13,26 @@ from kairos.jonas.gap import (
     side_index,
     split_sides,
 )
+from kairos.jonas.velocity import (
+    BAND_COVERAGE,
+    VELOCITY_COLUMNS,
+    decimal_years,
+    gap_slope,
+    gap_velocity,
+    leave_one_out,
+)
 
 __all__ = [
+    "BAND_COVERAGE",
     "GAP_COLUMNS",
+    "VELOCITY_COLUMNS",
     "GapSide",
     "component_log_index",
+    "decimal_years",
+    "gap_slope",
+    "gap_velocity",
     "jonas_gap",
+    "leave_one_out",
     "side_components",
     "side_index",
     "split_sides",

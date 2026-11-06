@@ -28,3 +28,19 @@ unchanged. **`dG/dt` is the headline quantity.**
 from kairos.jonas import jonas_gap
 gap = jonas_gap(frame, base_year=2016)   # ds, ln_c, ln_h, gap, n_c, n_h
 ```
+
+## Gap velocity `dG/dt` (K-7.02)
+
+`dG/dt` at month `t` is the OLS slope of `G` over the trailing `window` months
+(default 12), in log units per year. It never uses data after `t`.
+
+Uncertainty, from `gap_velocity(frame, base_year, n_boot=500)`:
+
+| Column | Meaning |
+|---|---|
+| `boot_lo`, `boot_hi`, `boot_se` | Bootstrap over index construction: components redrawn with replacement within each side, and observations perturbed log-normally so their 90% interval matches `y_lo`/`y_hi` |
+| `loo_min`, `loo_max` | Range of `dG/dt` over leave-one-out composites (each component dropped in turn) |
+| `dgdt_lo`, `dgdt_hi` | Reported interval: the union of the two |
+
+Replicates run on `kairos.compute.pmap`; each one is seeded with
+`derive_seed(seed, "jonas.velocity", r)`, so results are identical for any `n_jobs`.
