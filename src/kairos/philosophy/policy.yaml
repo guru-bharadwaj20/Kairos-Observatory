@@ -51,3 +51,10 @@ collingridge:
 intervention_cost:
   tau: 18.0
   floor: 0.1
+
+# Goodhart divergence: a public metric improving faster than its held-out twin is a
+# gaming signal. Trends are log-linear (per year) with Newey-West standard errors.
+goodhart:
+  alpha: 0.05          # one-sided significance of "public slope > held-out slope"
+  min_gap: 0.05        # and the gap must be at least this many log-units per year
+  min_overlap: 12      # months both series must share
