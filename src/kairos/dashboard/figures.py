@@ -6,7 +6,13 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from kairos.dashboard.components import resolved_level
-from kairos.dashboard.snapshot import AccelerationFit, DialReading, LeadTime, Snapshot
+from kairos.dashboard.snapshot import (
+    AccelerationFit,
+    DialReading,
+    LeadTime,
+    Snapshot,
+    VingeHorizon,
+)
 from kairos.dashboard.theme import (
     CAPABILITY_COLOR,
     GREY,
@@ -174,6 +180,51 @@ def delta_distribution(a: AccelerationFit) -> go.Figure:
     fig.update_xaxes(title_text="δ")
     fig.update_yaxes(title_text="resamples")
     fig.update_layout(showlegend=False, bargap=0.02, hovermode="closest")
+    return fig
+
+
+def _decimal_year(iso_date: str) -> float:
+    return int(iso_date[:4]) + (int(iso_date[5:7]) - 1) / 12
+
+
+def linear_trend(t: tuple[str, ...], y: tuple[float, ...]) -> tuple[float, float]:
+    """Ordinary least squares ``y = a + b * year``; returns ``(a, b)``."""
+    if len(t) < 2:
+        raise ValueError("need at least two points for a trend")
+    xs = [_decimal_year(d) for d in t]
+    mx, my = sum(xs) / len(xs), sum(y) / len(y)
+    sxx = sum((x - mx) ** 2 for x in xs)
+    b = sum((x - mx) * (v - my) for x, v in zip(xs, y, strict=True)) / sxx
+    return my - b * mx, b
+
+
+def vinge_horizon(vh: VingeHorizon, tolerance: float, published: float,
+                  trend_months: int = 36) -> go.Figure:  # fmt: skip
+    """h*(t) at one error tolerance, with a linear trend over the recent window."""
+    y = vh.at(tolerance, published)
+    fig = go.Figure(
+        go.Scatter(x=list(vh.t), y=list(y), mode="lines", name=f"h* (within {tolerance:g}x)",
+                   line={"color": HUMAN_COLOR, "width": 2}),
+    )  # fmt: skip
+    title = f"Vinge Horizon h*(t): how far ahead forecasts stay within {tolerance:g}x"
+    n = min(trend_months, len(vh.t))
+    if n >= 2:
+        tt, yy = vh.t[-n:], y[-n:]
+        a, b = linear_trend(tt, yy)
+        fig.add_trace(
+            go.Scatter(x=[tt[0], tt[-1]],
+                       y=[a + b * _decimal_year(tt[0]), a + b * _decimal_year(tt[-1])],
+                       mode="lines", name=f"trend, last {n} months",
+                       line={"color": VERMILLION, "width": 3, "dash": "dash"}),
+        )  # fmt: skip
+        verb = "shrinking" if b < 0 else "growing"
+        title += (
+            f"<br><sup>{verb} by {abs(b):.1f} {vh.unit} per year over the last {n} months</sup>"
+        )
+    if tolerance != published:
+        title += f"<br><sup>published tolerance is {published:g}x</sup>"
+    base_layout(fig, title, height=420)
+    fig.update_yaxes(title_text=f"h* ({vh.unit})", rangemode="tozero")
     return fig
 
 

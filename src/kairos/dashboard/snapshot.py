@@ -20,7 +20,8 @@ Schema version 1 (``schema_version: 1``)::
       "capability": SeriesFrame,                 # C(t)
       "human_capacity": SeriesFrame,             # H(t)
       "acceleration": [AccelerationFit, ...],    # one per C-side series
-      "vinge_horizon": {"t": [...], "h_star": [...], "unit": "months"},
+      "vinge_horizon": {"t": [...], "h_star": [...], "unit": "months",
+                        "by_tolerance": {"1.5": [...], "3.0": [...]}},  # optional
       "ledger": [LedgerEntry, ...]
     }
 
@@ -46,7 +47,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal, cast
 
@@ -126,8 +127,22 @@ class VingeHorizon:
     """Vinge horizon."""
 
     t: tuple[str, ...]
-    h_star: tuple[float, ...]
+    h_star: tuple[float, ...]  # at the published tolerance
     unit: str
+    #: h* recomputed at other tolerance factors (e.g. 1.5x, 2x, 3x), if published
+    by_tolerance: Mapping[float, tuple[float, ...]] = field(default_factory=dict)
+
+    def at(self, factor: float, published: float) -> tuple[float, ...]:
+        """Run at."""
+        if factor in self.by_tolerance:
+            return self.by_tolerance[factor]
+        if factor == published:
+            return self.h_star
+        raise KeyError(factor)
+
+    def tolerances(self, published: float) -> list[float]:
+        """Run tolerances."""
+        return sorted({published, *self.by_tolerance})
 
 
 @dataclass(frozen=True)
@@ -348,12 +363,21 @@ def parse_snapshot(raw: object) -> Snapshot:
         raise SnapshotError("dials: need exactly one reading per dial")
     dials = tuple(sorted(dials, key=lambda d: DIAL_ORDER.index(d.dial)))
     vh = _obj(_get(m, "vinge_horizon", "snapshot"), "vinge_horizon")
+    by_tol: dict[float, tuple[float, ...]] = {}
+    raw_tol = _obj(vh.get("by_tolerance", {}), "vinge_horizon.by_tolerance")
+    for key in raw_tol:
+        try:
+            factor = float(key)
+        except ValueError as exc:
+            raise SnapshotError(f"vinge_horizon.by_tolerance: key '{key}' is not a number") from exc
+        by_tol[factor] = _nums(raw_tol, key, "vinge_horizon.by_tolerance")
     vinge = VingeHorizon(
         t=_strs(vh, "t", "vinge_horizon"),
         h_star=_nums(vh, "h_star", "vinge_horizon"),
         unit=str(vh.get("unit", "months")),
+        by_tolerance=by_tol,
     )
-    _same_len("vinge_horizon", vinge.t, vinge.h_star)
+    _same_len("vinge_horizon", vinge.t, vinge.h_star, *by_tol.values())
     return Snapshot(
         schema_version=SCHEMA_VERSION,
         generated_at=_str(m, "generated_at", "snapshot"),

@@ -172,7 +172,15 @@ def build_demo_snapshot() -> dict[str, object]:
             "value": hum,
         },
         "acceleration": accel,
-        "vinge_horizon": {"t": t, "h_star": [_r(v) for v in h_star], "unit": "months"},
+        "vinge_horizon": {
+            "t": t,
+            "h_star": [_r(v) for v in h_star],
+            "unit": "months",
+            "by_tolerance": {
+                "1.5": [_r(0.7 * v) for v in h_star],
+                "3.0": [_r(1.4 * v) for v in h_star],
+            },
+        },
         "ledger": ledger,
     }
 

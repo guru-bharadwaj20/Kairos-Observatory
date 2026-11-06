@@ -75,8 +75,32 @@ def acceleration(snap: Snapshot) -> None:
     )
 
 
+def vinge(snap: Snapshot) -> None:
+    """Run vinge."""
+    st.header("Vinge Horizon")
+    published = snap.parameters.vinge_tolerance_factor
+    options = snap.vinge_horizon.tolerances(published)
+    tol = st.select_slider(
+        "Error tolerance (forecast within a factor of)",
+        options=options,
+        value=published,
+        format_func=lambda f: f"{f:g}x",
+        key="vinge-tol",
+    )
+    window = st.slider("Trend window (months)", 12, 120, 36, step=6, key="vinge-window")
+    st.plotly_chart(
+        figures.vinge_horizon(snap.vinge_horizon, float(tol), published, window), key="vinge"
+    )
+    st.caption(
+        "h* is the first forecast horizon at which the smoothed error leaves the "
+        "tolerance (D3). Error is measured as a factor in real units (D2). A shrinking "
+        "h* means the world is becoming harder to forecast."
+    )
+
+
 PAGES: dict[str, Callable[[Snapshot], None]] = {
     "Overview": overview,
     "C versus H": capability_vs_human,
     "Acceleration explorer": acceleration,
+    "Vinge Horizon": vinge,
 }
