@@ -25,7 +25,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | Phase | Name | Roadmap weeks | Subtasks | Done | Status |
 |:-:|---|:-:|:-:|:-:|:-:|
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
-| 1 | Compute layer (CPU/GPU) | 0 | 8 | 7 | ❌ |
+| 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 0 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 0 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **21** | **15%** |
+| | **Total** | | **137** | **22** | **16%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -244,7 +244,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-1.05 | Device selector | `get_device()` returns CUDA or falls back to CPU; float32 policy for GPU, float64 for CPU references | GPU | 1.02 | ✅ |
 | K-1.06 | Reproducibility | One `seed_everything()` covering numpy, torch, CUDA, CmdStan and Lightning; the same seed reproduces outputs bit for bit on CPU | CPU, GPU | 1.05 | ✅ |
 | K-1.07 | Fit cache | `joblib.Memory` keyed by data hash + params + code version; reruns skip finished fits | — | 1.02 | ✅ |
-| K-1.08 | Hardware benchmark | Script measures Prophet fits/s (1 vs 28 workers), NeuralProphet CPU vs GPU, batched least squares on GPU vs CPU; results in `docs/benchmarks.md` | CPU×N, GPU | 1.04, 1.05 | ❌ |
+| K-1.08 | Hardware benchmark | Script measures Prophet fits/s (1 vs 28 workers), NeuralProphet CPU vs GPU, batched least squares on GPU vs CPU; results in `docs/benchmarks.md` | CPU×N, GPU | 1.04, 1.05 | ✅ |
 
 ### Phase 2: Open dataset — `C(t)`, `H(t)`, events
 
