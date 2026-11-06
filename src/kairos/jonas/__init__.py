@@ -4,6 +4,12 @@ The level of ``G`` is relative to a base year (design note D8); ``dG/dt`` is the
 quantity that carries meaning.
 """
 
+from kairos.jonas.attribution import (
+    ATTRIBUTION_COLUMNS,
+    GrowthRate,
+    component_attribution,
+    growth_rate,
+)
 from kairos.jonas.gap import (
     GAP_COLUMNS,
     GapSide,
@@ -31,16 +37,20 @@ from kairos.jonas.velocity import (
 )
 
 __all__ = [
+    "ATTRIBUTION_COLUMNS",
     "BAND_COVERAGE",
     "GAP_COLUMNS",
     "VELOCITY_COLUMNS",
     "GapSide",
+    "GrowthRate",
     "HacTest",
     "SustainedResult",
+    "component_attribution",
     "component_log_index",
     "decimal_years",
     "gap_slope",
     "gap_velocity",
+    "growth_rate",
     "hac_mean_test",
     "jonas_gap",
     "leave_one_out",

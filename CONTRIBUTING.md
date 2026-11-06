@@ -31,13 +31,13 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 3 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
-| 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 3 | ❌ |
+| 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 4 | ❌ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 0 | ❌ |
 | 9 | Historical validation | 8, 10 | 9 | 0 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **48** | **35%** |
+| | **Total** | | **137** | **49** | **36%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -344,7 +344,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-7.01 | Gap series | `G(t) = ln C − ln H` normalised at a base year; docs say the level is relative (D8) | CPU | 2.21 | ✅ |
 | K-7.02 | Gap velocity with uncertainty | `dG/dt` with a bootstrap over index construction and the leave-one-out components | CPU×N | 7.01 | ✅ |
 | K-7.03 | Sustained-positive test | Run-length rule plus HAC (Newey–West) t-test on `dG/dt > 0` | CPU | 7.02 | ✅ |
-| K-7.04 | Component attribution | Which H sub-series lags the most: the funders' view | CPU | 7.02 | ❌ |
+| K-7.04 | Component attribution | Which H sub-series lags the most: the funders' view | CPU | 7.02 | ✅ |
 | K-7.05 | Closing scenarios | H growth rate needed to bring `dG/dt` to 0, with interval | CPU | 7.02 | ❌ |
 | K-7.06 | Jonas dial | Dial object: `dG/dt`, interval, run length, state | CPU | 7.03 | ❌ |
 

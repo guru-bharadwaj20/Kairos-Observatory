@@ -56,3 +56,12 @@ both:
    using Newey–West standard errors with `floor(4·(n/100)^(2/9))` lags. Composite
    indices are smoothed and interpolated, so the increments are autocorrelated and a
    plain t-test would overstate significance.
+
+## Component attribution (K-7.04)
+
+The funders' view: `component_attribution(frame, base_year, months=36)` ranks the
+H components by `lag = g_C − rate`, how far each one's growth falls behind the
+capability composite over the trailing window. `contribution = weight · lag` splits
+`dG/dt` across components (the contributions sum to the slope of `G` when weights
+are fixed over the window), and `loo_dgdt` shows `dG/dt` with the component left
+out. Rates are OLS slopes per year with Newey–West standard errors (`rate_se`).
