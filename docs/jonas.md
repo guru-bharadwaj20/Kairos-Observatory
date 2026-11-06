@@ -44,3 +44,15 @@ Uncertainty, from `gap_velocity(frame, base_year, n_boot=500)`:
 
 Replicates run on `kairos.compute.pmap`; each one is seeded with
 `derive_seed(seed, "jonas.velocity", r)`, so results are identical for any `n_jobs`.
+
+## Sustained-positive test (K-7.03)
+
+The danger sign is `dG/dt > 0` *sustained*. `sustained_positive(velocity)` requires
+both:
+
+1. **Run length:** trailing `dG/dt` positive for at least `min_run` months (default 6).
+2. **HAC t-test:** over the last `months` months (default 36), the annualised
+   increments `12·ΔG` have a mean above 0 at one-sided level `alpha` (default 0.05),
+   using Newey–West standard errors with `floor(4·(n/100)^(2/9))` lags. Composite
+   indices are smoothed and interpolated, so the increments are autocorrelated and a
+   plain t-test would overstate significance.
