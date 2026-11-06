@@ -6,12 +6,14 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from kairos.dashboard.components import resolved_level
-from kairos.dashboard.snapshot import DialReading, LeadTime, Snapshot
+from kairos.dashboard.snapshot import AccelerationFit, DialReading, LeadTime, Snapshot
 from kairos.dashboard.theme import (
     CAPABILITY_COLOR,
     GREY,
     HUMAN_COLOR,
     INK,
+    ORANGE,
+    SKY,
     STATE_STYLE,
     VERMILLION,
 )
@@ -96,6 +98,82 @@ def capability_vs_human(snap: Snapshot) -> go.Figure:
     fig.update_layout(title={"font": {"size": 14}})
     fig.update_yaxes(title_text=c.unit or "index", row=1, col=1)
     fig.update_yaxes(title_text="gap", row=2, col=1)
+    return fig
+
+
+def _quantile(sorted_xs: list[float], q: float) -> float:
+    """Linear-interpolation quantile (numpy's default method)."""
+    pos = (len(sorted_xs) - 1) * q
+    lo = int(pos)
+    hi = min(lo + 1, len(sorted_xs) - 1)
+    return sorted_xs[lo] + (sorted_xs[hi] - sorted_xs[lo]) * (pos - lo)
+
+
+def delta_summary(samples: tuple[float, ...]) -> dict[str, float]:
+    """Median, 90% interval and P(δ > 0) of the bootstrap distribution."""
+    if not samples:
+        raise ValueError("no bootstrap samples")
+    xs = sorted(samples)
+    return {
+        "median": _quantile(xs, 0.5),
+        "lower": _quantile(xs, 0.05),
+        "upper": _quantile(xs, 0.95),
+        "p_positive": sum(x > 0 for x in xs) / len(xs),
+    }
+
+
+def acceleration_fit(a: AccelerationFit) -> go.Figure:
+    """Observed series, Prophet null fit with interval, and its changepoints."""
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(x=list(a.t) + list(a.t)[::-1], y=list(a.upper) + list(a.lower)[::-1],
+                   fill="toself", fillcolor="rgba(0,114,178,0.18)", line={"width": 0},
+                   name="fit interval", hoverinfo="skip"),
+    )  # fmt: skip
+    fig.add_trace(
+        go.Scatter(x=list(a.t), y=list(a.fit), name="Prophet null fit", mode="lines",
+                   line={"color": HUMAN_COLOR, "width": 2}),
+    )  # fmt: skip
+    fig.add_trace(
+        go.Scatter(x=list(a.t), y=list(a.observed), name="observed", mode="markers",
+                   marker={"color": INK, "size": 4, "symbol": "circle"}),
+    )  # fmt: skip
+    for cp in a.changepoints:
+        fig.add_vline(x=cp, line={"color": ORANGE, "dash": "dot", "width": 2})
+    if a.changepoints:  # legend entry for the vertical lines
+        fig.add_trace(
+            go.Scatter(x=[None], y=[None], mode="lines", name="changepoint",
+                       line={"color": ORANGE, "dash": "dot", "width": 2}),
+        )  # fmt: skip
+    base_layout(fig, f"{a.series}: observed, null fit and changepoints", height=420)
+    fig.update_yaxes(title_text=a.unit)
+    return fig
+
+
+def delta_distribution(a: AccelerationFit) -> go.Figure:
+    """Bootstrap distribution of δ, with δ = 0 (plain exponential) marked."""
+    s = delta_summary(a.delta_samples)
+    fig = go.Figure(
+        go.Histogram(x=list(a.delta_samples), nbinsx=40, name="bootstrap δ",
+                     marker={"color": SKY, "line": {"color": INK, "width": 0.5}}),
+    )  # fmt: skip
+    fig.add_vline(
+        x=0,
+        line={"color": INK, "width": 2},
+        annotation_text="δ = 0 (exponential)",
+        annotation_position="top left",
+    )
+    for key, dash in (("lower", "dash"), ("median", "solid"), ("upper", "dash")):
+        fig.add_vline(x=s[key], line={"color": VERMILLION, "dash": dash, "width": 2})
+    base_layout(
+        fig,
+        f"δ bootstrap: median {s['median']:.3f}, 90% interval "
+        f"[{s['lower']:.3f}, {s['upper']:.3f}], P(δ > 0) = {s['p_positive']:.0%}",
+        height=340,
+    )
+    fig.update_xaxes(title_text="δ")
+    fig.update_yaxes(title_text="resamples")
+    fig.update_layout(showlegend=False, bargap=0.02, hovermode="closest")
     return fig
 
 

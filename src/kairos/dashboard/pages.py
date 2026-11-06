@@ -57,7 +57,26 @@ def capability_vs_human(snap: Snapshot) -> None:
     )
 
 
+def acceleration(snap: Snapshot) -> None:
+    """Run acceleration."""
+    st.header("Changepoints and acceleration")
+    if not snap.acceleration:
+        st.info("This snapshot has no acceleration fits.")
+        return
+    names = [a.series for a in snap.acceleration]
+    choice = st.selectbox("Series", names, key="accel-series")
+    a = snap.acceleration[names.index(str(choice))]
+    st.plotly_chart(figures.acceleration_fit(a), key="accel-fit")
+    st.plotly_chart(figures.delta_distribution(a), key="accel-delta")
+    st.caption(
+        "δ = 0 is ordinary exponential growth; sustained δ > 0 means growth that "
+        "speeds up as the system grows. The interval comes from a moving block "
+        "bootstrap (D4), not from a single regression's standard error."
+    )
+
+
 PAGES: dict[str, Callable[[Snapshot], None]] = {
     "Overview": overview,
     "C versus H": capability_vs_human,
+    "Acceleration explorer": acceleration,
 }
