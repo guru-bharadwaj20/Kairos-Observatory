@@ -65,3 +65,26 @@ first crossing of the 95% quantile to the first crossing of the 5% quantile
 (`None` means "after the horizon"). Claim fields: `series_id`, `threshold`,
 `unit`, `by`, `earliest`, `latest`, `horizon_end`, `coverage`, `condition`,
 `assumed_events`.
+
+## External timestamping (K-10.04)
+
+The chain proves order, not time, and git history can be rewritten. Each
+entry's `entry_hash` is therefore anchored with
+[OpenTimestamps](https://opentimestamps.org) (`kairos.ledger.timestamp`):
+
+- The proof's file digest is the 32-byte `entry_hash` (SHA-256); a random
+  nonce is appended before submission, as the reference client does.
+- Proofs are standard `.ots` files at
+  `ledger/proofs/<seq:06d>-<entry_hash[:16]>.ots`, committed with the ledger.
+- At least 2 of the 4 default public calendars (the reference client's list)
+  must answer, or the entry is left unstamped with a warning.
+- The library is optional: `uv sync --extra ots`. Without it, or offline,
+  stamping is skipped and proofs report `unavailable` / `missing`; nothing
+  else breaks. Only the `opentimestamps` core package is imported
+  (`otsclient`'s `python-bitcoinlib` fails to import on Windows).
+- A fresh proof is `pending`. A few hours later, after the calendars' Bitcoin
+  transaction confirms, `upgrade` turns it into `anchored`.
+
+Offline checks are structural (the proof commits to the hash and lists its
+attestations). For full Bitcoin verification use the reference client, e.g.
+`ots verify -d <entry_hash> ledger/proofs/000000-....ots`.

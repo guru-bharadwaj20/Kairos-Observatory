@@ -11,6 +11,7 @@ from kairos.ledger.chain import (
 )
 from kairos.ledger.conditional import ConditionalClaim, EventAssumption, crossing_claim
 from kairos.ledger.forecast import Forecast, ForecastPoint, forecast_hash
+from kairos.ledger.timestamp import OtsTimestamper, ProofStatus, stamp_entries
 
 __all__ = [
     "GENESIS_HASH",
@@ -22,9 +23,12 @@ __all__ = [
     "LedgerEntry",
     "LedgerError",
     "LedgerIntegrityError",
+    "OtsTimestamper",
+    "ProofStatus",
     "canonical_json",
     "crossing_claim",
     "forecast_hash",
     "manifest_hash",
     "sha256_hex",
+    "stamp_entries",
 ]
