@@ -1,0 +1,20 @@
+# KAIROS public policy parameters (Jonas rule: published, versioned, never literals in code).
+#
+# Changing any value here is a policy change: bump `version`, record the reason in
+# `changelog`, and register the new version in the forecast ledger before it is used.
+version: "1.0.0"
+changelog:
+  - version: "1.0.0"
+    date: 2026-11-06
+    note: >-
+      Initial values. lambda = 9 means a missed catastrophe is judged nine times as
+      costly as a false alarm, so a dial alarms once P(danger) > 1/(1+9) = 0.10.
+
+jonas:
+  # Asymmetric loss ratio: cost(missed danger) / cost(false alarm). Must be > 0.
+  lambda: 9.0
+  # Hysteresis below the alarm threshold, in probability units. A dial that is in
+  # danger stands down only when P(danger) < 1/(1+lambda) - band.
+  band: 0.03
+  # Consecutive weekly readings needed before a dial changes state.
+  dwell: 2
