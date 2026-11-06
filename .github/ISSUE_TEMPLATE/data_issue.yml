@@ -1,0 +1,23 @@
+name: Data or methodology issue
+description: A series, source, dial reading or method looks wrong.
+labels: [data]
+body:
+  - type: input
+    id: task
+    attributes:
+      label: Task ID
+      placeholder: K-2.03
+    validations:
+      required: true
+  - type: input
+    id: series
+    attributes:
+      label: Series or dial affected
+      placeholder: "frontier_training_compute / delta"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Sources, vintages and calculations. Public, verifiable evidence only (Löb rule).
+    validations:
+      required: true

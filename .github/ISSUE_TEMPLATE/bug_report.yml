@@ -1,0 +1,34 @@
+name: Bug report
+description: Something in KAIROS does not work as documented.
+labels: [bug]
+body:
+  - type: input
+    id: task
+    attributes:
+      label: Task ID
+      description: The roadmap subtask this bug belongs to (CONTRIBUTING.md section 6).
+      placeholder: K-1.04
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the command you ran and the full error output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `uv run kairos doctor`
+      render: text
+  - type: input
+    id: commit
+    attributes:
+      label: Commit hash

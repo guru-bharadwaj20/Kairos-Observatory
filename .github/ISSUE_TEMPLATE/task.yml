@@ -1,0 +1,24 @@
+name: Roadmap task
+description: Work on, split or discuss a roadmap subtask.
+labels: [task]
+body:
+  - type: input
+    id: task
+    attributes:
+      label: Task ID
+      description: Must match a row in CONTRIBUTING.md section 6.
+      placeholder: K-2.06
+    validations:
+      required: true
+  - type: textarea
+    id: done_when
+    attributes:
+      label: Done when
+      description: Paste the "Done when" text from the roadmap table.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Approach, open questions and design notes (D1-D12) that apply.
