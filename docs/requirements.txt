@@ -1,0 +1,6 @@
+# Documentation build dependencies (K-12.04). Kept outside pyproject.toml so the
+# docs job does not need the scientific stack.
+mkdocs>=1.6,<2
+mkdocs-material>=9.5,<10
+mkdocstrings[python]>=1.0,<2
+ruff>=0.6

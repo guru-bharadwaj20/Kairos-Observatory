@@ -1,0 +1,68 @@
+site_name: KAIROS Observatory
+site_description: A seismograph for the intelligence explosion, built to be proven wrong.
+site_url: https://guru-bharadwaj20.github.io/Kairos-Observatory/
+repo_url: https://github.com/guru-bharadwaj20/Kairos-Observatory
+repo_name: guru-bharadwaj20/Kairos-Observatory
+edit_uri: edit/main/docs/
+copyright: Code Apache-2.0. Data and forecasts CC BY 4.0.
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: false
+            show_root_heading: true
+            members_order: source
+            separate_signature: true
+            show_signature_annotations: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+not_in_nav: |
+  /benchmarks.md
+  /validation.md
+
+nav:
+  - Home: index.md
+  - Methodology: methodology.md
+  - Operations:
+      - Weekly pipeline: weekly.md
+      - Self-hosted GPU runner: runner.md
+  - API reference:
+      - kairos.commands.run: reference/run.md
