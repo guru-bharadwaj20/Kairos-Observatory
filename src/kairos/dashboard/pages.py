@@ -27,6 +27,16 @@ def overview(snap: Snapshot) -> None:
     """Run overview."""
     st.header("KAIROS Clock")
     render_clock(snap)
+    st.subheader("The four dials")
+    render_dials(snap)
+
+
+def render_dials(snap: Snapshot) -> None:
+    """Run render dials."""
+    for col, d in zip(st.columns(len(snap.dials)), snap.dials, strict=True):
+        with col:
+            st.markdown(components.dial_card_html(d), unsafe_allow_html=True)
+            st.plotly_chart(figures.sparkline(d), key=f"spark-{d.dial}")
 
 
 def render_clock(snap: Snapshot) -> None:

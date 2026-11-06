@@ -72,3 +72,31 @@ def level(n: int) -> Level:
     if not 0 <= n < len(LEVELS):
         raise ValueError(f"alert level must be 0-4, got {n}")
     return LEVELS[n]
+
+
+@dataclass(frozen=True)
+class DialInfo:
+    """Dial info."""
+
+    title: str
+    measures: str
+    danger_sign: str
+
+
+#: Wording from KAIROS_Project_Idea.md §8.
+DIALS: dict[str, DialInfo] = {
+    "acceleration": DialInfo(
+        "Acceleration", "Whether growth is super-exponential, and when it would blow up",
+        "δ significantly above 0 across several independent metrics",
+    ),
+    "recursion": DialInfo(
+        "Recursion", "How much AI progress is driven by AI itself",
+        "κ rising across rolling windows",
+    ),
+    "vinge_horizon": DialInfo(
+        "Vinge Horizon", "How far ahead we can still predict", "h* shrinking",
+    ),
+    "jonas_gap": DialInfo(
+        "Jonas Gap", "Capability outrunning comprehension", "dG/dt > 0, sustained",
+    ),
+}  # fmt: skip

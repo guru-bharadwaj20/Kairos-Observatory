@@ -9,8 +9,8 @@ from __future__ import annotations
 from dataclasses import replace
 from html import escape
 
-from kairos.dashboard.snapshot import Alert, LeadTime
-from kairos.dashboard.theme import Level, level
+from kairos.dashboard.snapshot import Alert, DialReading, LeadTime
+from kairos.dashboard.theme import DIALS, INK, STATE_STYLE, Level, level
 
 DISCLAIMER = "KAIROS recommends; humans decide."
 EN_DASH = "–"
@@ -77,4 +77,25 @@ def level_scale_html(current: int) -> str:
     return (
         '<ol class="kairos-scale" aria-label="Tripwire levels 0 to 4" '
         'style="display:flex;gap:4px;padding:0;margin:0.5rem 0;">' + "".join(cells) + "</ol>"
+    )
+
+
+def dial_card_html(d: DialReading) -> str:
+    """One dial: name, value, state (colour + symbol + words) and P(danger)."""
+    info = DIALS[d.dial]
+    color, symbol, label = STATE_STYLE[d.state]
+    unit = f" {escape(d.unit)}" if d.unit else ""
+    return (
+        f'<article class="kairos-dial" aria-label="{escape(info.title)} dial: {label}" '
+        f'style="border:2px solid {color};border-left:10px solid {color};'
+        f'border-radius:0.5rem;padding:0.75rem;">'
+        f'<h3 style="margin:0;font-size:1.1rem;">{escape(info.title)}</h3>'
+        f'<div style="font-size:1.8rem;font-weight:700;">'
+        f"{escape(d.symbol)} = {d.value:.3g}{unit}</div>"
+        f'<div style="font-weight:700;color:{INK};">'
+        f'<span aria-hidden="true" style="color:{color};">{symbol}</span> {label}</div>'
+        f"<div>P(danger) = {d.p_danger:.0%}</div>"
+        f'<div style="font-size:0.85rem;color:#3D3D3D;">{escape(info.measures)}. '
+        f"Danger sign: {escape(info.danger_sign)}.</div>"
+        f"</article>"
     )

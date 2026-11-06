@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from kairos.dashboard.snapshot import LeadTime
-from kairos.dashboard.theme import GREY, INK, VERMILLION
+from kairos.dashboard.snapshot import DialReading, LeadTime
+from kairos.dashboard.theme import GREY, INK, STATE_STYLE, VERMILLION
 
 FONT = {"family": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif", "color": INK}
 
@@ -48,4 +48,30 @@ def lead_time_figure(lead: LeadTime) -> go.Figure:
     base_layout(fig, f"KAIROS Clock: lead time ({pct} interval)", height=180)
     fig.update_xaxes(title=lead.unit, rangemode="tozero")
     fig.update_layout(showlegend=False, hovermode="closest")
+    return fig
+
+
+def sparkline(d: DialReading) -> go.Figure:
+    """Recent history of one dial, coloured by its current state."""
+    color = STATE_STYLE[d.state][0]
+    fig = go.Figure(
+        go.Scatter(
+            x=list(d.history.t),
+            y=list(d.history.value),
+            mode="lines",
+            line={"color": color, "width": 2},
+            name=d.symbol,
+            hovertemplate=f"%{{x}}<br>{d.symbol} = %{{y:.3g}}<extra></extra>",
+        )
+    )
+    fig.update_layout(
+        height=110,
+        margin={"l": 35, "r": 5, "t": 5, "b": 20},
+        showlegend=False,
+        font=FONT,
+        plot_bgcolor="#FFFFFF",
+        paper_bgcolor="#FFFFFF",
+    )
+    fig.update_xaxes(showgrid=False, tickformat="%Y", nticks=3)
+    fig.update_yaxes(showgrid=True, gridcolor="#EEEEEE", nticks=3)
     return fig
