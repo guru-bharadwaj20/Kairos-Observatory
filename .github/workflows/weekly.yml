@@ -1,0 +1,71 @@
+# K-12.02: weekly CPU-only KAIROS run.
+# Refreshes data, issues forecasts, and commits the new ledger entries
+# (hashes and OpenTimestamps proofs) back to the default branch.
+name: weekly
+
+on:
+  schedule:
+    # Fridays 06:00 UTC. Forecasts are registered before the week's data lands.
+    - cron: "0 6 * * 5"
+  workflow_dispatch:
+    inputs:
+      as_of:
+        description: "Override the as-of date (ISO 8601). Empty means now."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-pipeline
+  cancel-in-progress: false
+
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      KAIROS_DEVICE: cpu
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.12 and dependencies
+        run: |
+          uv python install 3.12
+          uv sync --frozen --extra dev
+
+      - name: Run the weekly pipeline (CPU only)
+        env:
+          AS_OF: ${{ inputs.as_of }}
+        run: |
+          args=(weekly --cpu-only --report build/weekly-report.json)
+          if [ -n "${AS_OF:-}" ]; then args+=(--as-of "$AS_OF"); fi
+          uv run --no-sync python -m kairos.commands.run "${args[@]}"
+
+      - name: Upload run report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-report
+          path: build/weekly-report.json
+          if-no-files-found: ignore
+
+      - name: Commit ledger hashes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- ledger/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No ledger changes this week."
+            exit 0
+          fi
+          git commit -m "data(ledger): weekly forecast $(date -u +%Y-%m-%d) [K-12.02]"
+          git push
