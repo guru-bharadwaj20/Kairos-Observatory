@@ -1,0 +1,2 @@
+# Append lock held while a process writes forecasts.jsonl.
+*.lock
