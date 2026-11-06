@@ -36,6 +36,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | OECD.AI Policy Observatory                  | Policy and law-making lag         | OECD terms and conditions |
 | OpenAlex                                    | Safety/interpretability papers    | CC0 1.0                |
 | arXiv metadata                              | Paper counts                      | CC0 1.0 (metadata)     |
+| OWID world population (HYDE, Gapminder, UN) | K-9.02 snapshot, validation/data | CC BY 4.0              |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.

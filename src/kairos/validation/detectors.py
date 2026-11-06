@@ -38,6 +38,7 @@ __all__ = [
     "decimal_year",
     "from_decimal_year",
     "get_detector",
+    "single_series_id",
 ]
 
 FloatArray = npt.NDArray[np.float64]
@@ -148,7 +149,8 @@ class Detector(Protocol):
         ...
 
 
-def _series_id(frame: SeriesFrame) -> str:
+def single_series_id(frame: SeriesFrame) -> str:
+    """Return the only ``series_id`` in ``frame`` or raise ``ValueError``."""
     ids = frame["series_id"].unique()
     if len(ids) != 1:
         raise ValueError(f"detector expects one series, got {list(ids)}")
@@ -241,7 +243,7 @@ class HyperbolicDetector:
 
     def __call__(self, frame: SeriesFrame, as_of: date) -> Prediction:
         """Fit the series in ``frame`` and turn the fit into a prediction."""
-        series_id = _series_id(frame)
+        series_id = single_series_id(frame)
         data = frame.dropna(subset=["y"]).sort_values("ds")
         n = len(data)
         if n < self.min_points:

@@ -39,7 +39,9 @@ class CaseResult:
     notes: list[str] = field(default_factory=list)
 
 
-CASES: dict[str, str] = {}
+CASES: dict[str, str] = {
+    "population": "kairos.validation.population:run",
+}
 """``case name -> "module:function"``."""
 
 
