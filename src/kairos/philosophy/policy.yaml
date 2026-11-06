@@ -33,3 +33,9 @@ rawls:
   # A scenario is plausible when its normalised ensemble weight is at least this.
   # Equal-weight ensembles of up to 20 members keep every member.
   min_weight: 0.05
+
+# Collingridge lead time: months until the upper-quantile forecast crosses a threshold.
+collingridge:
+  quantile: 0.95   # Jonas acts on the upper quantile, not the median
+  ci: 0.90         # width of the reported interval on the lead time
+  n_boot: 1000     # bootstrap resamples of the forecast paths
