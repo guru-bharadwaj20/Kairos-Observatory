@@ -85,3 +85,18 @@ the **first crossing** instead:
 `band_horizon(scored, k_efolds)` is the variant that applies the same rule to
 the median width of the 90 % band. It needs no future actuals, so it can be
 read at the live edge.
+
+## 5. The `h*(t)` series (K-6.04)
+
+`compute_hstar_series(frame, forecaster, horizon, spec)` backtests every
+monthly cutoff of every series. This is the largest CPU job in the project.
+Each fit is cached, so a monthly rerun only fits the new cutoff.
+`hstar_series(bt, spec)` then computes, for each evaluation month `t`, the
+`h*` of the forecasts with cutoff in `(t - window, t]` and target `ds <= t`.
+Each reading therefore uses only what was known at `t`.
+
+`HorizonSpec` holds the defaults: tolerance 2x on `ale`, a 36-month window,
+at least 6 cutoffs per reading, smoothing window 3, and a band threshold of
+2 e-folds. The output has one row per `(series_id, as_of)` with `h_star`,
+`censored`, `crossed_at`, `band_h_star`, `band_censored`, `n_cutoffs` and
+`max_horizon`.
