@@ -24,7 +24,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 
 | Phase | Name | Roadmap weeks | Subtasks | Done | Status |
 |:-:|---|:-:|:-:|:-:|:-:|
-| 0 | Foundation and governance | 0 | 14 | 5 | ❌ |
+| 0 | Foundation and governance | 0 | 14 | 6 | ❌ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 0 | ❌ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 0 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **5** | **4%** |
+| | **Total** | | **137** | **6** | **4%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -223,7 +223,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-0.03 | Add contribution guide and roadmap | This file committed with all 137 subtasks | — | — | ✅ |
 | K-0.04 | README | Pitch, the four dials, tripwire table, quickstart, hardware notes, links to the idea doc and this file | — | 0.03 | ✅ |
 | K-0.05 | `pyproject.toml` with `uv` | Python `==3.12.*`, `src/kairos/` layout, extras `dev`, `gpu`, `dashboard`; `uv sync` succeeds (D12) | CPU | — | ✅ |
-| K-0.06 | Lock file and CUDA wheel index | `uv.lock` committed; `torch.cuda.is_available()` is `True` on this machine | GPU | 0.05 | ❌ |
+| K-0.06 | Lock file and CUDA wheel index | `uv.lock` committed; `torch.cuda.is_available()` is `True` on this machine | GPU | 0.05 | ✅ |
 | K-0.07 | `.gitignore` and `.gitattributes` | Ignores venv, `data/raw/`, `lightning_logs/`, CmdStan build output, caches; LF line endings enforced | — | — | ❌ |
 | K-0.08 | Lint and type tooling | `ruff`, `ruff format`, `mypy --strict` on `src/`, `pre-commit` hooks installed and passing | CPU | 0.05 | ❌ |
 | K-0.09 | Test scaffold | `pytest`, `pytest-xdist`, `hypothesis`, coverage; markers `slow` and `gpu` registered; one smoke test | CPU | 0.05 | ❌ |
