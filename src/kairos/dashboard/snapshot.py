@@ -13,7 +13,7 @@ Schema version 1 (``schema_version: 1``)::
       "is_demo": false,                          # true only for the fixture
       "parameters": {"lambda": 9.0, "tripwires_version": "1.0.0",
                      "vinge_tolerance_factor": 2.0},
-      "alert": {"level": 0-4,
+      "alert": {"level": 0-4, "name": str?, "response": str?,
                 "lead_time": {"median": 31.0, "lower": 18.0, "upper": 52.0,
                               "interval": 0.9, "unit": "months"} | null},
       "dials": [DialReading, ...],               # exactly the four dials
@@ -102,6 +102,8 @@ class Alert:
 
     level: int
     lead_time: LeadTime | None
+    name: str | None = None  # overrides the default level name
+    response: str | None = None  # overrides the default recommended response
 
 
 @dataclass(frozen=True)
@@ -288,7 +290,13 @@ def _alert(raw: object) -> Alert:
         )
         if not lead.lower <= lead.median <= lead.upper:
             raise SnapshotError(f"{w}: need lower <= median <= upper")
-    return Alert(level=int(level), lead_time=lead)
+    name, response = m.get("name"), m.get("response")
+    return Alert(
+        level=int(level),
+        lead_time=lead,
+        name=name if isinstance(name, str) else None,
+        response=response if isinstance(response, str) else None,
+    )
 
 
 def _accel(raw: object, where: str) -> AccelerationFit:

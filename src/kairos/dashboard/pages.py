@@ -6,6 +6,7 @@ from collections.abc import Callable
 
 import streamlit as st
 
+from kairos.dashboard import components, figures
 from kairos.dashboard.snapshot import Snapshot
 
 
@@ -24,8 +25,16 @@ def render_provenance(snap: Snapshot) -> None:
 
 def overview(snap: Snapshot) -> None:
     """Run overview."""
-    st.header("Overview")
-    st.write(f"Alert level {snap.alert.level}.")
+    st.header("KAIROS Clock")
+    render_clock(snap)
+
+
+def render_clock(snap: Snapshot) -> None:
+    """Run render clock."""
+    st.markdown(components.banner_html(snap.alert), unsafe_allow_html=True)
+    st.markdown(components.level_scale_html(snap.alert.level), unsafe_allow_html=True)
+    if snap.alert.lead_time is not None:
+        st.plotly_chart(figures.lead_time_figure(snap.alert.lead_time), key="clock")
 
 
 PAGES: dict[str, Callable[[Snapshot], None]] = {"Overview": overview}
