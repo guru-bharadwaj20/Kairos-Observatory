@@ -25,7 +25,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | Phase | Name | Roadmap weeks | Subtasks | Done | Status |
 |:-:|---|:-:|:-:|:-:|:-:|
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
-| 1 | Compute layer (CPU/GPU) | 0 | 8 | 1 | ❌ |
+| 1 | Compute layer (CPU/GPU) | 0 | 8 | 2 | ❌ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 0 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 0 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **15** | **11%** |
+| | **Total** | | **137** | **16** | **12%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -238,7 +238,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | ID | Subtask | Done when | HW | Deps | Status |
 |---|---|---|:-:|---|:-:|
 | K-1.01 | `kairos doctor` command | Reports P/E core split, RAM, CUDA, GPU name/VRAM, torch build, CmdStan status; exits non-zero if something is missing | CPU, GPU | 0.06 | ✅ |
-| K-1.02 | Settings and logging | `pydantic-settings` + YAML for `n_jobs`, device, seeds, paths; structured logs with a run ID on every line | — | 0.05 | ❌ |
+| K-1.02 | Settings and logging | `pydantic-settings` + YAML for `n_jobs`, device, seeds, paths; structured logs with a run ID on every line | — | 0.05 | ✅ |
 | K-1.03 | Thread governance | Workers start with BLAS/OMP threads = 1 through `threadpoolctl`; a test proves no oversubscription | CPU×N | 1.02 | ❌ |
 | K-1.04 | Parallel executor | `kairos.compute.pmap()` on joblib loky; default 28 workers, auto batching for hybrid cores, Windows-`spawn` safe | CPU×N | 1.03 | ❌ |
 | K-1.05 | Device selector | `get_device()` returns CUDA or falls back to CPU; float32 policy for GPU, float64 for CPU references | GPU | 1.02 | ❌ |

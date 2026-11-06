@@ -34,3 +34,13 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
         skip = pytest.mark.skip(reason="CUDA device not available")
         for item in gpu_items:
             item.add_marker(skip)
+
+
+@pytest.fixture(autouse=True)
+def _fresh_settings():
+    """Drop the cached Settings before and after each test so env changes apply."""
+    from kairos.settings import get_settings
+
+    get_settings.cache_clear()
+    yield
+    get_settings.cache_clear()
