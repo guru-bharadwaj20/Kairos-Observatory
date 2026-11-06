@@ -33,11 +33,11 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 5 | ❌ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 7 | ❌ |
-| 9 | Historical validation | 8, 10 | 9 | 0 | ❌ |
+| 9 | Historical validation | 8, 10 | 9 | 1 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **57** | **42%** |
+| | **Total** | | **137** | **58** | **42%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -366,7 +366,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 
 | ID | Subtask | Done when | HW | Deps | Status |
 |---|---|---|:-:|---|:-:|
-| K-9.01 | Backtest runner | Replays the full pipeline at past "as-of" dates using only data available then | CPU×N | 6.01 | ❌ |
+| K-9.01 | Backtest runner | Replays the full pipeline at past "as-of" dates using only data available then | CPU×N | 6.01 | ✅ |
 | K-9.02 | World population | From 1960 data, recovers von Foerster's `t_c` ≈ Nov 2026; from 1960–80 data, sees `δ` fall toward 0 | CPU×N | 9.01, 5.04 | ❌ |
 | K-9.03 | Dot-com bubble | LPPLS `t_c` compared with Sornette's published values for Nasdaq 2000 | GPU | 5.11 | ❌ |
 | K-9.04 | Bitcoin 2017 | LPPLS run before the December 2017 peak; lead time recorded | GPU | 5.11 | ❌ |
