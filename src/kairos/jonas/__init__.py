@@ -19,6 +19,7 @@ from kairos.jonas.gap import (
     side_index,
     split_sides,
 )
+from kairos.jonas.scenarios import SCENARIO_COLUMNS, ClosingScenario, closing_scenarios, to_pct
 from kairos.jonas.sustained import (
     HacTest,
     SustainedResult,
@@ -40,11 +41,14 @@ __all__ = [
     "ATTRIBUTION_COLUMNS",
     "BAND_COVERAGE",
     "GAP_COLUMNS",
+    "SCENARIO_COLUMNS",
     "VELOCITY_COLUMNS",
+    "ClosingScenario",
     "GapSide",
     "GrowthRate",
     "HacTest",
     "SustainedResult",
+    "closing_scenarios",
     "component_attribution",
     "component_log_index",
     "decimal_years",
@@ -60,4 +64,5 @@ __all__ = [
     "side_index",
     "split_sides",
     "sustained_positive",
+    "to_pct",
 ]

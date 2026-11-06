@@ -65,3 +65,17 @@ capability composite over the trailing window. `contribution = weight · lag` sp
 `dG/dt` across components (the contributions sum to the slope of `G` when weights
 are fixed over the window), and `loo_dgdt` shows `dG/dt` with the component left
 out. Rates are OLS slopes per year with Newey–West standard errors (`rate_se`).
+
+## Closing scenarios (K-7.05)
+
+Because `dG/dt = g_C − g_H`, the gap stops widening when H grows as fast as C.
+`closing_scenarios(frame, base_year, months=36, level=0.90)` reports:
+
+- `required_rate = g_C` with an interval from the Newey–West error of `g_C`;
+- `shortfall = g_C − g_H`, the extra H growth needed per year, with an interval
+  from the HAC error of the slope of `G` (which handles C–H covariance);
+- per H component, the rate it alone would need, others unchanged:
+  `(g_C − Σ_{j≠i} w_j g_j) / w_i`, with interval and `multiplier` over its current
+  rate.
+
+Rates are continuous log growth per year; `required_pct` is `100·(e^g − 1)`.
