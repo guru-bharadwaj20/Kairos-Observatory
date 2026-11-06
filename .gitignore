@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Environments
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Tooling caches
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# KAIROS data and model artefacts
+data/raw/
+data/cache/
+data/interim/
+lightning_logs/
+checkpoints/
+*.ckpt
+mlruns/
+
+# CmdStan build output (prophet/cmdstanpy)
+cmdstan*/
+*.hpp
+*.o
+*_model.exe
+stan_*.csv
+**/prophet_model.bin.*
+
+# Docs
+site/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
