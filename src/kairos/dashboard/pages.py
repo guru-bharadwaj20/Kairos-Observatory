@@ -47,4 +47,17 @@ def render_clock(snap: Snapshot) -> None:
         st.plotly_chart(figures.lead_time_figure(snap.alert.lead_time), key="clock")
 
 
-PAGES: dict[str, Callable[[Snapshot], None]] = {"Overview": overview}
+def capability_vs_human(snap: Snapshot) -> None:
+    """Run capability vs human."""
+    st.header("Capability versus human capacity")
+    st.plotly_chart(figures.capability_vs_human(snap), key="c-vs-h")
+    st.caption(
+        "Both indices are normalised at a base year, so the level of the gap is "
+        "arbitrary; only its change over time (dG/dt) carries meaning."
+    )
+
+
+PAGES: dict[str, Callable[[Snapshot], None]] = {
+    "Overview": overview,
+    "C versus H": capability_vs_human,
+}
