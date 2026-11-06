@@ -45,6 +45,7 @@ __all__ = [
     "read_meta",
     "read_series",
     "read_table",
+    "read_table_meta",
     "write_dataset",
     "write_events",
     "write_table",
@@ -196,14 +197,33 @@ def read_all(root: Path | str | None = None, *, side: str | None = None) -> dict
     return out
 
 
-def write_table(df: pd.DataFrame, name: str, root: Path | str | None = None) -> Path:
-    """Write an auxiliary table to ``processed/tables/<name>.parquet``."""
-    return _write_parquet(df, data_paths(root).tables / f"{name}.parquet", {})
+def write_table(
+    df: pd.DataFrame,
+    name: str,
+    root: Path | str | None = None,
+    *,
+    meta: dict[str, Any] | None = None,
+) -> Path:
+    """Write an auxiliary table to ``processed/tables/<name>.parquet``.
+
+    Args:
+        df: Table to write.
+        name: Table name (file stem).
+        root: Dataset root (defaults to ``Settings.data_dir``).
+        meta: JSON-serialisable provenance (licence, URL, method) stored in the file.
+    """
+    blob = json.dumps(meta or {}, sort_keys=True, default=str).encode()
+    return _write_parquet(df, data_paths(root).tables / f"{name}.parquet", {EXTRA_KEY: blob})
 
 
 def read_table(name: str, root: Path | str | None = None) -> pd.DataFrame:
     """Read an auxiliary table written by :func:`write_table`."""
     return pd.read_parquet(data_paths(root).tables / f"{name}.parquet")
+
+
+def read_table_meta(name: str, root: Path | str | None = None) -> dict[str, Any]:
+    """Read the provenance metadata stored with an auxiliary table."""
+    return _kv(data_paths(root).tables / f"{name}.parquet", EXTRA_KEY)
 
 
 def write_events(events: pd.DataFrame, root: Path | str | None = None) -> Path:

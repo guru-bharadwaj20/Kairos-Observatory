@@ -26,7 +26,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 |:-:|---|:-:|:-:|:-:|:-:|
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
-| 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 4 | ❌ |
+| 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 5 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 0 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 0 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **26** | **19%** |
+| | **Total** | | **137** | **27** | **20%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -254,7 +254,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-2.02 | Event schema | `event`, `ds`, `type` (release, regulation, export control, incident), `lower_window`, `upper_window`, `source_url` | — | 2.01 | ✅ |
 | K-2.03 | Storage and catalog | `data/raw/` → `data/processed/` Parquet; DuckDB catalog view across all series | CPU | 2.01 | ✅ |
 | K-2.04 | Data manifest | SHA-256 of every processed file in `data/MANIFEST.json`, regenerated on refresh (feeds the ledger) | — | 2.03 | ✅ |
-| K-2.05 | Epoch AI notable models loader | Training compute, parameters, date, organisation; licence recorded | CPU | 2.03 | ❌ |
+| K-2.05 | Epoch AI notable models loader | Training compute, parameters, date, organisation; licence recorded | CPU | 2.03 | ✅ |
 | K-2.06 | Frontier envelope builder | Irregular releases → monthly frontier (top-k or running max), gap flags, method in metadata (D7) | CPU | 2.05 | ❌ |
 | K-2.07 | METR task-horizon loader | Sparse points with their confidence intervals kept in `y_lo`/`y_hi` | CPU | 2.03 | ❌ |
 | K-2.08 | Benchmark SOTA histories | SOTA per benchmark over time; logit transform for bounded scores so saturation doesn't look like a slowdown | CPU | 2.03 | ❌ |
