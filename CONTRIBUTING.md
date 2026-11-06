@@ -32,12 +32,12 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 5 | ❌ |
-| 8 | Ethical governor and tripwires | 10 | 9 | 2 | ❌ |
+| 8 | Ethical governor and tripwires | 10 | 9 | 3 | ❌ |
 | 9 | Historical validation | 8, 10 | 9 | 0 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **52** | **38%** |
+| | **Total** | | **137** | **53** | **39%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -354,7 +354,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 |---|---|---|:-:|---|:-:|
 | K-8.01 | Dial state machine | Calm/danger states with hysteresis so dials don't flicker; property tests | — | 5.14, 6.07, 7.06, 4.09 | ✅ |
 | K-8.02 | Jonas asymmetric loss | Alarm when `P(danger) > 1/(1+λ)` (D6); `λ` read from public YAML | — | 8.01 | ✅ |
-| K-8.03 | `P(danger)` per dial | Probabilities taken from bootstrap and ensemble distributions, not point estimates | CPU | 8.02 | ❌ |
+| K-8.03 | `P(danger)` per dial | Probabilities taken from bootstrap and ensemble distributions, not point estimates | CPU | 8.02 | ✅ |
 | K-8.04 | Rawls maximin | Decision taken in the worst plausible scenario of the ensemble; reported next to the expected value | CPU | 8.03 | ❌ |
 | K-8.05 | Collingridge lead time | Months until the upper quantile crosses the threshold, with 90% interval, e.g. "31 months (18–52)" | CPU | 8.03 | ❌ |
 | K-8.06 | Intervention-cost curve | Parametric cost-versus-lead-time curve with documented assumptions | — | 8.05 | ❌ |

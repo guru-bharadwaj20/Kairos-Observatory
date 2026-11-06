@@ -18,3 +18,12 @@ jonas:
   band: 0.03
   # Consecutive weekly readings needed before a dial changes state.
   dwell: 2
+
+# When each dial counts as "in danger" (KAIROS_Project_Idea.md section 8). P(danger) is
+# the share of a dial's bootstrap/ensemble draws (DialReading.detail["samples"]) on
+# the danger side of `threshold`.
+danger:
+  acceleration: {direction: above, threshold: 0.0}  # delta > 0: super-exponential
+  recursion: {direction: above, threshold: 0.0}     # trend of kappa across windows > 0
+  vinge: {direction: below, threshold: 0.0}         # trend of h* < 0: horizon shrinking
+  jonas: {direction: above, threshold: 0.0}         # dG/dt > 0, sustained
