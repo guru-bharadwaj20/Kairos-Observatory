@@ -50,3 +50,18 @@ Payloads:
 `Ledger.append` checks the whole chain before writing, takes a
 `forecasts.jsonl.lock` file so two processes cannot append at once, and
 `fsync`s the line.
+
+## Conditional forecasts (K-10.03)
+
+A forecast can carry `events` (interventions already known at `as_of` and fed
+to the model as event regressors; events dated after `as_of` are rejected) and
+`claims` (`ConditionalClaim`), built with `Forecast.with_claims([Y, ...])`:
+
+> If no new intervention, `frontier_compute` reaches 140 FLOP by 2027-02-01
+> (90% interval: 2026-12-01 to 2027-04-01). Events assumed: eu_ai_act_gpai.
+
+`by` is the first date the median reaches `Y`; the interval runs from the
+first crossing of the 95% quantile to the first crossing of the 5% quantile
+(`None` means "after the horizon"). Claim fields: `series_id`, `threshold`,
+`unit`, `by`, `earliest`, `latest`, `horizon_end`, `coverage`, `condition`,
+`assumed_events`.

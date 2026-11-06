@@ -9,10 +9,13 @@ from kairos.ledger.chain import (
     LedgerIntegrityError,
     manifest_hash,
 )
+from kairos.ledger.conditional import ConditionalClaim, EventAssumption, crossing_claim
 from kairos.ledger.forecast import Forecast, ForecastPoint, forecast_hash
 
 __all__ = [
     "GENESIS_HASH",
+    "ConditionalClaim",
+    "EventAssumption",
     "Forecast",
     "ForecastPoint",
     "Ledger",
@@ -20,6 +23,7 @@ __all__ = [
     "LedgerError",
     "LedgerIntegrityError",
     "canonical_json",
+    "crossing_claim",
     "forecast_hash",
     "manifest_hash",
     "sha256_hex",

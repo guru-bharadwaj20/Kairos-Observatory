@@ -15,6 +15,7 @@ from typing import Any, Final
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from kairos.ledger.canonical import sha256_hex
+from kairos.ledger.conditional import ConditionalClaim, EventAssumption
 from kairos.types import DialReading
 
 __all__ = [
@@ -88,6 +89,10 @@ class Forecast(BaseModel):
         params: Model parameters needed to reproduce the forecast.
         dials: Dial readings published alongside the forecast.
         notes: Free text.
+        events: Intervention events known at ``as_of`` and included in the model
+            (K-10.03). ``None`` for unconditional forecasts.
+        claims: Conditional threshold claims derived from the quantiles; see
+            :func:`kairos.ledger.conditional.crossing_claim` and :meth:`with_claims`.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -103,6 +108,8 @@ class Forecast(BaseModel):
     params: dict[str, Any] = Field(default_factory=dict)
     dials: tuple[DialReading, ...] = ()
     notes: str = ""
+    events: tuple[EventAssumption, ...] | None = None
+    claims: tuple[ConditionalClaim, ...] | None = None
 
     @field_validator("issued_at")
     @classmethod
@@ -118,7 +125,28 @@ class Forecast(BaseModel):
             raise ValueError("forecast points must have strictly increasing ds")
         if dates[0] <= self.as_of:
             raise ValueError("forecast points must lie after as_of")
+        for claim in self.claims or ():
+            if claim.series_id != self.series_id:
+                raise ValueError(f"claim is about {claim.series_id!r}, not {self.series_id!r}")
+            if claim.assumed_events != (self.events or ()):
+                raise ValueError("claim.assumed_events must equal the forecast's events")
+        for event in self.events or ():
+            if event.ds > self.as_of:
+                raise ValueError(
+                    f"event {event.name!r} on {event.ds} is after as_of; only known events "
+                    "may be assumed"
+                )
         return self
+
+    def with_claims(self, thresholds: list[float], *, coverage: float = 0.9) -> Forecast:
+        """Return a copy carrying one conditional claim per threshold."""
+        from kairos.ledger.conditional import crossing_claim
+
+        events = self.events or ()
+        claims = tuple(
+            crossing_claim(self, y, coverage=coverage, assumed_events=events) for y in thresholds
+        )
+        return Forecast.model_validate({**self.model_dump(), "claims": claims, "events": events})
 
     @property
     def horizon_end(self) -> date:
