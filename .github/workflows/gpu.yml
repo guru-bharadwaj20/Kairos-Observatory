@@ -1,0 +1,64 @@
+# K-12.03: GPU and slow jobs on the self-hosted workstation runner.
+# See docs/runner.md for how the runner is registered and labelled.
+# Fork pull requests never reach this runner: it only runs on pushes to
+# main, on a schedule, or when a maintainer dispatches it by hand.
+name: gpu
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Saturdays 02:00 UTC, after the Friday CPU run.
+    - cron: "0 2 * * 6"
+  workflow_dispatch:
+    inputs:
+      full_weekly:
+        description: "Also run the full weekly pipeline on the GPU"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gpu-runner
+  cancel-in-progress: false
+
+jobs:
+  gpu-tests:
+    if: github.repository_owner == 'guru-bharadwaj20'
+    runs-on: [self-hosted, windows, x64, gpu, kairos]
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync environment
+        run: |
+          uv python install 3.12
+          uv sync --frozen --extra dev --extra gpu
+
+      - name: Check the hardware
+        run: uv run --no-sync kairos doctor
+
+      - name: GPU tests
+        run: uv run --no-sync pytest -m gpu
+
+      - name: Slow backtests
+        run: uv run --no-sync pytest -m slow -n 28
+
+      - name: Full weekly pipeline (GPU)
+        if: github.event_name == 'workflow_dispatch' && inputs.full_weekly
+        run: >-
+          uv run --no-sync python -m kairos.commands.run weekly
+          --report build/weekly-gpu-report.json
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpu-report
+          path: build/weekly-gpu-report.json
+          if-no-files-found: ignore

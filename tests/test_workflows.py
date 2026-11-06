@@ -32,3 +32,15 @@ def test_weekly_is_scheduled_cpu_only_and_commits_ledger() -> None:
     assert "--cpu-only" in script
     assert "kairos.commands.run" in script
     assert "git add -- ledger/" in script
+
+
+def test_gpu_workflow_targets_labelled_runner_and_skips_forks() -> None:
+    wf = _load("gpu.yml")
+    assert "pull_request" not in wf["on"]
+    assert "pull_request_target" not in wf["on"]
+    assert wf["permissions"] == {"contents": "read"}
+    job = wf["jobs"]["gpu-tests"]
+    assert set(job["runs-on"]) >= {"self-hosted", "gpu", "kairos"}
+    script = "\n".join(str(s.get("run", "")) for s in job["steps"])
+    assert "pytest -m gpu" in script
+    assert "pytest -m slow" in script
