@@ -39,3 +39,15 @@ collingridge:
   quantile: 0.95   # Jonas acts on the upper quantile, not the median
   ci: 0.90         # width of the reported interval on the lead time
   n_boot: 1000     # bootstrap resamples of the forecast paths
+
+# Intervention-cost curve: relative cost of an effective intervention made L months
+# before the threshold is crossed:  cost(L) = floor + (1 - floor) * exp(-L / tau).
+# Assumptions (Collingridge 1980), all deliberately simple and open to challenge:
+#   * cost is relative: 1.0 = acting at the crossing itself (L = 0);
+#   * cost falls monotonically with lead time: earlier action meets less entrenchment;
+#   * entrenchment decays exponentially with time scale `tau` (months), set to about
+#     one frontier-model generation;
+#   * a `floor` remains however early one acts (institutions, evaluation, compliance).
+intervention_cost:
+  tau: 18.0
+  floor: 0.1
