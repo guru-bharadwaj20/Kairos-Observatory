@@ -49,3 +49,12 @@ months they share. Every driver is log-transformed and gets its own window:
 | `log_researchers` | `researchers` | 12 |
 
 Series IDs follow K-2.11; pass other `DriverSpec`s if Phase 2 names differ.
+
+## Events (`kairos.neural.events`)
+
+An `EventSpec` holds an event name, its months and an effect window
+(`lower_window <= 0` months before, `upper_window >= 0` after).
+`specs_from_calendar()` reads the K-2.17 calendar (`event`, `ds`, optional
+window columns); `add_events()` registers the specs and `with_events()` runs
+NeuralProphet's `create_df_with_events`. Effects are additive on the log
+scale, so `exp(effect)` is the multiplicative change in raw units.

@@ -28,7 +28,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 6 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 5 | ❌ |
-| 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 2 | ❌ |
+| 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 3 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 0 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 0 | ❌ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **35** | **26%** |
+| | **Total** | | **137** | **36** | **26%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -295,7 +295,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 |---|---|---|:-:|---|:-:|
 | K-4.01 | NeuralProphet wrapper | `trainer_config` picks GPU or CPU through `get_device()`; early stopping; quiet logs | CPU, GPU | 1.05 | ✅ |
 | K-4.02 | Lagged regressors | `log_compute`, `log_investment`, `log_researchers` added with their own lag windows | CPU | 4.01, 2.11 | ✅ |
-| K-4.03 | Events | Event calendar wired in through `create_df_with_events` with windows | CPU | 4.01, 2.17 | ❌ |
+| K-4.03 | Events | Event calendar wired in through `create_df_with_events` with windows | CPU | 4.01, 2.17 | ✅ |
 | K-4.04 | Future regressors | Policies known in advance (scheduled laws) entered as future regressors | CPU | 4.03 | ❌ |
 | K-4.05 | Quantiles and calibration | `quantiles=[0.05, 0.5, 0.95]`; empirical coverage reported on held-out data | CPU | 4.01 | ❌ |
 | K-4.06 | Paired models for `κ` | Exogenous-only model and the same model with self-lags (`n_lags`), identical splits | CPU, GPU | 4.02 | ❌ |
