@@ -120,3 +120,16 @@ columns in raw units, including 0.5 and the pair for the interval.
 `cross_check(prophet_hstar, np_hstar)` reports four numbers on the common
 readings: the count, the Spearman correlation, the mean absolute difference,
 and the share of readings within 3 months.
+
+## 7. Shrinkage test (K-6.06)
+
+`shrinkage_test(h_star_series, alpha=0.05)` runs a one-sided Mann-Kendall
+test (H1: `h*` decreasing) with the tie correction. It also reports the
+Theil-Sen slope in **months of horizon per year**, with its `1 - alpha`
+interval.
+
+Neighbouring `h*(t)` readings share most of their trailing window, so they
+are strongly autocorrelated. The default variance therefore uses the
+Hamed & Rao (1998) correction; `correction="none"` gives the textbook test.
+`shrinking` is true when `p < alpha` and the slope is negative.
+`shrinkage_by_series` runs the test on each series.
