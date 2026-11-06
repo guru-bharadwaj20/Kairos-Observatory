@@ -3,7 +3,7 @@
 Subcommands:
 
 * ``kairos prophet fit SERIES --out DIR``: fit every series in parallel and write
-  ``summary.csv``, ``forecast.csv`` and ``run.json`` (wall time).
+  ``summary.csv``, ``forecast.csv``, ``changepoints.csv`` and ``run.json`` (wall time).
 """
 
 from __future__ import annotations
@@ -49,6 +49,7 @@ def fit_command(
     cache: Annotated[bool, typer.Option(help="Reuse unchanged fits from the fit cache.")] = False,
 ) -> None:
     """Fit the null model to every series and write the summary and forecasts."""
+    from kairos.models.changepoints import changepoint_table
     from kairos.models.fit_all import fit_all, forecast_frame
 
     frame = read_series_frame(series)
@@ -56,6 +57,7 @@ def fit_command(
     out.mkdir(parents=True, exist_ok=True)
     result.summary().to_csv(out / "summary.csv", index=False)
     forecast_frame(result.fits).to_csv(out / "forecast.csv", index=False)
+    changepoint_table(result.fits).to_csv(out / "changepoints.csv", index=False)
     run = {
         "n_series": len(result.fits),
         "wall_seconds": result.wall_seconds,

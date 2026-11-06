@@ -77,6 +77,7 @@ def test_cli_prophet_fit(tmp_path):
     )
     assert result.exit_code == 0, result.output
     assert (out / "summary.csv").is_file()
+    assert len(pd.read_csv(out / "changepoints.csv")) == 2 * 25
     assert json.loads((out / "run.json").read_text())["wall_seconds"] > 0
     fc = pd.read_csv(out / "forecast.csv")
     assert len(fc) == 2 * (108 + 3)
