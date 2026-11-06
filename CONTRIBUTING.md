@@ -30,14 +30,14 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 3 | Prophet null models | 3–4 | 10 | 5 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 3 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
-| 6 | Vinge Horizon `h*` | 9 | 7 | 1 | ❌ |
+| 6 | Vinge Horizon `h*` | 9 | 7 | 2 | ❌ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 0 | ❌ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 0 | ❌ |
 | 9 | Historical validation | 8, 10 | 9 | 0 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **40** | **29%** |
+| | **Total** | | **137** | **41** | **30%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -330,7 +330,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | ID | Subtask | Done when | HW | Deps | Status |
 |---|---|---|:-:|---|:-:|
 | K-6.01 | Rolling-origin backtest harness | Wraps Prophet `cross_validation(parallel="processes")` with no lookahead, using vintages | CPU×N | 3.03 | ✅ |
-| K-6.02 | Log-unit error metrics | Absolute log error (factor error) and CRPS replace MAPE on `ln y` (D2) | CPU | 6.01 | ❌ |
+| K-6.02 | Log-unit error metrics | Absolute log error (factor error) and CRPS replace MAPE on `ln y` (D2) | CPU | 6.01 | ✅ |
 | K-6.03 | `h*` definition | First horizon where smoothed error crosses tolerance (D3), plus a variant where the 90% band exceeds k e-folds | CPU | 6.02 | ❌ |
 | K-6.04 | `h*(t)` series | `h*` recomputed at every monthly cutoff for every series (the largest CPU job; uses the fit cache) | CPU×N | 6.03, 1.07 | ❌ |
 | K-6.05 | NeuralProphet `h*` cross-check | Same procedure with NeuralProphet quantiles | GPU | 6.03, 4.05 | ❌ |

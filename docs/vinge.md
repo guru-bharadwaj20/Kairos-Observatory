@@ -49,3 +49,20 @@ for series that get revised.
 
 `LogDriftForecaster`, a random walk with drift on `ln y`, is the reference
 baseline. It is also the forecaster the tests use.
+
+## 3. Log-unit error metrics (K-6.02, D2)
+
+MAPE on `ln y` means nothing here. `ln FLOP` is about 57, so a "25 %" error is
+a factor of about e^14. `score_backtest` adds these columns, all on the log
+scale:
+
+| Column | Definition | Unit |
+|---|---|---|
+| `ale` | `abs(ln yhat - ln y)` | e-folds |
+| `factor_error` | `exp(ale)`; 2.0 means "off by 2x" | factor |
+| `crps` | CRPS of the forecast distribution of `ln y`. Uses the quantile (pinball) form when there are 3 or more `q_<p>` columns, else a Gaussian fitted to `yhat` and the band | e-folds |
+| `band_efolds` | `ln yhat_hi - ln yhat_lo` | e-folds |
+| `covered` | `yhat_lo <= y <= yhat_hi` | bool |
+
+`error_curve(scored, metric)` aggregates by horizon, using the median by
+default. Factor error is aggregated as `exp(median(ale))`.
