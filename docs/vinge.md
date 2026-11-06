@@ -66,3 +66,22 @@ scale:
 
 `error_curve(scored, metric)` aggregates by horizon, using the median by
 default. Factor error is aggregated as `exp(median(ale))`.
+
+## 4. The `h*` definition (K-6.03, D3)
+
+The sketch's `ok["horizon"].max()` took the *longest* horizon that passed.
+Errors aren't monotone, so one lucky long horizon inflated `h*`. KAIROS uses
+the **first crossing** instead:
+
+1. Build the error curve (median `ale` or `crps` per horizon), fill gaps, and
+   smooth it with a centred moving average (`window=3` months).
+2. `crossed_at` is the first horizon where the smoothed curve exceeds the
+   tolerance. A tolerance factor `f` means `ln f` e-folds; `f = 2` is
+   "within 2x".
+3. `h* = crossed_at - 1`. If the curve never crosses, `h*` is the longest
+   horizon tested and the result is `censored`, which makes it a lower bound.
+
+`error_horizon(scored, tolerance_factor)` implements this rule.
+`band_horizon(scored, k_efolds)` is the variant that applies the same rule to
+the median width of the 90 % band. It needs no future actuals, so it can be
+read at the live edge.
