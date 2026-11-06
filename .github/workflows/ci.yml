@@ -51,3 +51,11 @@ jobs:
 
       - name: Fast tests (no slow, no gpu)
         run: uv run --no-sync pytest -m "not slow and not gpu" -n auto --cov --cov-report=term
+
+  citation:
+    name: Validate CITATION.cff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uvx cffconvert --validate

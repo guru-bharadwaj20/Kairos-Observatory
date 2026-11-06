@@ -24,7 +24,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 
 | Phase | Name | Roadmap weeks | Subtasks | Done | Status |
 |:-:|---|:-:|:-:|:-:|:-:|
-| 0 | Foundation and governance | 0 | 14 | 13 | ❌ |
+| 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 0 | ❌ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 0 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **13** | **9%** |
+| | **Total** | | **137** | **14** | **10%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -231,7 +231,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-0.11 | Community files | `CODE_OF_CONDUCT.md`, `SECURITY.md`, issue and PR templates that require a task ID | — | — | ✅ |
 | K-0.12 | Governance and independence policy | `GOVERNANCE.md`: no funding from measured labs (Löb), conflict-of-interest disclosure, how `λ` is set through public deliberation | — | — | ✅ |
 | K-0.13 | Data licence | `LICENSE-DATA` (CC BY 4.0) for KAIROS-built datasets and published forecasts; third-party licences listed | — | — | ✅ |
-| K-0.14 | Citation metadata | `CITATION.cff` validated with `cffconvert` | — | — | ❌ |
+| K-0.14 | Citation metadata | `CITATION.cff` validated with `cffconvert` | — | — | ✅ |
 
 ### Phase 1: Compute layer (CPU/GPU)
 

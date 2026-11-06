@@ -1,0 +1,66 @@
+cff-version: 1.2.0
+message: "If you use KAIROS Observatory, its dataset or its forecasts, please cite it as below."
+type: software
+title: "KAIROS Observatory: an open early-warning system for runaway AI"
+abstract: >-
+  KAIROS watches AI capability C(t) against human oversight capacity H(t) and
+  reports four dials (acceleration, recursion, Vinge Horizon, Jonas Gap) that
+  feed pre-agreed tripwire levels. Prophet and NeuralProphet act as null models,
+  singularity detectors look for super-exponential growth, and every forecast is
+  pre-registered in a hash-chained public ledger.
+authors:
+  - alias: guru-bharadwaj20
+    website: "https://github.com/guru-bharadwaj20"
+repository-code: "https://github.com/guru-bharadwaj20/Kairos-Observatory"
+url: "https://github.com/guru-bharadwaj20/Kairos-Observatory"
+license: Apache-2.0
+version: 0.0.1
+date-released: "2026-11-06"
+keywords:
+  - forecasting
+  - early warning
+  - AI safety
+  - technological singularity
+  - Prophet
+  - NeuralProphet
+  - LPPLS
+  - pre-registration
+references:
+  - type: article
+    title: "Doomsday: Friday, 13 November, A.D. 2026"
+    authors:
+      - family-names: von Foerster
+        given-names: Heinz
+      - family-names: Mora
+        given-names: Patricia M.
+      - family-names: Amiot
+        given-names: Lawrence W.
+    journal: Science
+    volume: 132
+    issue: 3436
+    start: 1291
+    end: 1295
+    year: 1960
+    doi: 10.1126/science.132.3436.1291
+  - type: article
+    title: "Forecasting at Scale"
+    authors:
+      - family-names: Taylor
+        given-names: Sean J.
+      - family-names: Letham
+        given-names: Benjamin
+    journal: The American Statistician
+    volume: 72
+    issue: 1
+    start: 37
+    end: 45
+    year: 2018
+    doi: 10.1080/00031305.2017.1380080
+  - type: article
+    title: "NeuralProphet: Explainable Forecasting at Scale"
+    authors:
+      - family-names: Triebe
+        given-names: Oskar
+      - name: "et al."
+    year: 2021
+    repository: "https://arxiv.org/abs/2111.15397"
