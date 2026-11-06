@@ -36,3 +36,16 @@ overhead dominate such a small model. Phase 4 therefore follows this rule:
 Passing `device="cuda"` to the ensemble runner is supported; it then runs the
 fits one after another in-process on the GPU, which is only worth it for large
 global models.
+
+## Lagged drivers (`kairos.neural.regressors`)
+
+`design_frame()` joins the target and its drivers into one wide frame on the
+months they share. Every driver is log-transformed and gets its own window:
+
+| Column | Series | `n_lags` |
+|---|---|--:|
+| `log_compute` | `compute` | 6 |
+| `log_investment` | `investment` | 12 |
+| `log_researchers` | `researchers` | 12 |
+
+Series IDs follow K-2.11; pass other `DriverSpec`s if Phase 2 names differ.
