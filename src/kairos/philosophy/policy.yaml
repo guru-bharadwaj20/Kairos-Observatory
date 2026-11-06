@@ -27,3 +27,9 @@ danger:
   recursion: {direction: above, threshold: 0.0}     # trend of kappa across windows > 0
   vinge: {direction: below, threshold: 0.0}         # trend of h* < 0: horizon shrinking
   jonas: {direction: above, threshold: 0.0}         # dG/dt > 0, sustained
+
+# Rawls maximin: decide in the worst *plausible* scenario of the ensemble.
+rawls:
+  # A scenario is plausible when its normalised ensemble weight is at least this.
+  # Equal-weight ensembles of up to 20 members keep every member.
+  min_weight: 0.05
