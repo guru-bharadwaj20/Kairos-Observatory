@@ -100,3 +100,23 @@ at least 6 cutoffs per reading, smoothing window 3, and a band threshold of
 2 e-folds. The output has one row per `(series_id, as_of)` with `h_star`,
 `censored`, `crossed_at`, `band_h_star`, `band_censored`, `n_cutoffs` and
 `max_horizon`.
+
+## 6. NeuralProphet cross-check (K-6.05)
+
+The cross-check runs the same procedure with quantile forecasts. A model that
+satisfies `QuantileForecaster` provides
+`fit_predict_quantiles(history, horizon)` and returns `ds` plus `q_<p>`
+columns in raw units, including 0.5 and the pair for the interval.
+`QuantileAdapter` turns it into a `Forecaster`:
+
+- crossing quantiles are sorted (monotone rearrangement);
+- the median becomes `yhat`;
+- `q_0.05`/`q_0.95` become the band;
+- every quantile is kept, so CRPS uses the quantile form.
+
+`from_neuralprophet_columns` renames NeuralProphet's `yhat1` and
+`"yhat1 5.0%"` columns to `q_<p>`.
+
+`cross_check(prophet_hstar, np_hstar)` reports four numbers on the common
+readings: the count, the Spearman correlation, the mean absolute difference,
+and the share of readings within 3 months.
