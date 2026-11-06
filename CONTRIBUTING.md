@@ -36,8 +36,8 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 9 | Historical validation | 8, 10 | 9 | 2 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
-| 12 | Automation, release, paper | 12 | 9 | 5 | ❌ |
-| | **Total** | | **137** | **74** | **54%** |
+| 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
+| | **Total** | | **137** | **75** | **55%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -411,7 +411,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-12.03 | Self-hosted GPU runner | Documented setup for this workstation as a labelled runner for GPU and `slow` jobs | GPU | 12.02 | ✅ |
 | K-12.04 | Documentation site | `mkdocs-material` + `mkdocstrings` API reference, deployed to Pages | — | 0.04 | ✅ |
 | K-12.05 | Tutorial notebooks | Three notebooks: null model, singularity detectors, reading the clock | CPU | 12.04 | ✅ |
-| K-12.06 | Beyond AI example | Pandemic growth against health-system capacity, plus Scheffer critical-slowing-down signals as an optional fifth dial | CPU | 9.05 | ❌ |
+| K-12.06 | Beyond AI example | Pandemic growth against health-system capacity, plus Scheffer critical-slowing-down signals as an optional fifth dial | CPU | 9.05 | ✅ |
 | K-12.07 | Replication container | CUDA Docker image that reproduces the validation report end to end | GPU | 9.09 | ❌ |
 | K-12.08 | Release v0.1.0 | `CHANGELOG.md`, version tag, PyPI trusted-publishing workflow | — | 12.04 | ❌ |
 | K-12.09 | Paper draft | *"Measuring the Distance to a Singularity: Forecastability as an Early-Warning Signal"* in `paper/`, built in CI | — | 9.09, 10.07 | ❌ |
