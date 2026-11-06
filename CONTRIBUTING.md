@@ -27,7 +27,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 6 | ❌ |
-| 3 | Prophet null models | 3–4 | 10 | 0 | ❌ |
+| 3 | Prophet null models | 3–4 | 10 | 1 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 0 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 0 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 0 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 0 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 0 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 0 | ❌ |
-| | **Total** | | **137** | **28** | **20%** |
+| | **Total** | | **137** | **29** | **21%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -278,7 +278,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 
 | ID | Subtask | Done when | HW | Deps | Status |
 |---|---|---|:-:|---|:-:|
-| K-3.01 | Log-scale wrapper | Fit on `ln y`, back-transform the median and intervals; round-trip test | CPU | 0.05 | ❌ |
+| K-3.01 | Log-scale wrapper | Fit on `ln y`, back-transform the median and intervals; round-trip test | CPU | 0.05 | ✅ |
 | K-3.02 | Null model per series | Defaults: `interval_width=0.9`, no yearly seasonality on frontier series, `changepoint_prior_scale` from config | CPU | 3.01, 2.21 | ❌ |
 | K-3.03 | Parallel fit of all series | Every series fitted through `pmap`; wall time recorded | CPU×N | 3.02, 1.04 | ❌ |
 | K-3.04 | Changepoint extraction | Table of changepoint dates, slope deltas and magnitudes per series | CPU | 3.02 | ❌ |
