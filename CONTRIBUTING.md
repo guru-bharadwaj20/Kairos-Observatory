@@ -33,11 +33,11 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 6 | Vinge Horizon `h*` | 9 | 7 | 7 | ✅ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 6 | ✅ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 9 | ✅ |
-| 9 | Historical validation | 8, 10 | 9 | 7 | ❌ |
+| 9 | Historical validation | 8, 10 | 9 | 8 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **126** | **92%** |
+| | **Total** | | **137** | **127** | **93%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -373,7 +373,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-9.05 | COVID-19 early 2020 | Conditional forecasts with lockdown events show the curve bending; counterfactual scored | CPU, GPU | 4.03 | ✅ |
 | K-9.06 | Moore's law false-alarm test | Stays at Level 0 throughout | CPU×N | 8.08 | ✅ |
 | K-9.07 | AI history replay | Changepoints and dial states from 2012 to today, as-of each year | CPU×N | 9.01, 8.08 | ✅ |
-| K-9.08 | Scoring module | CRPS, PIT histograms, interval coverage, false-alarm rate, warning lead time | CPU | 6.02 | ❌ |
+| K-9.08 | Scoring module | CRPS, PIT histograms, interval coverage, false-alarm rate, warning lead time | CPU | 6.02 | ✅ |
 | K-9.09 | Validation report | `docs/validation.md` with figures and an honest list of failures | — | 9.02–9.08 | ❌ |
 
 ### Phase 10: Pre-registration ledger
