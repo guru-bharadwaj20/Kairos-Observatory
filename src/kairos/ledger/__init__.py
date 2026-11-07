@@ -11,6 +11,7 @@ from kairos.ledger.chain import (
 )
 from kairos.ledger.conditional import ConditionalClaim, EventAssumption, crossing_claim
 from kairos.ledger.forecast import Forecast, ForecastPoint, forecast_hash
+from kairos.ledger.scorecard import scorecard, scorecard_markdown
 from kairos.ledger.scoring import ForecastScore, log_intervention, score_matured
 from kairos.ledger.timestamp import OtsTimestamper, ProofStatus, stamp_entries
 
@@ -33,6 +34,8 @@ __all__ = [
     "log_intervention",
     "manifest_hash",
     "score_matured",
+    "scorecard",
+    "scorecard_markdown",
     "sha256_hex",
     "stamp_entries",
 ]

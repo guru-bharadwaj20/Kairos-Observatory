@@ -136,3 +136,13 @@ kairos ledger upgrade    # pending -> anchored
 kairos ledger verify --require-proofs
 git add ledger/ && git commit -m "data(ledger): ..."
 ```
+
+## Public scorecard (K-10.07)
+
+`kairos ledger scorecard [--out docs/scorecard.md]` rebuilds the table from
+`score` entries alone (scores superseded by a correction are dropped). There is
+one row per (series, model) plus `ALL`: `n_forecasts`, `n_points`,
+`n_counterfactual`, `mean_crps` (series units; blank for `ALL`), empirical
+`coverage` next to `nominal`, `pit_ks` (KS distance of PIT from uniform),
+`claims_within` (share of conditional claims resolved inside their interval)
+and `pit_hist` (10-bin PIT counts).

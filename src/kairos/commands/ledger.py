@@ -5,11 +5,13 @@
 * ``kairos ledger stamp`` submits unstamped entries to OpenTimestamps calendars
   (needs network and ``uv sync --extra ots``).
 * ``kairos ledger upgrade`` completes pending proofs once Bitcoin has confirmed.
+* ``kairos ledger scorecard`` prints the calibration and CRPS table.
 * ``kairos ledger show`` lists the entries.
 """
 
 from __future__ import annotations
 
+from datetime import date
 from pathlib import Path
 
 import typer
@@ -17,6 +19,7 @@ from rich.console import Console
 from rich.table import Table
 
 from kairos.ledger.chain import DEFAULT_LEDGER_PATH, Ledger, LedgerError
+from kairos.ledger.scorecard import scorecard, scorecard_markdown
 from kairos.ledger.timestamp import (
     DEFAULT_PROOFS_DIR,
     default_timestamper,
@@ -33,6 +36,7 @@ app = typer.Typer(
 
 LEDGER_OPT = typer.Option(DEFAULT_LEDGER_PATH, "--ledger", help="Ledger JSONL file.")
 PROOFS_OPT = typer.Option(DEFAULT_PROOFS_DIR, "--proofs", help="Directory of .ots proofs.")
+OUT_OPT = typer.Option(None, "--out", help="Write Markdown here (else stdout).")
 
 
 @app.command()
@@ -97,6 +101,21 @@ def upgrade(ledger: Path = LEDGER_OPT, proofs: Path = PROOFS_OPT) -> None:
         new = stamper.upgrade(digest, path.read_bytes())
         path.write_bytes(new)
         typer.echo(f"{entry.seq:6d}  {stamper.check(digest, new).status.value}")
+
+
+@app.command("scorecard")
+def scorecard_cmd(
+    ledger: Path = LEDGER_OPT,
+    out: Path | None = OUT_OPT,
+) -> None:
+    """Print (or write) the calibration and CRPS scorecard built from the ledger."""
+    text = scorecard_markdown(scorecard(Ledger(ledger)), generated=date.today())
+    if out is None:
+        typer.echo(text)
+    else:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(text, encoding="utf-8", newline="\n")
+        typer.echo(f"wrote {out}")
 
 
 @app.command()
