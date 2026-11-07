@@ -43,6 +43,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | NeurIPS conference statistics (curated)     | Researcher-count driver proxy     | Facts; cited per row   |
 | AI safety field surveys, grant databases    | Safety headcount and funding      | Estimates; cited       |
 | System cards and evaluator reports (curated) | Third-party evaluation share     | Facts; cited per row   |
+| Pew Research Center surveys (curated)       | Public AI literacy                | Facts; Pew terms of use |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.

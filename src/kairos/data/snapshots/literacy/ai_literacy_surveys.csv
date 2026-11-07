@@ -1,0 +1,8 @@
+# Share of U.S. adults who say they have ever used ChatGPT (Pew Research Center
+# American Trends Panel). Proxy for hands-on public familiarity with AI.
+# se is the survey standard error implied by Pew's reported margin of error.
+date,value,se,source_url
+2023-03-01,0.14,0.008,https://www.pewresearch.org/short-reads/2023/05/24/a-majority-of-americans-have-heard-of-chatgpt-but-few-have-tried-it-themselves/
+2023-07-01,0.18,0.008,https://www.pewresearch.org/short-reads/2023/08/28/most-americans-havent-used-chatgpt-few-think-it-will-have-a-major-impact-on-their-job/
+2024-02-01,0.23,0.008,https://www.pewresearch.org/short-reads/2024/03/26/americans-use-of-chatgpt-is-ticking-up-but-few-trust-its-election-information/
+2025-02-01,0.34,0.008,https://www.pewresearch.org/short-reads/2025/06/25/34-of-us-adults-have-used-chatgpt-about-double-the-share-in-2023/
