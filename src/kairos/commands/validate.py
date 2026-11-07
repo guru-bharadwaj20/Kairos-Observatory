@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import typer
 
@@ -46,3 +47,18 @@ def run_command(
             typer.echo(f"  note: {note}")
     if not (result.passed or result.skipped):
         raise typer.Exit(1)
+
+
+_DOCS_OPTION = typer.Option(Path("docs"), help="Where validation.md and figures go.")
+
+
+@app.command("report")
+def report_command(
+    docs_dir: Path = _DOCS_OPTION,
+) -> None:
+    """Run every case and write docs/validation.md with figures."""
+    from kairos.validation.report import write_report
+
+    out, results = write_report(docs_dir)
+    failed = [r.case for r in results if not (r.passed or r.skipped)]
+    typer.echo(f"wrote {out} ({len(results)} cases, failed: {failed or 'none'})")
