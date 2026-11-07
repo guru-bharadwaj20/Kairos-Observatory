@@ -1,4 +1,4 @@
-"""``kairos run weekly``: the weekly KAIROS pipeline orchestrator.
+"""``kairos run weekly`` and ``kairos run validation``: pipeline orchestrators.
 
 The pipeline runs six stages in a fixed order::
 
@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Any
 
 __all__ = [
+    "VALIDATION_STAGES",
     "WEEKLY_STAGES",
     "RunContext",
     "RunReport",
@@ -42,6 +43,7 @@ __all__ = [
     "StageStatus",
     "build_parser",
     "main",
+    "pipelines",
     "resolve_entry_point",
     "run_pipeline",
 ]
@@ -171,6 +173,30 @@ WEEKLY_STAGES: tuple[Stage, ...] = (
     ),
 )
 
+VALIDATION_STAGES: tuple[Stage, ...] = (
+    Stage(
+        "backtests",
+        ("kairos.validation.runner:run_stage", "kairos.validation:run_all"),
+        "Replay the pipeline on every historical case at its as-of dates",
+        needs_gpu=True,
+    ),
+    Stage(
+        "report",
+        ("kairos.validation.report:run_stage", "kairos.validation:write_report"),
+        "Score the backtests and write docs/validation.md",
+    ),
+)
+
+PIPELINE_HELP = {
+    "weekly": "refresh, fit, dials, governor, ledger, export",
+    "validation": "historical backtests and the validation report",
+}
+
+
+def pipelines() -> dict[str, tuple[Stage, ...]]:
+    """Return the named pipelines, looked up at call time."""
+    return {"weekly": WEEKLY_STAGES, "validation": VALIDATION_STAGES}
+
 
 def resolve_entry_point(spec: str) -> StageFn | None:
     """Import ``module:attr`` and return it, or ``None`` if it is missing.
@@ -262,18 +288,19 @@ def build_parser() -> argparse.ArgumentParser:
     """Build the ``kairos run`` argument parser."""
     parser = argparse.ArgumentParser(prog="kairos run", description="Run a KAIROS pipeline.")
     sub = parser.add_subparsers(dest="pipeline", required=True)
-    weekly = sub.add_parser("weekly", help="the full weekly pipeline")
-    weekly.add_argument("--root", type=Path, default=Path.cwd(), help="repository root")
-    weekly.add_argument("--cpu-only", action="store_true", help="never use the GPU (CI runners)")
-    weekly.add_argument("--dry-run", action="store_true", help="resolve stages without running")
-    weekly.add_argument("--only", action="append", default=[], metavar="STAGE")
-    weekly.add_argument("--skip", action="append", default=[], metavar="STAGE")
-    weekly.add_argument("--keep-going", action="store_true", help="continue after a failure")
-    weekly.add_argument(
-        "--strict", action="store_true", help="exit 2 if any selected stage is unavailable"
-    )
-    weekly.add_argument("--report", type=Path, help="write the JSON run report here")
-    weekly.add_argument("--as-of", help="ISO date for the run (default: now, UTC)")
+    for name, help_text in PIPELINE_HELP.items():
+        p = sub.add_parser(name, help=help_text)
+        p.add_argument("--root", type=Path, default=Path.cwd(), help="repository root")
+        p.add_argument("--cpu-only", action="store_true", help="never use the GPU (CI runners)")
+        p.add_argument("--dry-run", action="store_true", help="resolve stages without running")
+        p.add_argument("--only", action="append", default=[], metavar="STAGE")
+        p.add_argument("--skip", action="append", default=[], metavar="STAGE")
+        p.add_argument("--keep-going", action="store_true", help="continue after a failure")
+        p.add_argument(
+            "--strict", action="store_true", help="exit 2 if any selected stage is unavailable"
+        )
+        p.add_argument("--report", type=Path, help="write the JSON run report here")
+        p.add_argument("--as-of", help="ISO date for the run (default: now, UTC)")
     return parser
 
 
@@ -294,7 +321,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     try:
         report = run_pipeline(
-            ctx, WEEKLY_STAGES, only=args.only, skip=args.skip, keep_going=args.keep_going
+            ctx,
+            pipelines()[args.pipeline],
+            only=args.only,
+            skip=args.skip,
+            keep_going=args.keep_going,
         )
     except ValueError as exc:
         print(f"error: {exc}", file=sys.stderr)

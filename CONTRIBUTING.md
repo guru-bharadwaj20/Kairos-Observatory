@@ -36,8 +36,8 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 9 | Historical validation | 8, 10 | 9 | 9 | ✅ |
 | 10 | Pre-registration ledger | 11 | 7 | 7 | ✅ |
 | 11 | Public dashboard | 11–12 | 9 | 9 | ✅ |
-| 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **134** | **98%** |
+| 12 | Automation, release, paper | 12 | 9 | 7 | ❌ |
+| | **Total** | | **137** | **135** | **99%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -412,7 +412,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-12.04 | Documentation site | `mkdocs-material` + `mkdocstrings` API reference, deployed to Pages | — | 0.04 | ✅ |
 | K-12.05 | Tutorial notebooks | Three notebooks: null model, singularity detectors, reading the clock | CPU | 12.04 | ✅ |
 | K-12.06 | Beyond AI example | Pandemic growth against health-system capacity, plus Scheffer critical-slowing-down signals as an optional fifth dial | CPU | 9.05 | ✅ |
-| K-12.07 | Replication container | CUDA Docker image that reproduces the validation report end to end | GPU | 9.09 | ❌ |
+| K-12.07 | Replication container | CUDA Docker image that reproduces the validation report end to end | GPU | 9.09 | ✅ |
 | K-12.08 | Release v0.1.0 | `CHANGELOG.md`, version tag, PyPI trusted-publishing workflow | — | 12.04 | ❌ |
 | K-12.09 | Paper draft | *"Measuring the Distance to a Singularity: Forecastability as an Early-Warning Signal"* in `paper/`, built in CI | — | 9.09, 10.07 | ❌ |
 
