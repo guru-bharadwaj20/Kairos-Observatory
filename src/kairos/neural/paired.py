@@ -69,7 +69,14 @@ class PairedSpec:
     """
 
     config: NeuralConfig = field(
-        default_factory=lambda: NeuralConfig(n_forecasts=6, epochs=100, early_stopping=True)
+        default_factory=lambda: NeuralConfig(
+            n_forecasts=6,
+            epochs=300,
+            batch_size=16,
+            learning_rate=0.1,
+            n_changepoints=0,
+            early_stopping=False,
+        )
     )
     drivers: tuple[DriverSpec, ...] = DEFAULT_DRIVERS
     self_lags: int = 12

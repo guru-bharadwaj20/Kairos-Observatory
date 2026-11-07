@@ -104,3 +104,32 @@ replaced by the CPU pool: `ensemble_device(None | "auto")` is `"cpu"`, and
 only an explicit `device="cuda"` runs the fits in-process on the GPU. Every
 fit goes through `cached_fit`, and `summarize()` reports the mean, standard
 deviation and 5/50/95 % quantiles of the out-of-sample MAE per variant.
+
+## The recursion coefficient κ (`kairos.neural.kappa`)
+
+With MAE the out-of-sample mean absolute error in log units, averaged over
+horizons and seeds:
+
+    κ = 1 − MAE_self / MAE_exo
+
+- `κ = 0`: own lags add nothing once compute, money and people are known.
+  `κ = 0.2`: they cut the forecast error by 20 %. `κ < 0`: they hurt.
+- Interval: percentile bootstrap over the paired seeds (90 % by default).
+- Null: `n_permutations` (default 49) refits with a block-shuffled self channel
+  give `κ_null`; `p = (1 + #{κ_null ≥ κ}) / (1 + n_permutations)`, and
+  `excess = κ − median(κ_null)` is the gain over chance.
+- `kappa_reading()` returns the `"recursion"` `DialReading`: `value = κ`,
+  `ci_lo/ci_hi` from the bootstrap, and `level = 1` only when `κ` is significant
+  and rising across rolling windows (K-4.09); otherwise 0. `detail` carries
+  the p-value, excess, MAEs, null and per-seed values.
+
+The default `PairedSpec` (horizon 6, `self_lags = 12`, 24 hold-out months,
+no changepoints, learning rate 0.1, batch 16, 300 epochs) was chosen on
+synthetic series: with `phi = 0` it gives `κ ≈ 0`, with `phi = 0.95` a clearly
+positive `κ`. Early stopping is off for `κ`: without a validation split it
+watches the training loss and stopped high-learning-rate fits too early, and
+overfitting is already handled by scoring out of sample against the null.
+
+CLI: `kairos kappa synthetic --coupling 0.8` (offline demo) and
+`kairos kappa estimate data.parquet --target <series_id>` print the reading
+as JSON.
