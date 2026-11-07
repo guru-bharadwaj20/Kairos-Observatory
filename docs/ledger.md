@@ -107,3 +107,32 @@ the quantiles linearly. Interventions are logged with
 logged after a forecast takes effect within its horizon, targets its series
 and was not already assumed, the score is `counterfactual` and
 `mean_log_gap = mean log(y / median)` estimates the intervention's effect.
+
+## Verifying (K-10.06)
+
+```bash
+kairos ledger verify                    # chain + offline proof checks; exit 1 on error
+kairos ledger verify --require-proofs   # also fail on entries without a proof
+kairos ledger verify --expect-head <entry_hash> --json
+kairos ledger show                      # entries with proof status
+```
+
+`verify_ledger` reports every problem rather than stopping at the first:
+invalid or non-canonical lines, CR line endings, `seq` gaps (deleted or
+reordered entries), broken `prev_hash` links, payload/header/forecast hash
+mismatches, corrupt or swapped proofs, and orphan proofs (a deleted tail
+entry leaves its proof behind). `--expect-head` catches truncation of entries
+that have no proof yet.
+
+### Timestamping for real (manual, uses the network)
+
+Tests never contact calendars. To anchor the public ledger:
+
+```bash
+uv sync --extra ots
+kairos ledger stamp      # writes ledger/proofs/*.ots (pending)
+# a few hours later
+kairos ledger upgrade    # pending -> anchored
+kairos ledger verify --require-proofs
+git add ledger/ && git commit -m "data(ledger): ..."
+```
