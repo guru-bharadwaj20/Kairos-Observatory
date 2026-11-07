@@ -1,0 +1,10 @@
+# Capability first public appearance -> first binding rule that addresses it.
+# Rules are those listed in the OECD.AI national policy database (or its
+# underlying official texts); capability dates are first public demonstrations.
+capability,capability_date,rule,rule_date,jurisdiction,source_url
+face_recognition_at_scale,2014-03-17,San Francisco Stop Secret Surveillance Ordinance,2019-05-14,US-CA (city),https://sfbos.org/sites/default/files/o0107-19.pdf
+deepfake_video,2017-12-11,Virginia Code 18.2-386.2 amendment on synthetic media,2019-07-01,US-VA,https://law.lis.virginia.gov/vacode/title18.2/chapter8/section18.2-386.2/
+synthetic_media_generation,2022-04-06,China Provisions on Deep Synthesis Internet Information Services,2023-01-10,CN,https://oecd.ai/en/dashboards/countries/China
+chat_llm_public_release,2022-11-30,China Interim Measures for Generative AI Services,2023-08-15,CN,https://oecd.ai/en/dashboards/countries/China
+voice_cloning,2023-01-05,FCC Declaratory Ruling on AI-generated voices in robocalls,2024-02-08,US,https://docs.fcc.gov/public/attachments/FCC-24-17A1.pdf
+general_purpose_ai_models,2020-06-11,EU AI Act general-purpose AI model obligations,2025-08-02,EU,https://eur-lex.europa.eu/eli/reg/2024/1689/oj
