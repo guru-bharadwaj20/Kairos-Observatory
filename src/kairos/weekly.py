@@ -17,7 +17,8 @@ is recorded as skipped with the reason, and the run carries on. Any other
 exception is a bug and fails the stage.
 
 Set ``KAIROS_OFFLINE=1`` to forbid network access (live data and timestamp
-calendars). ``--cpu-only`` implies offline data and a reduced ``κ`` ensemble.
+calendars). ``--cpu-only`` only selects a reduced ``κ`` ensemble; it does not
+change data access.
 """
 
 from __future__ import annotations
@@ -66,7 +67,7 @@ _UNITS = {"acceleration": "", "recursion": "", "vinge": "months", "jonas": "per 
 
 
 def _offline(ctx: RunContext) -> bool:
-    return ctx.cpu_only or os.environ.get("KAIROS_OFFLINE", "") not in ("", "0")
+    return os.environ.get("KAIROS_OFFLINE", "") not in ("", "0")
 
 
 def _data_root(ctx: RunContext) -> Path:

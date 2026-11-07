@@ -24,7 +24,7 @@ hosted runner with `--cpu-only` and commits any new files under `ledger/`.
 
 ## Behaviour
 
-- `refresh` uses the committed snapshots when `--cpu-only` is set or
+- `refresh` downloads live data, uses the committed snapshots when
   `KAIROS_OFFLINE=1`, and falls back to them if a live download fails.
 - `dials` reads each dial independently. A dial short of data (a `ValueError`
   from its package) is reported as `"<dial> skipped: <reason>"` in the stage
