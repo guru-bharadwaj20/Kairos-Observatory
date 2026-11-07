@@ -1,0 +1,18 @@
+# METR 50%-success task time horizons, curated from METR publications.
+# Values are read from METR's published charts and reports and rounded; they are
+# approximate. CIs are METR's bootstrap 95% intervals where reported.
+# Primary source: Kwa et al. (2025), "Measuring AI Ability to Complete Long Tasks",
+# arXiv:2503.14499, and METR's per-model evaluation reports.
+model,release_date,p50_minutes,ci_lo_minutes,ci_hi_minutes,source_url
+GPT-2,2019-02-14,0.04,0.01,0.1,https://arxiv.org/abs/2503.14499
+GPT-3 (davinci-002),2020-05-28,0.15,0.07,0.3,https://arxiv.org/abs/2503.14499
+GPT-3.5 (turbo-instruct),2022-03-15,0.6,0.3,1.2,https://arxiv.org/abs/2503.14499
+GPT-4,2023-03-14,5.4,2.5,11,https://arxiv.org/abs/2503.14499
+GPT-4o,2024-05-13,9,5,17,https://arxiv.org/abs/2503.14499
+Claude 3.5 Sonnet (Oct 2024),2024-10-22,28,15,55,https://arxiv.org/abs/2503.14499
+o1,2024-12-05,39,20,75,https://arxiv.org/abs/2503.14499
+Claude 3.7 Sonnet,2025-02-24,59,30,115,https://arxiv.org/abs/2503.14499
+o3,2025-04-16,92,48,180,https://evaluations.metr.org/openai-o3-report/
+Claude Opus 4,2025-05-22,80,40,160,https://metr.org/
+GPT-5,2025-08-07,137,65,270,https://evaluations.metr.org/gpt-5-report/
+Claude Opus 4.5,2025-11-24,289,109,1225,https://metr.org/
