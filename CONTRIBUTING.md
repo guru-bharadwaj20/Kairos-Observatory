@@ -29,7 +29,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 23 | ✅ |
 | 3 | Prophet null models | 3–4 | 10 | 10 | ✅ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 12 | ✅ |
-| 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
+| 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 4 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 5 | ❌ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 7 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **106** | **77%** |
+| | **Total** | | **137** | **107** | **78%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -313,7 +313,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-5.01 | Synthetic test series | Generators for exponential (`δ = 0`), hyperbolic (known `δ`, `t_c`) and logistic curves, with noise | CPU | 0.09 | ✅ |
 | K-5.02 | Growth-rate estimator and `δ` regression | `g(t)` from smoothing-spline derivative on history only (D1); `ln g = ln k + δ ln x`; `T_remaining = 1/(δ·g)` with delta-method interval (D5) | CPU | 5.01 | ✅ |
 | K-5.03 | Direct hyperbolic fit | `scipy.optimize.least_squares` on `x0·(1 − t/t_c)^(−1/δ)`; agrees with K-5.02 on synthetic data | CPU | 5.01 | ✅ |
-| K-5.04 | Block bootstrap (CPU) | Moving block bootstrap for `δ` and `t_c` with smoother refit per draw (D4) | CPU×N | 5.02, 1.04 | ❌ |
+| K-5.04 | Block bootstrap (CPU) | Moving block bootstrap for `δ` and `t_c` with smoother refit per draw (D4) | CPU×N | 5.02, 1.04 | ✅ |
 | K-5.05 | Vectorised bootstrap (GPU) | 10⁵ resamples in batched `torch`; matches K-5.04 distribution (KS test) | GPU | 5.04, 1.05 | ❌ |
 | K-5.06 | Coverage check | 90% bootstrap intervals cover the true synthetic `δ` in 85–95% of trials | CPU×N | 5.04 | ❌ |
 | K-5.07 | LPPLS reference (CPU float64) | Filimonov–Sornette form: linear `A, B, C1, C2` by OLS, nonlinear `t_c, m, ω` by search | CPU | 5.01 | ❌ |
