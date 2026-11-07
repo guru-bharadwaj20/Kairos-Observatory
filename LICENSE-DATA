@@ -41,6 +41,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | Liang et al. 2024, arXiv:2404.01268         | AI share of AI research proxy     | Figures cited as facts |
 | OWID / Quid, private investment in AI       | Investment driver                 | CC BY 4.0              |
 | NeurIPS conference statistics (curated)     | Researcher-count driver proxy     | Facts; cited per row   |
+| AI safety field surveys, grant databases    | Safety headcount and funding      | Estimates; cited       |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.

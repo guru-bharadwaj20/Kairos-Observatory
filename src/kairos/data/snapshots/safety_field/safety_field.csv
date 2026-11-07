@@ -1,0 +1,20 @@
+# AI safety field size, annual estimates placed mid-year. Rough, order-of-magnitude
+# estimates compiled from public field surveys (S. McAleese, "AI Safety Field
+# Growth Analysis", LessWrong/EA Forum 2022 and 2025) and public grant databases
+# (Open Philanthropy, Survival and Flourishing Fund). Bands are deliberately wide.
+series_id,date,value,lo,hi,source_url
+h.safety_researchers,2015-07-01,50,30,80,https://forum.effectivealtruism.org/posts/3gmkrj3khJHndYGNe/estimating-the-current-and-future-number-of-ai-safety
+h.safety_researchers,2017-07-01,100,60,160,https://forum.effectivealtruism.org/posts/3gmkrj3khJHndYGNe/estimating-the-current-and-future-number-of-ai-safety
+h.safety_researchers,2019-07-01,200,120,320,https://forum.effectivealtruism.org/posts/3gmkrj3khJHndYGNe/estimating-the-current-and-future-number-of-ai-safety
+h.safety_researchers,2021-07-01,300,180,480,https://forum.effectivealtruism.org/posts/3gmkrj3khJHndYGNe/estimating-the-current-and-future-number-of-ai-safety
+h.safety_researchers,2022-07-01,400,240,640,https://forum.effectivealtruism.org/posts/3gmkrj3khJHndYGNe/estimating-the-current-and-future-number-of-ai-safety
+h.safety_researchers,2023-07-01,600,360,960,https://www.lesswrong.com/posts/7uJnA3XDpTgemRH2c/ai-safety-field-growth-analysis-2025
+h.safety_researchers,2024-07-01,800,480,1280,https://www.lesswrong.com/posts/7uJnA3XDpTgemRH2c/ai-safety-field-growth-analysis-2025
+h.safety_researchers,2025-07-01,1100,660,1760,https://www.lesswrong.com/posts/7uJnA3XDpTgemRH2c/ai-safety-field-growth-analysis-2025
+h.safety_funding,2015-07-01,10,6,17,https://futureoflife.org/grant-program/2015-grant-program/
+h.safety_funding,2017-07-01,40,24,68,https://www.openphilanthropy.org/grants/?q=&focus-area=potential-risks-advanced-ai
+h.safety_funding,2019-07-01,50,30,85,https://www.openphilanthropy.org/grants/?q=&focus-area=potential-risks-advanced-ai
+h.safety_funding,2021-07-01,80,48,136,https://www.openphilanthropy.org/grants/?q=&focus-area=potential-risks-advanced-ai
+h.safety_funding,2022-07-01,120,72,204,https://www.openphilanthropy.org/grants/?q=&focus-area=potential-risks-advanced-ai
+h.safety_funding,2023-07-01,100,60,170,https://www.openphilanthropy.org/grants/?q=&focus-area=potential-risks-advanced-ai
+h.safety_funding,2024-07-01,110,66,187,https://www.openphilanthropy.org/grants/?q=&focus-area=potential-risks-advanced-ai
