@@ -26,7 +26,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 |:-:|---|:-:|:-:|:-:|:-:|
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
-| 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 19 | ❌ |
+| 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 20 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 5 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 3 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **88** | **64%** |
+| | **Total** | | **137** | **89** | **65%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -269,7 +269,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-2.17 | Event calendar v1 | Frontier releases 2012–2026, major laws, export controls, notable incidents; ≥ 1 source URL each | — | 2.02 | ✅ |
 | K-2.18 | Validation data: population and Moore's law | World population (Kremer/UN historical), transistor counts | CPU | 2.03 | ✅ |
 | K-2.19 | Validation data: bubbles and COVID | Nasdaq 1995–2001, Bitcoin 2015–2018, OWID COVID cases with lockdown events | CPU | 2.03 | ✅ |
-| K-2.20 | Data quality checks | Date monotonicity, units, duplicates, gaps, outlier flags; run on every refresh | CPU | 2.03 | ❌ |
+| K-2.20 | Data quality checks | Date monotonicity, units, duplicates, gaps, outlier flags; run on every refresh | CPU | 2.03 | ✅ |
 | K-2.21 | Composite indices `C(t)` and `H(t)` | Normalised growth rates combined by geometric mean (PCA as a variant); leave-one-out sensitivity table | CPU | 2.06–2.16 | ❌ |
 | K-2.22 | `kairos data refresh` | One command fetches, validates, writes Parquet and updates the manifest | CPU | 2.04, 2.20 | ❌ |
 | K-2.23 | Datasheet | `docs/data.md`: provenance, licence, known biases and secrecy notes for each series | — | 2.21 | ❌ |
