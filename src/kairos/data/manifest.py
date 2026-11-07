@@ -81,7 +81,8 @@ def write_manifest(root: Path | str | None = None) -> dict[str, Any]:
         if old.get("digest") == manifest["digest"]:
             return old
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    text = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    path.write_text(text, encoding="utf-8", newline="\n")
     return manifest
 
 
