@@ -6,7 +6,7 @@ from collections.abc import Callable
 
 import streamlit as st
 
-from kairos.dashboard import components, figures, ledger_view
+from kairos.dashboard import components, figures, ledger_view, methodology
 from kairos.dashboard.snapshot import Snapshot
 
 
@@ -135,10 +135,17 @@ def ledger(snap: Snapshot) -> None:
     )
 
 
+def methodology_page(snap: Snapshot) -> None:
+    """Render the methodology page."""
+    st.header("Methodology")
+    st.markdown(methodology.methodology_markdown(snap))
+
+
 PAGES: dict[str, Callable[[Snapshot], None]] = {
     "Overview": overview,
     "C versus H": capability_vs_human,
     "Acceleration explorer": acceleration,
     "Vinge Horizon": vinge,
     "Ledger": ledger,
+    "Methodology": methodology_page,
 }
