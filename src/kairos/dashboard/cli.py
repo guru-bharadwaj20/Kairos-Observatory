@@ -70,7 +70,29 @@ def build_parser(p: argparse.ArgumentParser | None = None) -> argparse.ArgumentP
     serve.add_argument("--port", type=int, default=8501)
     serve.add_argument("--headless", action="store_true")
     serve.set_defaults(func=_serve)
+    export = cmds.add_parser("export", help="write the static HTML site (GitHub Pages)")
+    export.add_argument(
+        "--snapshot",
+        type=Path,
+        default=None,
+        help=f"published snapshot JSON (default: ${SNAPSHOT_ENV}, else demo)",
+    )
+    export.add_argument("--out", type=Path, default=Path("site"), help="output directory")
+    export.set_defaults(func=_export)
     return p
+
+
+def _export(args: argparse.Namespace) -> int:
+    from kairos.dashboard.export import export_site  # plotly only needed here
+
+    snap = resolve_snapshot(args.snapshot)
+    try:
+        index = export_site(snap, args.out)
+    except (OSError, SnapshotError) as exc:
+        print(f"kairos dashboard: {exc}", file=sys.stderr)
+        return 2
+    print(index)
+    return 0
 
 
 def register(sub: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:

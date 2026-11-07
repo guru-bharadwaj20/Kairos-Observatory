@@ -35,9 +35,9 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 8 | Ethical governor and tripwires | 10 | 9 | 9 | ✅ |
 | 9 | Historical validation | 8, 10 | 9 | 9 | ✅ |
 | 10 | Pre-registration ledger | 11 | 7 | 7 | ✅ |
-| 11 | Public dashboard | 11–12 | 9 | 8 | ❌ |
+| 11 | Public dashboard | 11–12 | 9 | 9 | ✅ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **133** | **97%** |
+| | **Total** | | **137** | **134** | **98%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -400,7 +400,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-11.06 | Vinge Horizon chart | `h*(t)` with trend line and tolerance control | — | 6.04 | ✅ |
 | K-11.07 | Ledger browser | Every forecast, its hash, proof status and score | — | 10.06 | ✅ |
 | K-11.08 | Methodology page | `λ`, thresholds, assumptions and the D1–D12 notes in plain language | — | 8.08 | ✅ |
-| K-11.09 | Static export | Plotly HTML snapshot published to GitHub Pages each week | — | 11.02–11.07 | ❌ |
+| K-11.09 | Static export | Plotly HTML snapshot published to GitHub Pages each week | — | 11.02–11.07 | ✅ |
 
 ### Phase 12: Automation, release, paper
 
