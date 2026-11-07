@@ -67,3 +67,12 @@ sunset (`until`). They enter as un-normalised future regressors, and
 `future_frame()` fills in their scheduled values for the forecast months. A
 policy that is constant over the training data (for example one that starts
 after the data ends) is rejected: its effect cannot be learned.
+
+## Quantiles and calibration (`kairos.neural.evaluation`)
+
+Models forecast `quantiles=[0.05, 0.5, 0.95]` (`DEFAULT_QUANTILES`).
+`holdout_split()` keeps the last `test_months` out of training;
+`calibration_table()` reports, per horizon, the empirical share of held-out
+values inside the 5–95 % band against the nominal 90 %, the shares below and
+above, and the mean band width. `horizon_errors()` gives the out-of-sample MAE
+per horizon in log units, the skill measure used for `κ`.
