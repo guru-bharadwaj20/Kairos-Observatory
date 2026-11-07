@@ -7,7 +7,7 @@ from kairos.data.sources.base import BuildContext, fetch_source, registered_sour
 
 @pytest.mark.parametrize(
     "name",
-    sorted(n for n, s in registered_sources().items() if all(f.url is None for f in s.files)),
+    sorted(n for n, s in registered_sources().items() if not any(f.live for f in s.files)),
 )
 def test_curated_sources_build_offline(name, tmp_path):
     src = registered_sources()[name]

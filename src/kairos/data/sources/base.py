@@ -56,10 +56,18 @@ class RawFile:
     Attributes:
         name: File name under ``raw/<source>/`` and ``snapshots/<source>/``.
         url: Live download URL; ``None`` for curated files kept in the repository.
+        fetch: Custom downloader ``fetch(dest, client)`` for inputs that need more than
+            one request (paged APIs); used instead of ``url``.
     """
 
     name: str
     url: str | None = None
+    fetch: Callable[[Path, httpx.Client], None] | None = None
+
+    @property
+    def live(self) -> bool:
+        """Whether the file can be retrieved from the network."""
+        return self.url is not None or self.fetch is not None
 
 
 @dataclass(frozen=True, slots=True)
@@ -239,12 +247,16 @@ def fetch_source(
     try:
         for raw in source.files:
             dest = folder / raw.name
-            if raw.url is not None and not offline and http is not None:
+            if raw.live and not offline and http is not None:
                 try:
-                    _download(raw.url, dest, http)
+                    if raw.fetch is not None:
+                        raw.fetch(dest, http)
+                    else:
+                        assert raw.url is not None
+                        _download(raw.url, dest, http)
                     files[raw.name], origin[raw.name] = dest, "live"
                     continue
-                except httpx.HTTPError as exc:
+                except (httpx.HTTPError, ValueError, KeyError) as exc:
                     log.warning(
                         "%s: download of %s failed (%s); using snapshot", source.name, raw.name, exc
                     )
@@ -253,7 +265,7 @@ def fetch_source(
     finally:
         if own and http is not None:
             http.close()
-    live_urls = [r for r in source.files if r.url is not None]
+    live_urls = [r for r in source.files if r.live]
     all_live = bool(live_urls) and all(origin[r.name] == "live" for r in live_urls)
     vintage = (today or date.today()) if all_live else snapshot_vintage(source.name)
     return FetchedSource(source, files, origin, vintage)
