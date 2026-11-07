@@ -76,3 +76,21 @@ Models forecast `quantiles=[0.05, 0.5, 0.95]` (`DEFAULT_QUANTILES`).
 values inside the 5–95 % band against the nominal 90 %, the shares below and
 above, and the mean band width. `horizon_errors()` gives the out-of-sample MAE
 per horizon in log units, the skill measure used for `κ`.
+
+## Paired models (`kairos.neural.paired`)
+
+`κ` compares two models that differ in one input channel only:
+
+| Variant | Inputs |
+|---|---|
+| `exo` | trend + lagged drivers (+ events) |
+| `self` | `exo` + the target's own last `self_lags` values |
+| `null` | `self`, but the self channel is a block-shuffled surrogate of `y` |
+
+The self channel is a lagged regressor holding a copy of `y`. With linear
+layers this is the same function class as NeuralProphet's AR-Net (`n_lags`),
+and it lets the permutation null use exactly the same architecture as `self`.
+The surrogate permutes 12-month blocks of the first differences of `y` and
+re-integrates them, so it keeps short-range autocorrelation and overall growth
+but loses the alignment with the target. All variants share config, seed and
+the hold-out window (`test_months`, default 24).
