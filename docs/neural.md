@@ -58,3 +58,12 @@ An `EventSpec` holds an event name, its months and an effect window
 window columns); `add_events()` registers the specs and `with_events()` runs
 NeuralProphet's `create_df_with_events`. Effects are additive on the log
 scale, so `exp(effect)` is the multiplicative change in raw units.
+
+## Future regressors (`kairos.neural.future`)
+
+Policies with a published schedule are `PolicySpec`s: a 0/1 step from the
+effective month, an optional linear phase-in (`ramp_months`) and an optional
+sunset (`until`). They enter as un-normalised future regressors, and
+`future_frame()` fills in their scheduled values for the forecast months. A
+policy that is constant over the training data (for example one that starts
+after the data ends) is rejected: its effect cannot be learned.
