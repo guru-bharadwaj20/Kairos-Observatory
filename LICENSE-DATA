@@ -33,6 +33,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | METR, task-completion time horizons         | Agent task-time horizon           | Per METR publication terms |
 | Our World in Data                           | Population, AI-related charts     | CC BY 4.0              |
 | UN World Population Prospects               | Historical population validation  | CC BY 3.0 IGO          |
+| HYDE 3.x (via OWID population)              | Long-run population validation    | CC BY 4.0 (via OWID)   |
 | OECD.AI Policy Observatory                  | Policy and law-making lag         | OECD terms and conditions |
 | OpenAlex                                    | Safety/interpretability papers    | CC0 1.0                |
 | arXiv metadata                              | Paper counts                      | CC0 1.0 (metadata)     |
