@@ -27,7 +27,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 23 | ✅ |
-| 3 | Prophet null models | 3–4 | 10 | 7 | ❌ |
+| 3 | Prophet null models | 3–4 | 10 | 8 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 3 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **94** | **69%** |
+| | **Total** | | **137** | **95** | **69%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -285,7 +285,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-3.05 | Acceleration-run detector | Flags runs of consecutive positive slope deltas as candidate super-exponential segments | CPU | 3.04 | ✅ |
 | K-3.06 | Blind changepoints on AI history | Finds 2012, 2017 and 2020–23 within ±12 months without being told | CPU | 3.04 | ✅ |
 | K-3.07 | Logistic model with `cap = H(t)` | `growth="logistic"` with a time-varying cap from the H index | CPU | 3.02, 2.21 | ✅ |
-| K-3.08 | Cap-breach detector | Reports when observed `C` breaks through the H-bounded cap | CPU | 3.07 | ❌ |
+| K-3.08 | Cap-breach detector | Reports when observed `C` breaks through the H-bounded cap | CPU | 3.07 | ✅ |
 | K-3.09 | One-sided residual test | Sign test and CUSUM on "reality beats the forecast" residuals | CPU | 3.02 | ❌ |
 | K-3.10 | Prior sensitivity sweep | Grid over `changepoint_prior_scale` × `n_changepoints`; stable-region report | CPU×N | 3.03 | ❌ |
 
