@@ -75,3 +75,21 @@ def test_dotcom_real_data():
     if result.skipped:
         pytest.skip("FRED not reachable")
     assert result.passed, result.summary
+
+
+def test_bitcoin_registered():
+    from kairos.validation import list_cases
+    from kairos.validation.bubbles import BITCOIN
+
+    assert "bitcoin" in list_cases()
+    lo, hi = BITCOIN.reference_window
+    assert lo < decimal_year(BITCOIN.peak) < hi
+
+
+@pytest.mark.slow
+def test_bitcoin_real_data():
+    result = run_case("bitcoin")
+    if result.skipped:
+        pytest.skip("FRED not reachable")
+    assert result.passed, result.summary
+    assert result.summary["lead_time_days"] > 0

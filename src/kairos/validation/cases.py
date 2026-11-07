@@ -44,6 +44,7 @@ class CaseResult:
 CASES: dict[str, str] = {
     "population": "kairos.validation.population:run",
     "dotcom": "kairos.validation.bubbles:run_dotcom",
+    "bitcoin": "kairos.validation.bubbles:run_bitcoin",
 }
 """``case name -> "module:function"``."""
 

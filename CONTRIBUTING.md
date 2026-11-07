@@ -33,11 +33,11 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 6 | Vinge Horizon `h*` | 9 | 7 | 7 | ✅ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 6 | ✅ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 9 | ✅ |
-| 9 | Historical validation | 8, 10 | 9 | 3 | ❌ |
+| 9 | Historical validation | 8, 10 | 9 | 4 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **122** | **89%** |
+| | **Total** | | **137** | **123** | **90%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -369,7 +369,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-9.01 | Backtest runner | Replays the full pipeline at past "as-of" dates using only data available then | CPU×N | 6.01 | ✅ |
 | K-9.02 | World population | From 1960 data, recovers von Foerster's `t_c` ≈ Nov 2026; from 1960–80 data, sees `δ` fall toward 0 | CPU×N | 9.01, 5.04 | ✅ |
 | K-9.03 | Dot-com bubble | LPPLS `t_c` compared with Sornette's published values for Nasdaq 2000 | GPU | 5.11 | ✅ |
-| K-9.04 | Bitcoin 2017 | LPPLS run before the December 2017 peak; lead time recorded | GPU | 5.11 | ❌ |
+| K-9.04 | Bitcoin 2017 | LPPLS run before the December 2017 peak; lead time recorded | GPU | 5.11 | ✅ |
 | K-9.05 | COVID-19 early 2020 | Conditional forecasts with lockdown events show the curve bending; counterfactual scored | CPU, GPU | 4.03 | ❌ |
 | K-9.06 | Moore's law false-alarm test | Stays at Level 0 throughout | CPU×N | 8.08 | ❌ |
 | K-9.07 | AI history replay | Changepoints and dial states from 2012 to today, as-of each year | CPU×N | 9.01, 8.08 | ❌ |

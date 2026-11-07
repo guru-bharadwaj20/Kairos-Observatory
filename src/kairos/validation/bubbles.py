@@ -23,7 +23,15 @@ from kairos.validation.datasets import DataUnavailableError, fetch_fred
 from kairos.validation.detectors import Detector, decimal_year
 from kairos.validation.lppls import LPPLSDetector
 
-__all__ = ["DOTCOM", "BubbleCase", "monthly_dates", "run_bubble", "run_dotcom"]
+__all__ = [
+    "BITCOIN",
+    "DOTCOM",
+    "BubbleCase",
+    "monthly_dates",
+    "run_bitcoin",
+    "run_bubble",
+    "run_dotcom",
+]
 
 
 @dataclass(frozen=True)
@@ -63,6 +71,17 @@ DOTCOM = BubbleCase(
         "LPPLS critical time in the first half of 2000 (window used here: 2000.0-2000.5)"
     ),
     replay=(date(1999, 1, 1), date(2000, 12, 1)),
+)
+
+BITCOIN = BubbleCase(
+    name="bitcoin",
+    fred_id="CBBTCUSD",
+    series_id="bitcoin_usd",
+    unit="USD",
+    peak=date(2017, 12, 17),
+    reference_window=(2017.71, 2018.21),
+    reference="Reference window: the 17 December 2017 peak (2017.96) +/- 3 months",
+    replay=(date(2017, 1, 1), date(2018, 6, 1)),
 )
 
 
@@ -133,3 +152,8 @@ def run_bubble(
 def run_dotcom(*, n_jobs: int | None = None) -> CaseResult:
     """K-9.03: Nasdaq Composite 1999-2000."""
     return run_bubble(DOTCOM, n_jobs=n_jobs)
+
+
+def run_bitcoin(*, n_jobs: int | None = None) -> CaseResult:
+    """K-9.04: Bitcoin (Coinbase USD) through the December 2017 peak."""
+    return run_bubble(BITCOIN, n_jobs=n_jobs)
