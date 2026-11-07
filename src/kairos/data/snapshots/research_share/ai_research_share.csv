@@ -1,0 +1,9 @@
+# Estimated fraction of LLM-modified sentences in arXiv computer-science abstracts.
+# Read from Liang et al. (2024), arXiv:2404.01268, Figure 1 (CS curve), rounded.
+# Bounds are deliberately wide (+/- 0.02 to 0.03) to cover reading error.
+date,value,lo,hi,source_url
+2022-11-01,0.02,0.005,0.04,https://arxiv.org/abs/2404.01268
+2023-03-01,0.05,0.03,0.07,https://arxiv.org/abs/2404.01268
+2023-07-01,0.10,0.07,0.13,https://arxiv.org/abs/2404.01268
+2023-11-01,0.14,0.11,0.17,https://arxiv.org/abs/2404.01268
+2024-02-01,0.175,0.145,0.205,https://arxiv.org/abs/2404.01268

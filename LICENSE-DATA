@@ -38,6 +38,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | arXiv metadata                              | Paper counts                      | CC0 1.0 (metadata)     |
 | Model cards and papers (curated)            | Benchmark SOTA histories          | Facts; cited per row   |
 | Provider API pricing pages (curated)        | Cost per unit of capability       | Facts; cited per row   |
+| Liang et al. 2024, arXiv:2404.01268         | AI share of AI research proxy     | Figures cited as facts |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.
