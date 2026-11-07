@@ -88,3 +88,22 @@ entry's `entry_hash` is therefore anchored with
 Offline checks are structural (the proof commits to the hash and lists its
 attestations). For full Bitcoin verification use the reference client, e.g.
 `ots verify -d <entry_hash> ledger/proofs/000000-....ots`.
+
+## Scoring matured forecasts (K-10.05)
+
+`score_matured(ledger, actuals, today=...)` scores every forecast whose horizon
+end has passed and whose target dates all have observations, skipping
+forecasts already scored or superseded by a correction. Each score is appended
+as a `score` entry (`ForecastScore`): `forecast_entry`, `forecast_hash`,
+`series_id`, `model`, `as_of`, `scored_on`, `coverage_level`, per-point
+`points` (`ds`, `y`, `median`, `crps`, `pit`, `covered`, `log_gap`),
+`mean_crps`, `coverage`, `counterfactual`, `interventions`, `mean_log_gap`
+and resolved `claims` (`threshold`, `crossed`, `within_interval`).
+
+CRPS is the quantile-loss approximation `2/K · Σ pinball`; PIT interpolates
+the quantiles linearly. Interventions are logged with
+`log_intervention(ledger, EventAssumption(...), series_ids=[...])`
+(`intervention` entries: `{"event": {...}, "series_ids": [...]}`). If one
+logged after a forecast takes effect within its horizon, targets its series
+and was not already assumed, the score is `counterfactual` and
+`mean_log_gap = mean log(y / median)` estimates the intervention's effect.

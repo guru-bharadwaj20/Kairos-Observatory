@@ -34,10 +34,10 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 6 | ✅ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 9 | ✅ |
 | 9 | Historical validation | 8, 10 | 9 | 9 | ✅ |
-| 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
+| 10 | Pre-registration ledger | 11 | 7 | 5 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **128** | **93%** |
+| | **Total** | | **137** | **129** | **94%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -384,7 +384,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-10.02 | Hash-chained ledger | `ledger/forecasts.jsonl`, append-only; each entry includes the previous entry's hash and the data manifest hash (D11) | — | 10.01, 2.04 | ✅ |
 | K-10.03 | Conditional forecast format | Stored as "If no new intervention, X reaches Y by Z (90% interval)" plus the event set assumed | — | 10.01 | ✅ |
 | K-10.04 | External timestamping | Each weekly entry anchored with OpenTimestamps; proof files committed (D11) | — | 10.02 | ✅ |
-| K-10.05 | Scorer for matured forecasts | Scores forecasts once their outcome date passes; interventions logged since then enable counterfactual scoring | CPU | 10.03, 9.08 | ❌ |
+| K-10.05 | Scorer for matured forecasts | Scores forecasts once their outcome date passes; interventions logged since then enable counterfactual scoring | CPU | 10.03, 9.08 | ✅ |
 | K-10.06 | `kairos ledger verify` | Recomputes the chain and checks every proof; tamper tests (edited, deleted, reordered entries) all fail loudly | — | 10.04 | ❌ |
 | K-10.07 | Public scorecard | Running calibration and CRPS table generated from the ledger | — | 10.05 | ❌ |
 
