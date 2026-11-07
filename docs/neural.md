@@ -141,6 +141,15 @@ gives the dial for the latest window with the trend and window table in
 `detail`. Caveat: windows share data, so window estimates are positively
 correlated and the trend p-value is optimistic; read it with the interval.
 
+## Granger/VAR cross-check (`kairos.neural.granger`)
+
+`self_lag_f_test()` is the classical twin of `κ`: a nested OLS F-test of the
+target's own lags in an ARX regression on the lagged drivers (first
+differences by default). `var_granger()` adds the VAR test that the drivers
+Granger-cause the target (lag order by AIC). `agreement_table()` lists, per
+series, `κ` and its permutation p-value next to the F-test and flags whether
+both agree at `alpha = 0.05`.
+
 CLI: `kairos kappa synthetic --coupling 0.8` (offline demo) and
 `kairos kappa estimate data.parquet --target <series_id>` print the reading
 as JSON.
