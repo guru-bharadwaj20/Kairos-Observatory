@@ -26,7 +26,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 |:-:|---|:-:|:-:|:-:|:-:|
 | 0 | Foundation and governance | 0 | 14 | 14 | ✅ |
 | 1 | Compute layer (CPU/GPU) | 0 | 8 | 8 | ✅ |
-| 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 8 | ❌ |
+| 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 9 | ❌ |
 | 3 | Prophet null models | 3–4 | 10 | 5 | ❌ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 3 | ❌ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 3 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **77** | **56%** |
+| | **Total** | | **137** | **78** | **57%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -258,7 +258,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-2.06 | Frontier envelope builder | Irregular releases → monthly frontier (top-k or running max), gap flags, method in metadata (D7) | CPU | 2.05 | ✅ |
 | K-2.07 | METR task-horizon loader | Sparse points with their confidence intervals kept in `y_lo`/`y_hi` | CPU | 2.03 | ✅ |
 | K-2.08 | Benchmark SOTA histories | SOTA per benchmark over time; logit transform for bounded scores so saturation doesn't look like a slowdown | CPU | 2.03 | ✅ |
-| K-2.09 | Cost per unit of capability | Price per million tokens at a fixed benchmark score, over time | CPU | 2.08 | ❌ |
+| K-2.09 | Cost per unit of capability | Price per million tokens at a fixed benchmark score, over time | CPU | 2.08 | ✅ |
 | K-2.10 | AI share of AI research proxy | Documented proxy series with method and caveats written down | CPU | 2.03 | ❌ |
 | K-2.11 | Exogenous drivers | `log_compute`, `log_investment`, `log_researchers` monthly series for `κ` | CPU | 2.05 | ❌ |
 | K-2.12 | H: safety and interpretability publications | Monthly counts from the OpenAlex/arXiv APIs with a fixed, versioned query | CPU | 2.03 | ❌ |

@@ -1,0 +1,13 @@
+# Launch API list prices (USD per million tokens) and MMLU scores of models that
+# reach GPT-4-level MMLU, curated from provider pricing pages and model cards.
+# Prices are the provider's own list price at launch; scores as reported.
+model,release_date,mmlu,input_usd_per_mtok,output_usd_per_mtok,source_url
+GPT-4,2023-03-14,0.864,30.00,60.00,https://openai.com/index/gpt-4-research/
+GPT-4 Turbo,2023-11-06,0.865,10.00,30.00,https://openai.com/index/new-models-and-developer-products-announced-at-devday/
+Claude 3 Opus,2024-03-04,0.868,15.00,75.00,https://www.anthropic.com/news/claude-3-family
+GPT-4o,2024-05-13,0.887,5.00,15.00,https://openai.com/index/hello-gpt-4o/
+Claude 3.5 Sonnet,2024-06-20,0.887,3.00,15.00,https://www.anthropic.com/news/claude-3-5-sonnet
+GPT-4o mini,2024-07-18,0.820,0.15,0.60,https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/
+Gemini 1.5 Flash (Oct 2024),2024-10-03,0.789,0.075,0.30,https://developers.googleblog.com/en/gemini-15-flash-8b-is-now-generally-available-for-use/
+DeepSeek-V3,2024-12-26,0.885,0.27,1.10,https://api-docs.deepseek.com/news/news1226
+Gemini 2.0 Flash-Lite,2025-02-25,0.832,0.075,0.30,https://developers.googleblog.com/en/start-building-with-the-gemini-2-0-flash-family/
