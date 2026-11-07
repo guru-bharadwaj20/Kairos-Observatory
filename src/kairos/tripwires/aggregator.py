@@ -46,6 +46,7 @@ __all__ = [
     "Confirmation",
     "DialAssessment",
     "Governor",
+    "Independence",
     "LevelSpec",
     "TripwireAlert",
     "TripwireSpec",
@@ -92,6 +93,15 @@ class Confirmation(BaseModel):
     min_independent_groups: int = Field(default=3, ge=2)
 
 
+class Independence(BaseModel):
+    """Löb independence settings (see :mod:`kairos.tripwires.lob`)."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    sources_key: str = "sources"
+    lab_controlled_groups: list[str] = Field(default_factory=list)
+
+
 class TripwireSpec(BaseModel):
     """Contents of ``tripwires.yaml``."""
 
@@ -102,6 +112,7 @@ class TripwireSpec(BaseModel):
     dials: list[str]
     confirmation: Confirmation = Field(default_factory=Confirmation)
     levels: list[LevelSpec]
+    independence: Independence = Field(default_factory=Independence)
 
     @model_validator(mode="after")
     def _complete(self) -> TripwireSpec:

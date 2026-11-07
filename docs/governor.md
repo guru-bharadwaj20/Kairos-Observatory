@@ -50,3 +50,10 @@ kairos governor evaluate readings.json [--history] [--spec PATH] [--policy PATH]
   `floor + (1 − floor)·exp(−L/τ)`.
 * `kairos.tripwires.goodhart.detect_divergence`: public vs held-out log-trend gap
   (Newey-West SEs), reported as a `goodhart` reading that does not move the level.
+
+## Löb independence
+
+`kairos governor lob readings.json` (or `kairos.tripwires.lob.enforce`) fails the
+run when a dial lists no provenance in `detail["sources"]`, or when all its sources
+sit in one source group that is lab-controlled (flagged per source, or named in
+`tripwires.yaml: independence.lab_controlled_groups`).

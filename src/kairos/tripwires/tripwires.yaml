@@ -42,3 +42,11 @@ levels:
     name: Kairos
     trigger: All four dials
     response: The decisive moment, the last window in which intervention is still cheap
+
+# Löb independence (no self-certification): a run fails if any dial rests only on a
+# single lab-controlled source group. Readings list provenance in detail["sources"]
+# as [{source, source_group, lab_controlled}]; groups named here count as
+# lab-controlled even when a reading does not say so.
+independence:
+  sources_key: sources
+  lab_controlled_groups: []

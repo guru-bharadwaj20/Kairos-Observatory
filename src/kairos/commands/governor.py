@@ -69,3 +69,20 @@ def show_spec(spec: SpecOpt = None, policy: PolicyOpt = None) -> None:
     )
     for lv in s.levels:
         typer.echo(f"{lv.level} {lv.name}: {lv.trigger} -> {lv.response}")
+
+
+@app.command()
+def lob(
+    readings: Annotated[
+        Path, typer.Argument(exists=True, dir_okay=False, help="JSON array of DialReading.")
+    ],
+    spec: SpecOpt = None,
+) -> None:
+    """Löb independence report; exit 1 if a dial rests on one lab-controlled source."""
+    from kairos.tripwires.aggregator import load_tripwire_spec
+    from kairos.tripwires.lob import independence_report
+
+    report = independence_report(read_readings(readings), load_tripwire_spec(spec).independence)
+    typer.echo(report.model_dump_json(indent=2))
+    if not report.passed:
+        raise typer.Exit(code=1)
