@@ -34,7 +34,7 @@ def test_snapshot_overrides_and_escapes() -> None:
 
 def test_level_bounds() -> None:
     assert [lv.number for lv in LEVELS] == [0, 1, 2, 3, 4]
-    with pytest.raises(ValueError, match="alert level"):
+    with pytest.raises(ValueError, match="0-4"):
         level(5)
 
 

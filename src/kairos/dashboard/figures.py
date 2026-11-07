@@ -28,7 +28,7 @@ FONT = {"family": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif", "col
 
 
 def base_layout(fig: go.Figure, title: str, height: int = 360) -> go.Figure:
-    """Run base layout."""
+    """Apply the shared accessible layout to a figure."""
     fig.update_layout(
         title={"text": title, "x": 0},
         font=FONT,

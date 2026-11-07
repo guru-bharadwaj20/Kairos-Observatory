@@ -23,7 +23,7 @@ def test_delta_summary_matches_statistics_median() -> None:
 
 
 def test_delta_summary_empty() -> None:
-    with pytest.raises(ValueError, match="no bootstrap samples"):
+    with pytest.raises(ValueError, match="no bootstrap"):
         figures.delta_summary(())
 
 

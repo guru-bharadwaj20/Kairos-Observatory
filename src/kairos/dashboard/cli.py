@@ -28,7 +28,7 @@ def resolve_snapshot(path: Path | None) -> Path:
 
 
 def streamlit_command(snapshot: Path, port: int, headless: bool) -> list[str]:
-    """Run streamlit command."""
+    """Build the ``streamlit run`` command line for the app."""
     cmd = [
         sys.executable, "-m", "streamlit", "run", str(APP_PATH),
         "--server.port", str(port), "--browser.gatherUsageStats", "false",
@@ -56,7 +56,7 @@ def _serve(args: argparse.Namespace) -> int:
 
 
 def build_parser(p: argparse.ArgumentParser | None = None) -> argparse.ArgumentParser:
-    """Run build parser."""
+    """Build (or fill in) the ``kairos dashboard`` argument parser."""
     p = p or argparse.ArgumentParser(prog="kairos dashboard")
     p.set_defaults(func=_serve, snapshot=None, port=8501, headless=False)
     cmds = p.add_subparsers(dest="command")
@@ -79,7 +79,7 @@ def register(sub: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Run main."""
+    """Run the command and return its exit code."""
     args = build_parser().parse_args(argv)
     result: int = args.func(args)
     return result

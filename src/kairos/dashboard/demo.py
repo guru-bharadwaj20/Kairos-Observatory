@@ -28,7 +28,7 @@ def _r(x: float) -> float:
 
 
 def build_demo_snapshot() -> dict[str, object]:
-    """Run build demo snapshot."""
+    """Return the synthetic demo snapshot as a JSON-ready dict."""
     rng = random.Random(_SEED)
     n = 202  # 2010-01 .. 2026-10
     t = _months(2010, n)
@@ -40,6 +40,7 @@ def build_demo_snapshot() -> dict[str, object]:
     hum = [_r(0.08 * y + rng.gauss(0, 0.03)) for y in years]
 
     def history(f: list[float]) -> dict[str, object]:
+        """Last three years of a series, as a dial history."""
         return {"t": t[-36:], "value": [_r(v) for v in f[-36:]]}
 
     delta_hist = [0.02 + 0.0006 * i + rng.gauss(0, 0.01) for i in range(n)]
@@ -186,7 +187,7 @@ def build_demo_snapshot() -> dict[str, object]:
 
 
 def write_demo_snapshot(path: Path = DEMO_SNAPSHOT_PATH) -> Path:
-    """Run write demo snapshot."""
+    """Write the demo snapshot fixture and return its path."""
     path.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(build_demo_snapshot(), ensure_ascii=False, separators=(",", ":"))
     path.write_text(text + "\n", encoding="utf-8")

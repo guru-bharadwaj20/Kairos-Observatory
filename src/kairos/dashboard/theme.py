@@ -31,7 +31,7 @@ STATE_STYLE = {
 
 @dataclass(frozen=True)
 class Level:
-    """Level."""
+    """A tripwire level: trigger, response and display style."""
 
     number: int
     name: str
@@ -68,7 +68,7 @@ LEVELS: tuple[Level, ...] = (
 
 
 def level(n: int) -> Level:
-    """Run level."""
+    """Return the spec for alert level ``n`` (0-4)."""
     if not 0 <= n < len(LEVELS):
         raise ValueError(f"alert level must be 0-4, got {n}")
     return LEVELS[n]
@@ -76,7 +76,7 @@ def level(n: int) -> Level:
 
 @dataclass(frozen=True)
 class DialInfo:
-    """Dial info."""
+    """Plain-language description of a dial."""
 
     title: str
     measures: str

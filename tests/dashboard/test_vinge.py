@@ -16,7 +16,7 @@ def test_linear_trend_exact() -> None:
 
 
 def test_linear_trend_needs_two_points() -> None:
-    with pytest.raises(ValueError, match="at least two points"):
+    with pytest.raises(ValueError, match="two points"):
         figures.linear_trend(T[:1], (1.0,))
 
 

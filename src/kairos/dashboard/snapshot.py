@@ -65,7 +65,7 @@ class SnapshotError(ValueError):
 
 @dataclass(frozen=True)
 class SeriesFrame:
-    """Series frame."""
+    """A dated series of floats (columns ``t`` and ``value``)."""
 
     name: str
     unit: str
@@ -75,7 +75,7 @@ class SeriesFrame:
 
 @dataclass(frozen=True)
 class DialReading:
-    """Dial reading."""
+    """One dial's current reading, state and recent history."""
 
     dial: DialName
     symbol: str
@@ -88,7 +88,7 @@ class DialReading:
 
 @dataclass(frozen=True)
 class LeadTime:
-    """Lead time."""
+    """Collingridge lead time: median with its interval."""
 
     median: float
     lower: float
@@ -99,7 +99,7 @@ class LeadTime:
 
 @dataclass(frozen=True)
 class Alert:
-    """Alert."""
+    """The tripwire level and lead time."""
 
     level: int
     lead_time: LeadTime | None
@@ -109,7 +109,7 @@ class Alert:
 
 @dataclass(frozen=True)
 class AccelerationFit:
-    """Acceleration fit."""
+    """Prophet null fit, changepoints and δ bootstrap for one series."""
 
     series: str
     unit: str
@@ -124,7 +124,7 @@ class AccelerationFit:
 
 @dataclass(frozen=True)
 class VingeHorizon:
-    """Vinge horizon."""
+    """h*(t), at the published tolerance and optionally others."""
 
     t: tuple[str, ...]
     h_star: tuple[float, ...]  # at the published tolerance
@@ -133,7 +133,7 @@ class VingeHorizon:
     by_tolerance: Mapping[float, tuple[float, ...]] = field(default_factory=dict)
 
     def at(self, factor: float, published: float) -> tuple[float, ...]:
-        """Run at."""
+        """Return h* at a tolerance factor."""
         if factor in self.by_tolerance:
             return self.by_tolerance[factor]
         if factor == published:
@@ -141,13 +141,13 @@ class VingeHorizon:
         raise KeyError(factor)
 
     def tolerances(self, published: float) -> list[float]:
-        """Run tolerances."""
+        """Return every tolerance factor with published h*."""
         return sorted({published, *self.by_tolerance})
 
 
 @dataclass(frozen=True)
 class LedgerEntry:
-    """Ledger entry."""
+    """One pre-registered forecast as published in the ledger."""
 
     id: str
     registered_at: str
@@ -161,7 +161,7 @@ class LedgerEntry:
 
 @dataclass(frozen=True)
 class Parameters:
-    """Parameters."""
+    """Published parameters the snapshot was computed with."""
 
     lam: float
     tripwires_version: str
@@ -170,7 +170,7 @@ class Parameters:
 
 @dataclass(frozen=True)
 class Snapshot:
-    """Snapshot."""
+    """The whole published snapshot."""
 
     schema_version: int
     generated_at: str
@@ -186,7 +186,7 @@ class Snapshot:
     ledger: tuple[LedgerEntry, ...]
 
     def dial(self, name: DialName) -> DialReading:
-        """Run dial."""
+        """Return the reading for one dial."""
         for d in self.dials:
             if d.dial == name:
                 return d

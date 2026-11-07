@@ -1,4 +1,4 @@
-"""Module entry point for dashboard."""
+"""Run ``python -m kairos.dashboard`` (same as ``kairos dashboard``)."""
 
 import sys
 

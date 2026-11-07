@@ -32,7 +32,7 @@ def _load(path: str, mtime: float) -> Snapshot:
 
 
 def main() -> None:
-    """Run main."""
+    """Run the command and return its exit code."""
     st.set_page_config(page_title="KAIROS Observatory", layout="wide")
     path = _snapshot_path(sys.argv[1:])
     try:
