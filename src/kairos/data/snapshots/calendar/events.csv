@@ -1,0 +1,40 @@
+# KAIROS event calendar v1: frontier releases, laws, export controls, incidents.
+# Windows are in days. Every row cites at least one primary or reputable source.
+event,ds,type,lower_window,upper_window,source_url,scope,description
+alexnet_imagenet,2012-09-30,release,0,90,https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks,ai,AlexNet wins ILSVRC 2012
+word2vec_release,2013-01-16,release,0,30,https://arxiv.org/abs/1301.3781,ai,word2vec paper
+gan_paper,2014-06-10,release,0,30,https://arxiv.org/abs/1406.2661,ai,Generative adversarial networks
+resnet_paper,2015-12-10,release,0,30,https://arxiv.org/abs/1512.03385,ai,ResNet
+alphago_lee_sedol,2016-03-09,release,0,30,https://deepmind.google/research/breakthroughs/alphago/,ai,AlphaGo beats Lee Sedol
+transformer_paper,2017-06-12,release,0,90,https://arxiv.org/abs/1706.03762,ai,Attention Is All You Need
+bert_release,2018-10-11,release,0,30,https://arxiv.org/abs/1810.04805,ai,BERT
+gpt2_staged_release,2019-02-14,release,0,30,https://openai.com/index/better-language-models/,ai,GPT-2 staged release
+gpt3_release,2020-05-28,release,0,60,https://arxiv.org/abs/2005.14165,ai,GPT-3 paper
+alphafold2_casp14,2020-11-30,release,0,30,https://deepmind.google/discover/blog/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology/,ai,AlphaFold 2 at CASP14
+us_export_controls_oct2022,2022-10-07,export_control,0,90,https://www.bis.doc.gov/index.php/documents/about-bis/newsroom/press-releases/3158-2022-10-07-bis-press-release-advanced-computing-and-semiconductor-manufacturing-controls-final-rule/file,ai,US BIS advanced computing controls
+chatgpt_release,2022-11-30,release,0,90,https://openai.com/index/chatgpt/,ai,ChatGPT launch
+china_deep_synthesis_rules,2023-01-10,regulation,0,30,https://www.cac.gov.cn/2022-12/11/c_1672221949354811.htm,ai,China deep synthesis provisions in force
+gpt4_release,2023-03-14,release,0,60,https://openai.com/index/gpt-4-research/,ai,GPT-4
+pause_letter,2023-03-22,incident,0,30,https://futureoflife.org/open-letter/pause-giant-ai-experiments/,ai,FLI open letter calling for a pause
+cais_extinction_statement,2023-05-30,incident,0,14,https://www.safe.ai/work/statement-on-ai-risk,ai,CAIS statement on AI risk
+china_generative_ai_measures,2023-08-15,regulation,0,30,http://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm,ai,China interim measures for generative AI
+us_export_controls_oct2023,2023-10-17,export_control,0,90,https://www.bis.gov/press-release/commerce-strengthens-restrictions-advanced-computing-semiconductors-enhance-foundry-due-diligence-prevent,ai,US BIS controls update
+us_executive_order_14110,2023-10-30,regulation,0,30,https://www.federalregister.gov/documents/2023/11/01/2023-24283/safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence,ai,US Executive Order 14110
+bletchley_summit,2023-11-01,regulation,0,7,https://www.gov.uk/government/publications/ai-safety-summit-2023-the-bletchley-declaration,ai,Bletchley Declaration
+openai_board_crisis,2023-11-17,incident,0,14,https://openai.com/index/openai-announces-leadership-transition/,ai,OpenAI leadership crisis
+gemini_ultra_announce,2023-12-06,release,0,30,https://blog.google/technology/ai/google-gemini-ai/,ai,Gemini 1.0
+claude3_release,2024-03-04,release,0,30,https://www.anthropic.com/news/claude-3-family,ai,Claude 3 family
+gpt4o_release,2024-05-13,release,0,30,https://openai.com/index/hello-gpt-4o/,ai,GPT-4o
+eu_ai_act_in_force,2024-08-01,regulation,-30,30,https://eur-lex.europa.eu/eli/reg/2024/1689/oj,ai,EU AI Act enters into force
+o1_preview_release,2024-09-12,release,0,60,https://openai.com/index/learning-to-reason-with-llms/,ai,o1-preview reasoning model
+us_export_controls_dec2024,2024-12-02,export_control,0,60,https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military,ai,US BIS HBM and equipment controls
+deepseek_r1_release,2025-01-20,release,0,30,https://api-docs.deepseek.com/news/news250120,ai,DeepSeek-R1
+us_eo_14110_revoked,2025-01-20,regulation,0,30,https://www.whitehouse.gov/presidential-actions/2025/01/initial-rescissions-of-harmful-executive-orders-and-actions/,ai,EO 14110 revoked
+eu_ai_act_prohibitions,2025-02-02,regulation,0,30,https://eur-lex.europa.eu/eli/reg/2024/1689/oj,ai,EU AI Act prohibitions apply
+claude37_release,2025-02-24,release,0,30,https://www.anthropic.com/news/claude-3-7-sonnet,ai,Claude 3.7 Sonnet
+o3_release,2025-04-16,release,0,30,https://openai.com/index/introducing-o3-and-o4-mini/,ai,o3 and o4-mini
+eu_ai_act_gpai_obligations,2025-08-02,regulation,-30,30,https://eur-lex.europa.eu/eli/reg/2024/1689/oj,ai,EU AI Act GPAI obligations apply
+gpt5_release,2025-08-07,release,0,30,https://openai.com/index/introducing-gpt-5/,ai,GPT-5
+california_sb53_signed,2025-09-29,regulation,0,30,https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53,ai,California SB 53 frontier AI transparency
+gemini3_release,2025-11-18,release,0,30,https://blog.google/products/gemini/gemini-3/,ai,Gemini 3
+claude_opus45_release,2025-11-24,release,0,30,https://www.anthropic.com/news/claude-opus-4-5,ai,Claude Opus 4.5
