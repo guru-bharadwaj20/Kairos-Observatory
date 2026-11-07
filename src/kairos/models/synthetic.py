@@ -12,7 +12,7 @@ import pandas as pd
 
 from kairos.types import SeriesFrame, validate_series_frame
 
-__all__ = ["piecewise_exponential"]
+__all__ = ["piecewise_exponential", "synthetic_ai_compute"]
 
 
 def piecewise_exponential(
@@ -61,3 +61,21 @@ def piecewise_exponential(
         }
     )
     return validate_series_frame(frame)
+
+
+def synthetic_ai_compute(*, noise: float = 0.15, seed: int = 0) -> SeriesFrame:
+    """Stylised frontier-compute history 2000-2026 with shifts in 2012, 2017 and 2021.
+
+    Growth rates (ln units per year) step from 0.35 (Moore era) to 1.2, 1.8 and 2.5.
+    Used to test that changepoint detection recovers known shifts blind.
+    """
+    return piecewise_exponential(
+        "2000-01-01",
+        "2026-06-01",
+        breaks=("2012-06-01", "2017-06-01", "2021-06-01"),
+        rates=(0.35, 1.2, 1.8, 2.5),
+        noise=noise,
+        seed=seed,
+        series_id="ai_compute_frontier",
+        unit="FLOP",
+    )
