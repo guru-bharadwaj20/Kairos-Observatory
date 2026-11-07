@@ -1,0 +1,29 @@
+# Headline benchmark scores of notable models, curated from model cards, papers and
+# official leaderboards. Scores are fractions in (0, 1); values are as reported by
+# the developer (setting noted in the source) and rounded to three decimals.
+benchmark,model,release_date,score,source_url
+mmlu,GPT-3 175B,2020-05-28,0.439,https://arxiv.org/abs/2009.03300
+mmlu,Gopher,2021-12-08,0.600,https://arxiv.org/abs/2112.11446
+mmlu,Chinchilla,2022-03-29,0.675,https://arxiv.org/abs/2203.15556
+mmlu,PaLM 540B,2022-04-04,0.693,https://arxiv.org/abs/2204.02311
+mmlu,Flan-PaLM 540B,2022-10-20,0.752,https://arxiv.org/abs/2210.11416
+mmlu,GPT-4,2023-03-14,0.864,https://arxiv.org/abs/2303.08774
+mmlu,Gemini Ultra,2023-12-06,0.900,https://arxiv.org/abs/2312.11805
+mmlu,o1,2024-12-05,0.918,https://openai.com/index/learning-to-reason-with-llms/
+gpqa_diamond,GPT-4,2023-11-20,0.357,https://arxiv.org/abs/2311.12022
+gpqa_diamond,Claude 3 Opus,2024-03-04,0.504,https://www.anthropic.com/news/claude-3-family
+gpqa_diamond,Claude 3.5 Sonnet,2024-06-20,0.594,https://www.anthropic.com/news/claude-3-5-sonnet
+gpqa_diamond,o1-preview,2024-09-12,0.733,https://openai.com/index/learning-to-reason-with-llms/
+gpqa_diamond,o1,2024-12-05,0.780,https://openai.com/index/learning-to-reason-with-llms/
+gpqa_diamond,Gemini 2.5 Pro,2025-03-25,0.840,https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+gpqa_diamond,GPT-5,2025-08-07,0.873,https://openai.com/index/introducing-gpt-5/
+gpqa_diamond,Gemini 3 Pro,2025-11-18,0.919,https://blog.google/products/gemini/gemini-3/
+swe_bench_verified,GPT-4o,2024-05-13,0.332,https://openai.com/index/introducing-swe-bench-verified/
+swe_bench_verified,Claude 3.5 Sonnet,2024-06-20,0.334,https://www.anthropic.com/news/claude-3-5-sonnet
+swe_bench_verified,Claude 3.5 Sonnet (Oct 2024),2024-10-22,0.490,https://www.anthropic.com/news/3-5-models-and-computer-use
+swe_bench_verified,Claude 3.7 Sonnet,2025-02-24,0.623,https://www.anthropic.com/news/claude-3-7-sonnet
+swe_bench_verified,o3,2025-04-16,0.691,https://openai.com/index/introducing-o3-and-o4-mini/
+swe_bench_verified,Claude Opus 4,2025-05-22,0.725,https://www.anthropic.com/news/claude-4
+swe_bench_verified,GPT-5,2025-08-07,0.749,https://openai.com/index/introducing-gpt-5/
+swe_bench_verified,Claude Sonnet 4.5,2025-09-29,0.772,https://www.anthropic.com/news/claude-sonnet-4-5
+swe_bench_verified,Claude Opus 4.5,2025-11-24,0.809,https://www.anthropic.com/news/claude-opus-4-5
