@@ -4,6 +4,8 @@ Subcommands:
 
 * ``kairos prophet fit SERIES --out DIR``: fit every series in parallel and write
   ``summary.csv``, ``forecast.csv``, ``changepoints.csv`` and ``run.json`` (wall time).
+* ``kairos prophet sweep SERIES --out DIR``: prior sensitivity grid; writes
+  ``sensitivity.csv`` and the stable-region report ``sensitivity.md``.
 """
 
 from __future__ import annotations
@@ -70,3 +72,43 @@ def fit_command(
         f"fitted {len(result.fits)} series in {result.wall_seconds:.2f} s "
         f"on {result.n_jobs} workers -> {out}"
     )
+
+
+def _floats(text: str) -> list[float]:
+    return [float(x) for x in text.split(",") if x.strip()]
+
+
+@app.command("sweep")
+def sweep_command(
+    series: Annotated[Path, typer.Argument(exists=True, dir_okay=False, help="SeriesFrame file.")],
+    out: Annotated[Path, typer.Option("--out", "-o", help="Output directory.")] = DEFAULT_OUT,
+    prior_scales: Annotated[
+        str, typer.Option(help="Comma-separated changepoint_prior_scale values.")
+    ] = "0.01,0.03,0.1,0.3,1,3",
+    n_changepoints: Annotated[
+        str, typer.Option(help="Comma-separated n_changepoints values.")
+    ] = "10,15,25,35,50",
+    metric: Annotated[str, typer.Option(help="final_rate, n_significant or yhat_end.")] = (
+        "final_rate"
+    ),
+    tol: Annotated[float, typer.Option(help="Neighbour tolerance for a stable cell.")] = 0.05,
+    n_jobs: Annotated[int | None, typer.Option("--n-jobs", "-j", help="Workers.")] = None,
+    seed: Annotated[int | None, typer.Option(help="Master seed.")] = None,
+) -> None:
+    """Sweep changepoint_prior_scale x n_changepoints and report the stable region."""
+    from kairos.models.sensitivity import prior_sensitivity
+
+    report = prior_sensitivity(
+        read_series_frame(series),
+        prior_scales=_floats(prior_scales),
+        n_changepoints=[int(x) for x in _floats(n_changepoints)],
+        metric=metric,
+        tol=tol,
+        n_jobs=n_jobs,
+        seed=seed,
+        desc="sweep",
+    )
+    out.mkdir(parents=True, exist_ok=True)
+    report.grid.to_csv(out / "sensitivity.csv", index=False)
+    (out / "sensitivity.md").write_text(report.to_markdown(), encoding="utf-8")
+    Console().print(report.to_markdown())
