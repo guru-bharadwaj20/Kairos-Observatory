@@ -74,6 +74,8 @@ class NeuralConfig(BaseModel):
         trend_reg: Trend regularisation strength.
         ar_reg: AR sparsity regularisation (``None`` = off).
         growth: Trend type.
+        trend_global_local: In multi-series models, one shared trend (``"global"``)
+            or one per series (``"local"``).
         early_stopping: Stop when the validation (or training) loss stalls.
         loss_func: NeuralProphet loss name.
     """
@@ -90,6 +92,7 @@ class NeuralConfig(BaseModel):
     trend_reg: float = Field(default=0.0, ge=0)
     ar_reg: float | None = None
     growth: Literal["off", "linear", "discontinuous"] = "linear"
+    trend_global_local: Literal["global", "local"] = "global"
     early_stopping: bool = True
     loss_func: str = "SmoothL1Loss"
 
@@ -163,6 +166,7 @@ def build_model(config: NeuralConfig, device: torch.device | str | None = None) 
         neuralprophet.set_log_level("ERROR")
         model = neuralprophet.NeuralProphet(
             growth=config.growth,
+            trend_global_local=config.trend_global_local,
             n_changepoints=config.n_changepoints,
             trend_reg=config.trend_reg,
             yearly_seasonality=False,

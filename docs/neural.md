@@ -150,6 +150,15 @@ Granger-cause the target (lag order by AIC). `agreement_table()` lists, per
 series, `κ` and its permutation p-value next to the F-test and flags whether
 both agree at `alpha = 0.05`.
 
+## Global model (`kairos.neural.global_model`)
+
+`global_frame()` stacks C-side series into NeuralProphet's `ds, y, ID`
+layout. `fit_global()` trains one model on all of them (shared AR weights,
+per-series trend via `trend_global_local="local"`, per-series normalisation)
+on `get_device()`, the one GPU job in this phase. `compare_global_local()`
+scores it against one model per series (CPU pool) on identical per-series
+hold-outs and reports `gain = 1 − MAE_global / MAE_local`.
+
 CLI: `kairos kappa synthetic --coupling 0.8` (offline demo) and
 `kairos kappa estimate data.parquet --target <series_id>` print the reading
 as JSON.
