@@ -94,3 +94,13 @@ The surrogate permutes 12-month blocks of the first differences of `y` and
 re-integrates them, so it keeps short-range autocorrelation and overall growth
 but loses the alignment with the target. All variants share config, seed and
 the hold-out window (`test_months`, default 24).
+
+## Seed ensembles (`kairos.neural.ensemble`)
+
+`run_seed_ensemble()` fits the paired models over `DEFAULT_N_SEEDS = 20`
+seeds (child seeds from `derive_seed`, so an exo/self pair shares its seed).
+Following the compute policy above, the roadmap's "batch on the GPU" is
+replaced by the CPU pool: `ensemble_device(None | "auto")` is `"cpu"`, and
+only an explicit `device="cuda"` runs the fits in-process on the GPU. Every
+fit goes through `cached_fit`, and `summarize()` reports the mean, standard
+deviation and 5/50/95 % quantiles of the out-of-sample MAE per variant.
