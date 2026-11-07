@@ -1,5 +1,11 @@
 # KAIROS Observatory
 
+<p align="center">
+  <img src="Kairos-Observatory%20Demo.avif" alt="KAIROS Observatory demo, 60 seconds: the 1960 doomsday curve, the two curves KAIROS watches, its four dials and five tripwire levels, six historical replays and a sealed weekly forecast" width="100%">
+  <br>
+  <sub>▶ <b>KAIROS in 60 seconds</b> (plays above, on a loop): the 1960 doomsday curve that bent, the two curves KAIROS watches, its four dials and tripwire levels, six history replays and this week's sealed forecast</sub>
+</p>
+
 **An open early-warning observatory for runaway AI: a seismograph for the intelligence explosion, built to be proven wrong.**
 
 [![CI](https://github.com/guru-bharadwaj20/Kairos-Observatory/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
