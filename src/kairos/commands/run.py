@@ -144,33 +144,33 @@ class RunReport:
 WEEKLY_STAGES: tuple[Stage, ...] = (
     Stage(
         "refresh",
-        ("kairos.data.refresh:run_stage", "kairos.data:refresh"),
+        ("kairos.weekly:refresh",),
         "Refresh C(t), H(t) and the event calendar; write the data manifest",
     ),
     Stage(
         "fit",
-        ("kairos.models.weekly:run_stage", "kairos.models:fit_all"),
+        ("kairos.weekly:fit",),
         "Fit Prophet null models and NeuralProphet ensembles",
         needs_gpu=True,
     ),
     Stage(
         "dials",
-        ("kairos.dials.weekly:run_stage", "kairos.dials:compute_all"),
+        ("kairos.weekly:dials",),
         "Compute the four dials: delta/t_c, kappa, h*, dG/dt",
     ),
     Stage(
         "governor",
-        ("kairos.governor.weekly:run_stage", "kairos.governor:evaluate"),
+        ("kairos.weekly:governor",),
         "Apply the ethical governor and set the tripwire level",
     ),
     Stage(
         "ledger",
-        ("kairos.ledger.weekly:run_stage", "kairos.ledger:append_weekly"),
+        ("kairos.weekly:ledger",),
         "Hash the forecast, append it to the ledger, timestamp it",
     ),
     Stage(
         "export",
-        ("kairos.dashboard.export:run_stage", "kairos.dashboard:export_static"),
+        ("kairos.weekly:export",),
         "Export the static dashboard snapshot",
     ),
 )
@@ -240,9 +240,11 @@ def _run_stage(stage: Stage, ctx: RunContext) -> StageResult:
             return StageResult(
                 stage.name, StageStatus.FAILED, time.perf_counter() - start, spec, repr(exc)
             )
+        detail = ""
         if out is not None:
             ctx.artifacts[stage.name] = out
-        return StageResult(stage.name, StageStatus.OK, time.perf_counter() - start, spec)
+            detail = str(out.get("detail", ""))
+        return StageResult(stage.name, StageStatus.OK, time.perf_counter() - start, spec, detail)
     return StageResult(
         stage.name,
         StageStatus.UNAVAILABLE,
