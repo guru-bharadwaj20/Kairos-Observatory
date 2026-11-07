@@ -29,6 +29,7 @@ class CaseResult:
         criterion: The acceptance criterion in words.
         table: Per-as-of-date results, if the case is a replay.
         notes: Caveats a reader needs to interpret the result.
+        skipped: The case could not run (e.g. data unavailable offline).
     """
 
     case: str
@@ -37,10 +38,12 @@ class CaseResult:
     criterion: str
     table: pd.DataFrame | None = None
     notes: list[str] = field(default_factory=list)
+    skipped: bool = False
 
 
 CASES: dict[str, str] = {
     "population": "kairos.validation.population:run",
+    "dotcom": "kairos.validation.bubbles:run_dotcom",
 }
 """``case name -> "module:function"``."""
 

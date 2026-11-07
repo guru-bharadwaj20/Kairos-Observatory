@@ -38,10 +38,11 @@ def run_command(
         payload = {"case": result.case, "passed": result.passed, **result.summary}
         typer.echo(json.dumps(payload, default=str, indent=2))
     else:
-        typer.echo(f"{result.case}: {'PASS' if result.passed else 'FAIL'}  ({result.criterion})")
+        status = "SKIP" if result.skipped else ("PASS" if result.passed else "FAIL")
+        typer.echo(f"{result.case}: {status}  ({result.criterion})")
         for key, value in result.summary.items():
             typer.echo(f"  {key}: {value}")
         for note in result.notes:
             typer.echo(f"  note: {note}")
-    if not result.passed:
+    if not (result.passed or result.skipped):
         raise typer.Exit(1)

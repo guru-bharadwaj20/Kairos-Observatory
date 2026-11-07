@@ -33,19 +33,11 @@ and SeriesMeta.url) and is checked when a source is added.
 | METR, task-completion time horizons         | Agent task-time horizon           | Per METR publication terms |
 | Our World in Data                           | Population, AI-related charts     | CC BY 4.0              |
 | UN World Population Prospects               | Historical population validation  | CC BY 3.0 IGO          |
-| HYDE 3.x (via OWID population)              | Long-run population validation    | CC BY 4.0 (via OWID)   |
-| FRED: NASDAQCOM, CBBTCUSD                   | Bubble validation cases           | FRED terms; (c) owners |
 | OECD.AI Policy Observatory                  | Policy and law-making lag         | OECD terms and conditions |
 | OpenAlex                                    | Safety/interpretability papers    | CC0 1.0                |
 | arXiv metadata                              | Paper counts                      | CC0 1.0 (metadata)     |
-| Model cards and papers (curated)            | Benchmark SOTA histories          | Facts; cited per row   |
-| Provider API pricing pages (curated)        | Cost per unit of capability       | Facts; cited per row   |
-| Liang et al. 2024, arXiv:2404.01268         | AI share of AI research proxy     | Figures cited as facts |
-| OWID / Quid, private investment in AI       | Investment driver                 | CC BY 4.0              |
-| NeurIPS conference statistics (curated)     | Researcher-count driver proxy     | Facts; cited per row   |
-| AI safety field surveys, grant databases    | Safety headcount and funding      | Estimates; cited       |
-| System cards and evaluator reports (curated) | Third-party evaluation share     | Facts; cited per row   |
-| Pew Research Center surveys (curated)       | Public AI literacy                | Facts; Pew terms of use |
+| OWID world population (HYDE, Gapminder, UN) | K-9.02 snapshot, validation/data | CC BY 4.0              |
+| FRED NASDAQCOM (Nasdaq OMX Group)          | K-9.03, fetched at run time only  | (c) Nasdaq; not redistributed |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.
