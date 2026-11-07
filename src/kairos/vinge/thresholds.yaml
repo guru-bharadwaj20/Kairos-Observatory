@@ -1,0 +1,12 @@
+# Vinge dial parameters (K-6.07). Published, versioned; never hard-coded (Jonas rule).
+# Changing a value is a governance change: bump `version` and record why in the ledger.
+version: 1
+tolerance_factor: 2.0      # h* tolerance: forecast within 2x of the outcome
+metric: ale                # ale (point) or crps (probabilistic)
+k_efolds: 2.0              # band variant: 90% band wider than 2 e-folds
+window_months: 36          # trailing window of cutoffs for each h*(t) reading
+alpha: 0.05                # one-sided significance of the shrinkage test
+min_shrinking_series: 1    # Watch: at least this many series shrink significantly
+confirm_shrinking_series: 3  # Warning/Critical need this many (cf. D10 independence)
+warning_months: 6.0        # Warning: median current h* at or below this
+critical_months: 1.0       # Critical: median current h* at or below this

@@ -133,3 +133,31 @@ are strongly autocorrelated. The default variance therefore uses the
 Hamed & Rao (1998) correction; `correction="none"` gives the textbook test.
 `shrinking` is true when `p < alpha` and the slope is negative.
 `shrinkage_by_series` runs the test on each series.
+
+## 8. The Vinge dial (K-6.07)
+
+`vinge_dial(hstar_table)` returns a `DialReading` with `dial="vinge"`:
+
+- `value` is the median of each series' latest `h*`, in months;
+- `ci_lo`/`ci_hi` are the 10th and 90th percentiles of those values;
+- `detail` holds per-series readings and trends, the count of series that
+  are shrinking, and the thresholds used.
+
+Every threshold lives in the versioned `src/kairos/vinge/thresholds.yaml`
+(Jonas rule). `load_thresholds(path)` overrides the file.
+
+| State | Level | Condition |
+|---|:-:|---|
+| normal | 0 | fewer than `min_shrinking_series` series shrink significantly |
+| watch | 1 | at least `min_shrinking_series` series shrink |
+| warning | 2 | at least `confirm_shrinking_series` series shrink and median `h*` <= `warning_months` |
+| critical | 3 | as warning, with median `h*` <= `critical_months` |
+
+Level 4 is reserved for the governor (Phase 8), which combines the dials.
+
+CLI:
+
+```bash
+kairos vinge hstar backtest.parquet -o hstar.parquet   # h*(t) table
+kairos vinge dial hstar.parquet                        # DialReading as JSON
+```

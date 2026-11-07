@@ -30,14 +30,14 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 3 | Prophet null models | 3–4 | 10 | 10 | ✅ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 12 | ✅ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 14 | ✅ |
-| 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
+| 6 | Vinge Horizon `h*` | 9 | 7 | 7 | ✅ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 5 | ❌ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 7 | ❌ |
 | 9 | Historical validation | 8, 10 | 9 | 2 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **117** | **85%** |
+| | **Total** | | **137** | **118** | **86%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -335,7 +335,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-6.04 | `h*(t)` series | `h*` recomputed at every monthly cutoff for every series (the largest CPU job; uses the fit cache) | CPU×N | 6.03, 1.07 | ✅ |
 | K-6.05 | NeuralProphet `h*` cross-check | Same procedure with NeuralProphet quantiles | GPU | 6.03, 4.05 | ✅ |
 | K-6.06 | Shrinkage test | Mann–Kendall and Theil–Sen slope on `h*(t)` with a significance level | CPU | 6.04 | ✅ |
-| K-6.07 | Vinge dial | Dial object: current `h*`, its trend, state | CPU | 6.06 | ❌ |
+| K-6.07 | Vinge dial | Dial object: current `h*`, its trend, state | CPU | 6.06 | ✅ |
 
 ### Phase 7: Jonas Gap `G`, `dG/dt`
 
