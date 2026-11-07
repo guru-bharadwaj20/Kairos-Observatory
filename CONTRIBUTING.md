@@ -29,7 +29,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 2 | Open dataset: `C(t)`, `H(t)`, events | 1–2 | 23 | 23 | ✅ |
 | 3 | Prophet null models | 3–4 | 10 | 10 | ✅ |
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 12 | ✅ |
-| 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 7 | ❌ |
+| 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 8 | ❌ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 6 | ❌ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 5 | ❌ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 7 | ❌ |
@@ -37,7 +37,7 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **110** | **80%** |
+| | **Total** | | **137** | **111** | **81%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -317,7 +317,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-5.05 | Vectorised bootstrap (GPU) | 10⁵ resamples in batched `torch`; matches K-5.04 distribution (KS test) | GPU | 5.04, 1.05 | ✅ |
 | K-5.06 | Coverage check | 90% bootstrap intervals cover the true synthetic `δ` in 85–95% of trials | CPU×N | 5.04 | ✅ |
 | K-5.07 | LPPLS reference (CPU float64) | Filimonov–Sornette form: linear `A, B, C1, C2` by OLS, nonlinear `t_c, m, ω` by search | CPU | 5.01 | ✅ |
-| K-5.08 | LPPLS filter conditions | `m ∈ [0.1, 0.9]`, `ω ∈ [6, 13]`, damping and oscillation-count checks | CPU | 5.07 | ❌ |
+| K-5.08 | LPPLS filter conditions | `m ∈ [0.1, 0.9]`, `ω ∈ [6, 13]`, damping and oscillation-count checks | CPU | 5.07 | ✅ |
 | K-5.09 | LPPLS batched GPU search | Grid `t_c × m × ω` × windows solved in chunks under 20 GB VRAM; float32 with centring; equivalence test against K-5.07 | GPU | 5.07, 1.05 | ❌ |
 | K-5.10 | Float64 refinement | Best GPU cells polished on CPU float64 | CPU×N | 5.09 | ❌ |
 | K-5.11 | LPPLS confidence indicator | Share of qualified fits across shrinking windows (Sornette style) as a time series | GPU | 5.09, 5.08 | ❌ |
