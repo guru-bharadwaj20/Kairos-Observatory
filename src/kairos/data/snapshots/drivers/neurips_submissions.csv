@@ -1,0 +1,16 @@
+# NeurIPS main-track paper submissions per year: a proxy for the size of the
+# active ML research workforce. From NeurIPS conference statistics / opening
+# remarks; recent years rounded. Lower/upper bounds +/- 5% for counting differences.
+year,value,lo,hi,source_url
+2014,1678,1594,1762,https://papers.nips.cc/
+2015,1838,1746,1930,https://papers.nips.cc/
+2016,2406,2286,2526,https://papers.nips.cc/
+2017,3240,3078,3402,https://papers.nips.cc/
+2018,4856,4613,5099,https://papers.nips.cc/
+2019,6743,6406,7080,https://papers.nips.cc/
+2020,9467,8994,9940,https://papers.nips.cc/
+2021,9122,8666,9578,https://papers.nips.cc/
+2022,10411,9890,10932,https://papers.nips.cc/
+2023,12345,11728,12962,https://papers.nips.cc/
+2024,15671,14887,16455,https://papers.nips.cc/
+2025,21575,20496,22654,https://papers.nips.cc/
