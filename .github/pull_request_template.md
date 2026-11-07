@@ -6,14 +6,14 @@
 
 ## Done when
 
-<!-- Paste the "Done when" text from CONTRIBUTING.md section 6 as a checklist. -->
+<!-- Paste the "Done when" text for this task as a checklist. -->
 
 - [ ]
 
 ## Checklist
 
 - [ ] One subtask, one commit; the subject ends with the task ID
-- [ ] CONTRIBUTING.md status (section 6 row and section 1 counts) updated in the same commit
+- [ ] CHANGELOG.md updated if the change is user-visible
 - [ ] Tests ship with the code; `uv run pytest -m "not slow and not gpu"` passes
 - [ ] `uv run ruff check .`, `uv run ruff format --check .` and `uv run mypy src` pass
 - [ ] No thresholds or `λ` hard-coded in code (they live in versioned YAML)

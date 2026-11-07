@@ -6,7 +6,7 @@ All notable changes to KAIROS Observatory are recorded here. The format follows
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-11-13
+## [0.1.0] - 2026-11-07
 
 First public release: the open dataset, the four dials, the ethical governor,
 the pre-registration ledger and the public dashboard.

@@ -1,6 +1,6 @@
-# K-12.08: build and publish a release to PyPI with trusted publishing (OIDC).
-# Triggered by pushing a tag such as v0.1.0. No API token is stored anywhere:
-# PyPI trusts this workflow file in this repository, via the `pypi` environment.
+# K-12.08: build a release and publish it as a GitHub release.
+# Triggered by pushing a tag such as v0.1.0. The sdist and wheel are attached to
+# the release; install with `pip install <wheel URL>` or from git.
 name: release
 
 on:
@@ -29,23 +29,8 @@ jobs:
           name: dist
           path: dist/
 
-  publish-pypi:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/kairos-observatory
-    permissions:
-      id-token: write
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-      - uses: pypa/gh-action-pypi-publish@release/v1
-
   github-release:
-    needs: publish-pypi
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write

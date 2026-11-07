@@ -1,4 +1,4 @@
-"""Release plumbing: changelog format and the trusted-publishing workflow."""
+"""Release plumbing: changelog format and the GitHub release workflow."""
 
 from __future__ import annotations
 
@@ -19,13 +19,15 @@ def test_changelog_has_v010_and_links() -> None:
     assert "[0.1.0]: https://github.com/" in text
 
 
-def test_release_uses_oidc_not_tokens() -> None:
+def test_release_publishes_github_release_without_tokens() -> None:
     wf = yaml.safe_load((ROOT / ".github" / "workflows" / "release.yml").read_text("utf-8"))
     trigger = wf.get("on", wf.get(True))
     assert trigger["push"]["tags"] == ["v*.*.*"]
-    publish = wf["jobs"]["publish-pypi"]
-    assert publish["permissions"] == {"id-token": "write"}
-    assert publish["environment"]["name"] == "pypi"
-    step = publish["steps"][-1]
-    assert step["uses"].startswith("pypa/gh-action-pypi-publish")
-    assert "with" not in step or "password" not in step["with"]
+    jobs = wf["jobs"]
+    assert "publish-pypi" not in jobs
+    release = jobs["github-release"]
+    assert release["needs"] == "build"
+    assert release["permissions"] == {"contents": "write"}
+    run = release["steps"][-1]["run"]
+    assert "gh release create" in run
+    assert "secrets." not in (ROOT / ".github" / "workflows" / "release.yml").read_text("utf-8")

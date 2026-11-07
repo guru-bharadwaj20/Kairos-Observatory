@@ -2,7 +2,7 @@
 
 With 28 worker processes on a 32-thread CPU, every native thread pool inside a
 worker (OpenBLAS/MKL, OpenMP, numexpr, torch intra-op, Stan) must run with one
-thread, or the machine thrashes (CONTRIBUTING section 4.1).
+thread, or the machine thrashes (docs/design.md, hardware plan).
 
 Two layers are used:
 

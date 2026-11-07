@@ -11,7 +11,7 @@ and ``entry_hash`` is the SHA-256 of all of the above. Changing, deleting or
 reordering any line therefore breaks every hash after it.
 
 Entries are never edited. A mistake is fixed by appending a ``correction`` entry
-that names the hash of the entry it supersedes (Popper rule, CONTRIBUTING 2.5).
+that names the hash of the entry it supersedes (Popper rule, docs/design.md, non-negotiables).
 """
 
 from __future__ import annotations

@@ -55,7 +55,7 @@ DEFAULT_DRIVERS: tuple[DriverSpec, ...] = (
     DriverSpec("log_investment", "investment", n_lags=12),
     DriverSpec("log_researchers", "researchers", n_lags=12),
 )
-"""Drivers used for ``κ`` (CONTRIBUTING K-2.11): one lag window per driver."""
+"""Drivers used for ``κ`` (roadmap task K-2.11): one lag window per driver."""
 
 
 def design_frame(

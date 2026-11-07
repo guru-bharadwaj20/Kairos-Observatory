@@ -61,6 +61,7 @@ not_in_nav: |
 nav:
   - Home: index.md
   - Methodology: methodology.md
+  - Design notes: design.md
   - Beyond AI: beyond-ai.md
   - Operations:
       - Weekly pipeline: weekly.md

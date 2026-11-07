@@ -14,8 +14,8 @@ authors:
 repository-code: "https://github.com/guru-bharadwaj20/Kairos-Observatory"
 url: "https://github.com/guru-bharadwaj20/Kairos-Observatory"
 license: Apache-2.0
-version: 0.0.1
-date-released: "2026-11-06"
+version: 0.1.0
+date-released: "2026-11-07"
 keywords:
   - forecasting
   - early warning

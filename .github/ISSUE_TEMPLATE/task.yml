@@ -6,7 +6,7 @@ body:
     id: task
     attributes:
       label: Task ID
-      description: Must match a row in CONTRIBUTING.md section 6.
+      description: The roadmap task ID, as used in commit subjects.
       placeholder: K-2.06
     validations:
       required: true

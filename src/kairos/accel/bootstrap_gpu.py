@@ -9,7 +9,7 @@ so with ``ln y* = ln x̂ + r*``
 and the ``ln g`` on ``ln x`` regression is a closed-form weighted OLS over a batch axis.
 The deterministic parts ``S·ln x̂`` and ``D·ln x̂`` are computed once in float64 and
 centred, so the float32 GPU kernel only handles residual-sized numbers
-(CONTRIBUTING 4.2). Chunks are sized to the VRAM budget with
+(docs/design.md, hardware plan). Chunks are sized to the VRAM budget with
 :func:`kairos.compute.chunk_size`.
 
 The draws are statistically, not bitwise, equivalent to the CPU reference (different

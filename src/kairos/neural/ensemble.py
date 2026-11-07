@@ -1,7 +1,7 @@
 """Seed ensembles: many small NeuralProphet fits, mean and spread of skill.
 
 With ~200 points one fit is noisy, so every ``κ`` uses at least
-:data:`DEFAULT_N_SEEDS` (20) seeds per model (CONTRIBUTING D9).
+:data:`DEFAULT_N_SEEDS` (20) seeds per model (docs/design.md D9).
 
 Execution policy (``docs/benchmarks.md``): a single small fit takes 0.64 s on
 the CPU and 1.21 s on the GPU, so ensembles run as **independent CPU fits over

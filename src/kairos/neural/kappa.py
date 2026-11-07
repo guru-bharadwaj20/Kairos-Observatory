@@ -1,6 +1,6 @@
 """The recursion coefficient ``κ`` with a permutation null.
 
-Definition (idea doc §8, CONTRIBUTING D9). With ``MAE`` the out-of-sample mean
+Definition (idea doc §8, docs/design.md D9). With ``MAE`` the out-of-sample mean
 absolute error (log units, averaged over horizons and seeds)::
 
     κ = 1 - MAE_self / MAE_exo

@@ -5,7 +5,7 @@ Values are resolved in this order (first wins):
 1. keyword arguments passed to :class:`Settings`;
 2. environment variables with the ``KAIROS_`` prefix (``KAIROS_N_JOBS=8``);
 3. a YAML file: ``$KAIROS_CONFIG`` if set, else ``./kairos.yaml`` if it exists;
-4. the defaults below, tuned for the reference workstation (CONTRIBUTING section 4).
+4. the defaults below, tuned for the reference workstation (docs/design.md, hardware plan).
 
 Policy parameters such as ``λ`` and tripwire thresholds are **not** settings; they
 live in versioned YAML under ``config/`` (Jonas rule).

@@ -1,7 +1,7 @@
 """Device selection and precision policy.
 
 * :func:`get_device` returns CUDA when asked for and available, else the CPU.
-* Precision policy (CONTRIBUTING section 4.2): GPU kernels run in **float32**
+* Precision policy (docs/design.md, hardware plan): GPU kernels run in **float32**
   (Ada FP64 is ~1/64 of FP32); CPU reference implementations run in **float64**.
   :func:`dtype_for` encodes that rule.
 * :func:`vram_budget_bytes` and :func:`chunk_size` keep peak VRAM under the

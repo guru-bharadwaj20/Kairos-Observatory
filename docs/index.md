@@ -24,7 +24,7 @@ ledger before its outcome is known.
 - [Methodology](methodology.md): the mathematics and the decision rules.
 - [Weekly pipeline](weekly.md): what `kairos run weekly` does.
 - [API reference](reference/run.md): generated from the docstrings.
-- The full idea and the build plan live in the repository as
-  [`KAIROS_Project_Idea.md`](https://github.com/guru-bharadwaj20/Kairos-Observatory/blob/main/KAIROS_Project_Idea.md)
-  and
-  [`CONTRIBUTING.md`](https://github.com/guru-bharadwaj20/Kairos-Observatory/blob/main/CONTRIBUTING.md).
+- [Design notes](design.md): the non-negotiables, toolchain pins, hardware
+  plan and design notes D1–D12.
+- The full idea lives in the repository as
+  [`KAIROS_Project_Idea.md`](https://github.com/guru-bharadwaj20/Kairos-Observatory/blob/main/KAIROS_Project_Idea.md).

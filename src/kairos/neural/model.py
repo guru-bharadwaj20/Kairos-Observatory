@@ -59,7 +59,7 @@ _NOISY_LOGGERS = (
 class NeuralConfig(BaseModel):
     """Hyper-parameters of one NeuralProphet model.
 
-    Defaults suit ~200 monthly points (CONTRIBUTING D9): a small linear AR-Net,
+    Defaults suit ~200 monthly points (docs/design.md D9): a small linear AR-Net,
     no seasonality (the series are annual-scale trends), a modest learning rate
     and early stopping.
 

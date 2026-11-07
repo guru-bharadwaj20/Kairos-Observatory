@@ -63,7 +63,7 @@ repository that must never include code from fork pull requests.
 
 ## Resource limits
 
-Jobs follow the hardware plan in `CONTRIBUTING.md` section 4: 28 worker
+Jobs follow the hardware plan in the [design notes](design.md#hardware-plan-for-this-workstation): 28 worker
 processes at most, BLAS threads pinned to 1, peak VRAM under 20 GB. The
 workflow's `concurrency` group keeps it to one GPU job at a time.
 

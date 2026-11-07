@@ -1,7 +1,7 @@
 # Pre-registration ledger
 
 KAIROS commits every forecast to a public, append-only ledger *before* its
-outcome is known (Popper rule, CONTRIBUTING 2.5; design note D11). Anyone can
+outcome is known (Popper rule, docs/design.md, non-negotiables; design note D11). Anyone can
 recompute the chain and check that no entry was changed after the fact.
 
 Code: `src/kairos/ledger/`. Data: `ledger/forecasts.jsonl`.

@@ -3,7 +3,7 @@
 NeuralProphet's ``predict`` puts the ``h``-step-ahead forecast *of* month ``t``
 in column ``yhat<h>`` on row ``t``. Every metric here is computed on rows whose
 month lies in the hold-out window, so models with different lag windows are
-scored on exactly the same targets (CONTRIBUTING D9: out-of-sample only).
+scored on exactly the same targets (docs/design.md D9: out-of-sample only).
 Errors are in the model's units: log units for growth series, so an absolute
 error of ``0.69`` is a factor of two.
 """

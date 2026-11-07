@@ -6,7 +6,7 @@ except one input channel:
 * ``"exo"``: trend plus lagged drivers only;
 * ``"self"``: the same plus the target's own last ``self_lags`` values;
 * ``"null"``: the same as ``"self"``, but the self channel is a **block-shuffled
-  surrogate** of the target (CONTRIBUTING D9, the permutation null).
+  surrogate** of the target (docs/design.md D9, the permutation null).
 
 The self channel is fed to NeuralProphet as a lagged regressor holding a copy
 of ``y``. With linear layers (the default) this is the same function class as

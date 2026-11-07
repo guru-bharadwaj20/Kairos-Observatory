@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kairos-observatory"
-version = "0.0.1"
+version = "0.1.0"
 description = "An open early-warning observatory for runaway AI: Prophet null models, singularity detectors and a pre-registered forecast ledger."
 readme = "README.md"
 license = "Apache-2.0"
@@ -20,7 +20,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Information Analysis",
 ]
 dependencies = [
-    # numerics (numpy<2 is required by neuralprophet 0.9, see CONTRIBUTING D12)
+    # numerics (numpy<2 is required by neuralprophet 0.9, see docs/design.md D12)
     "numpy>=1.26,<2",
     "pandas>=2.2,<2.3",
     "scipy>=1.13",

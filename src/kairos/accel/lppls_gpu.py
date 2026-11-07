@@ -6,7 +6,7 @@ built, the 3×3 normal equations are solved with ``torch.linalg.solve`` and the 
 taken from the residuals directly (never from ``yᵀy − βᵀXᵀy``, which cancels badly in
 float32).
 
-Precision (CONTRIBUTING 4.2): on the GPU everything runs in **float32** with
+Precision (docs/design.md, hardware plan): on the GPU everything runs in **float32** with
 centred and scaled inputs: ``τ`` is measured in window lengths, ``ln p`` is centred
 and divided by its standard deviation per window. The grid is defined in those
 normalised units, so all windows share one cell list. Pairs are processed in chunks

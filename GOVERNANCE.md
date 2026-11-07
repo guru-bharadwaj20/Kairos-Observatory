@@ -7,7 +7,7 @@ Jonas loss ratio `λ`, is set.
 
 The rules here follow the philosophy layer in
 [KAIROS_Project_Idea.md](KAIROS_Project_Idea.md) (section 6) and the
-non-negotiables in [CONTRIBUTING.md](CONTRIBUTING.md) (section 2.5).
+non-negotiables in [docs/design.md](docs/design.md#non-negotiables-from-the-philosophy-layer).
 
 ---
 

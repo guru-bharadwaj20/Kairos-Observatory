@@ -9,7 +9,7 @@ from __future__ import annotations
 from kairos.dashboard.snapshot import Snapshot
 from kairos.dashboard.theme import DIALS, LEVELS
 
-#: The design notes D1-D12 from CONTRIBUTING.md §5, rewritten for a general reader.
+#: The design notes D1-D12 from docs/design.md, rewritten for a general reader.
 DESIGN_NOTES: tuple[tuple[str, str, str], ...] = (
     ("D1", "Measuring acceleration",
      "Growth rates are estimated from historical data with a smoothing method, never from "
