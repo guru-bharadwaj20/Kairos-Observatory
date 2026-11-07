@@ -40,6 +40,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | FRED NASDAQCOM (Nasdaq OMX Group)          | K-9.03, fetched at run time only  | (c) Nasdaq; not redistributed |
 | FRED CBBTCUSD (Coinbase)                   | K-9.04, fetched at run time only  | (c) Coinbase; not redistributed |
 | OWID COVID-19 cases (WHO), Italy weekly    | K-9.05 snapshot, validation/data | CC BY 4.0              |
+| OWID transistors per microprocessor        | K-9.06 snapshot, validation/data | CC BY 4.0              |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.
