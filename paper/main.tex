@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+% Result numbers are filled from the published snapshot (ledger entry and
+% docs/validation.md). Until then every number is a visible placeholder.
+\newcommand{\TBD}[1]{\textcolor{red}{\textbf{[#1]}}}
+\input{results}
+
+\title{Measuring the Distance to a Singularity:\\
+Forecastability as an Early-Warning Signal}
+\author{KAIROS Observatory contributors\\
+\small\url{https://github.com/guru-bharadwaj20/Kairos-Observatory}}
+\date{Draft, \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A finite-time singularity is a time-series event: growth that is faster than
+exponential reaches infinity at a finite critical date $t_c$. Vinge's original
+definition of the technological singularity is also about time series: it is the
+point beyond which the future can no longer be forecast. We combine both
+readings in KAIROS, an open instrument that tracks AI capability $C(t)$ against
+human oversight capacity $H(t)$. It reports four dials: an acceleration
+exponent $\delta$ with critical time $t_c$; a recursion coefficient $\kappa$;
+the Vinge Horizon $h^*$, the longest horizon still forecastable within a fixed
+factor error; and the velocity of the Jonas Gap $G=\ln C-\ln H$. Decision rules
+with published parameters turn the dials into pre-agreed tripwire levels, and
+every weekly forecast is hashed into a timestamped public ledger before its
+outcome is known. In backtests the method recovers von Foerster's 1960
+doomsday date (\resPopTc), sees $\delta$ fall toward zero by \resPopBendYear,
+and stays at level~0 on Moore's law (false-alarm rate \resMooreFAR). The
+current reading is level \resLevel{} with a lead time of \resLeadTime.
+\end{abstract}
+
+\section{Introduction}
+
+In 1960 von Foerster, Mora and Amiot fitted a hyperbola to world population and
+found that it diverged on Friday, 13 November 2026~\cite{vonfoerster1960}.
+The singularity was real in the data and was avoided in reality: the curve bent
+during the demographic transition. Two lessons follow. Finite-time
+singularities can be seen in data decades ahead, and they can be bent. The hard
+part is telling early whether a curve is bending.
+
+AI governance faces the Collingridge dilemma~\cite{collingridge1980}: control is
+easy while harms are unknown and hard once they are clear. Task horizons of AI
+agents have doubled roughly every seven months~\cite{metr2025}, and frontier
+training compute grows several-fold per year~\cite{epoch}. What is missing is a
+neutral instrument that issues falsifiable warnings tied to responses agreed in
+advance. This paper describes one and reports its validation.
+
+Our contributions are: (i)~a forecastability-based definition of distance to a
+singularity, the Vinge Horizon $h^*$; (ii)~a relational definition of danger,
+the Jonas Gap velocity $dG/dt$; (iii)~decision rules written as mathematics with
+published parameters; and (iv)~a pre-registration ledger that makes a
+self-defeating prophecy scorable through conditional forecasts.
+
+\section{Method}
+
+\subsection{Null model}
+Prophet~\cite{taylor2018} is fitted to $\ln y$. A piecewise-linear trend on the
+log scale is piecewise exponential growth. It cannot represent a finite-time
+singularity, and that is the point: it stands for the boring world, and
+persistent one-sided residuals against it are evidence of acceleration.
+
+\subsection{Acceleration: $\delta$ and $t_c$}
+Hyperbolic growth $\dot x = k x^{1+\delta}$ gives
+$x(t)=x_0(1-t/t_c)^{-1/\delta}$. With $g=d\ln x/dt$,
+\begin{equation}
+\ln g = \ln k + \delta \ln x, \qquad t_c - t = \frac{1}{\delta\, g}.
+\end{equation}
+$g$ is estimated from observed data with a cross-validated smoother, not from a
+forecast trend, whose slope is piecewise constant by construction and biases
+$\delta$ to zero. Because $\ln g$ and $\ln x$ share autocorrelated errors,
+intervals come from a moving block bootstrap that refits the smoother on every
+resample. A direct nonlinear fit of $x(t)$ and the log-periodic power law
+singularity (LPPLS) model~\cite{sornette2003}
+\begin{equation}
+\ln x = A + B(t_c-t)^m + C(t_c-t)^m\cos\!\big(\omega\ln(t_c-t)-\phi\big)
+\end{equation}
+give independent estimates of $t_c$. Significance across metrics is controlled
+with Benjamini--Hochberg, and metrics count as independent only if they come
+from different source groups.
+
+\subsection{Recursion: $\kappa$}
+NeuralProphet~\cite{triebe2021} is fitted with exogenous drivers only (compute,
+investment, talent), then with capability's own lags added. $\kappa$ is the
+relative out-of-sample skill gain, reported against a permutation null with
+shuffled self-lags and cross-checked with Granger tests.
+
+\subsection{The Vinge Horizon $h^*$}
+Rolling-origin backtests with data vintages give forecast error as a function of
+horizon. Error is measured in log units, as absolute log error and CRPS, with a
+tolerance stated as a factor (for example within $2\times$). $h^*$ is the
+\emph{first} horizon at which the smoothed error crosses the tolerance;
+taking the maximum passing horizon would let one lucky long horizon inflate it.
+$h^*(t)$ is recomputed at every monthly cutoff and tested for shrinkage with
+Mann--Kendall and Theil--Sen. This is Lorenz's predictability limit~\cite{lorenz1963}
+applied to technology.
+
+\subsection{The Jonas Gap}
+$G(t)=\ln C(t)-\ln H(t)$, with both composite indices normalised at a base year.
+The level of $G$ is arbitrary; only $dG/dt$ is interpreted. The dial is in danger
+when $dG/dt>0$ is sustained under a run-length rule and a Newey--West $t$-test.
+
+\subsection{Decision rules}
+A missed catastrophe costs $\lambda$ times a false alarm~\cite{jonas1984}, so a
+dial raises its alarm when $P(\text{danger}) > 1/(1+\lambda)$, with
+probabilities taken from bootstrap and ensemble distributions. The maximin
+decision over the scenario ensemble~\cite{rawls1971} is reported next to the
+expected-value one. Lead time is the time until the upper forecast quantile
+crosses the danger threshold. Tripwire levels 0--4 count dials in danger
+(Table~\ref{tab:levels}). $\lambda$ and every threshold are versioned YAML.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Level & Trigger & Recommended response\\
+\midrule
+0 Normal & All dials calm & Weekly publication\\
+1 Watch & One dial & More data, public notice\\
+2 Warning & Two dials, or one on $\ge 3$ metrics & Mandatory third-party evaluation\\
+3 Alarm & Three dials & Pause scaling past the frontier\\
+4 Kairos & All four dials & Last cheap window\\
+\bottomrule
+\end{tabular}
+\caption{Tripwire levels, agreed in advance.}
+\label{tab:levels}
+\end{table}
+
+\subsection{Pre-registration}
+Each weekly forecast is serialised as canonical JSON, hashed with SHA-256,
+appended to a hash-chained ledger that includes the data manifest hash, and
+anchored with OpenTimestamps~\cite{popper1959}. Forecasts are conditional (``if
+no new intervention, $X$ reaches $Y$ by $Z$''), and interventions are logged as
+events, so a warning that is acted on can be scored against the counterfactual
+instead of counting as a false alarm~\cite{merton1948}.
+
+\section{Validation}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Case & Check & Result\\
+\midrule
+World population & $t_c$ from 1960 data & \resPopTc\\
+ & $\delta$ falls toward 0 by & \resPopBendYear\\
+Nasdaq 2000 & LPPLS $t_c$ vs.\ Sornette & \resDotcomTc\\
+Bitcoin 2017 & Warning lead time & \resBtcLead\\
+COVID-19 2020 & Counterfactual CRPS gain & \resCovidCrps\\
+Moore's law & False-alarm rate & \resMooreFAR\\
+AI history & Changepoints found blind & \resAiChangepoints\\
+All & 90\% interval coverage & \resCoverage\\
+\bottomrule
+\end{tabular}
+\caption{Historical validation. Numbers come from \texttt{docs/validation.md}.}
+\end{table}
+
+\section{Current reading}
+As of \resAsOf, the dials read $\delta=\resDelta$, $\kappa=\resKappa$,
+$h^*=\resHstar$ and $dG/dt=\resGapVelocity$. The tripwire level is
+\resLevel{} and the lead time is \resLeadTime. The ledger entry is
+\texttt{\resLedgerHash}.
+
+\section{Limitations}
+Frontier data are sparse, delayed or secret; we use many proxies and treat
+growing secrecy as a signal. Metrics can be gamed; held-out metrics rotate and a
+divergence between public and held-out trends is flagged. Singularity fits on
+noisy data raise false alarms; bootstrap intervals, multi-dial confirmation and
+a published false-alarm rate mitigate this. The clock could feed race dynamics,
+so $H$ and the recommended responses are always shown with $C$. KAIROS cannot
+stop anything; it buys lead time, and the decisions stay with people.
+
+\section{Conclusion}
+Forecastability is measurable, and its decline is a model-free warning sign.
+Combined with acceleration, recursion and the capability--comprehension gap, and
+bound to pre-registered forecasts, it gives an instrument that is built to be
+proven wrong.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\end{document}
