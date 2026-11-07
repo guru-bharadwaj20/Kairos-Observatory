@@ -106,32 +106,42 @@ def spline_smoother(t: FloatArray, lam: float) -> SplineSmoother:
     return SplineSmoother(t=t, lam=float(lam), S=s_mat, D=d_mat)
 
 
-def _gcv(t: FloatArray, z: FloatArray, log10_lam: float) -> float:
+GCV_GAMMA = 1.4
+"""Inflation of the effective degrees of freedom in GCV (Kim and Gu 2004; Wood 2017).
+
+Plain GCV (``γ = 1``) undersmooths and its ``λ`` varies a lot between samples; the
+derivative ``g`` inherits that variance, which a fixed-``λ`` bootstrap cannot see.
+``γ = 1.4`` is the standard remedy and makes the K-5.04 intervals reach nominal
+coverage (K-5.06)."""
+
+
+def _gcv(t: FloatArray, z: FloatArray, log10_lam: float, gamma: float) -> float:
     sm = spline_smoother(t, 10.0**log10_lam)
     resid = z - sm.smooth(z)
     n = len(z)
-    denom = (1.0 - sm.edf / n) ** 2
+    denom = (1.0 - gamma * sm.edf / n) ** 2 if gamma * sm.edf < n else 0.0
     return float(np.mean(resid**2) / max(denom, 1e-12))
 
 
-def select_lambda(t: FloatArray, z: FloatArray) -> float:
+def select_lambda(t: FloatArray, z: FloatArray, *, gamma: float = GCV_GAMMA) -> float:
     """Choose the spline penalty by generalised cross-validation.
 
-    A coarse grid over ``log10 λ ∈ [-8, 6]`` is followed by a bounded scalar search
-    around the best grid point.
+    Minimises ``n·RSS / (n − γ·edf)²``. A coarse grid over ``log10 λ ∈ [-8, 6]`` is
+    followed by a bounded scalar search around the best grid point.
 
     Args:
         t: Strictly increasing times.
         z: Values to smooth (``ln y``).
+        gamma: Degrees-of-freedom inflation; ``1`` is classical GCV.
     """
     t = _check_t(t)
     z = np.asarray(z, dtype=np.float64)
     grid = np.linspace(*_LOG10_LAM_BOUNDS, 29)
-    scores = np.array([_gcv(t, z, g) for g in grid])
+    scores = np.array([_gcv(t, z, g, gamma) for g in grid])
     i = int(np.argmin(scores))
     lo, hi = grid[max(i - 1, 0)], grid[min(i + 1, len(grid) - 1)]
     res = optimize.minimize_scalar(
-        lambda v: _gcv(t, z, float(v)), bounds=(lo, hi), method="bounded"
+        lambda v: _gcv(t, z, float(v), gamma), bounds=(lo, hi), method="bounded"
     )
     best = float(res.x) if res.fun <= scores[i] else float(grid[i])
     return float(10.0**best)
