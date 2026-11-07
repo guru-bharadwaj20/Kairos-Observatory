@@ -34,6 +34,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | Our World in Data                           | Population, AI-related charts     | CC BY 4.0              |
 | UN World Population Prospects               | Historical population validation  | CC BY 3.0 IGO          |
 | HYDE 3.x (via OWID population)              | Long-run population validation    | CC BY 4.0 (via OWID)   |
+| FRED: NASDAQCOM, CBBTCUSD                   | Bubble validation cases           | FRED terms; (c) owners |
 | OECD.AI Policy Observatory                  | Policy and law-making lag         | OECD terms and conditions |
 | OpenAlex                                    | Safety/interpretability papers    | CC0 1.0                |
 | arXiv metadata                              | Paper counts                      | CC0 1.0 (metadata)     |

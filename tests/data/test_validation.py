@@ -20,3 +20,28 @@ def test_growth_cases(tmp_path):
     hist = res.tables[POPULATION_TABLE]
     assert hist["year"].min() < 0  # BCE years kept in the table
     assert (res.datasets[0].frame["side"] == "validation").all()
+
+
+def test_bubble_cases(tmp_path):
+    from kairos.data.sources.validation import VALIDATION_BUBBLES
+
+    res = build(VALIDATION_BUBBLES, tmp_path)
+    by_id = {d.meta.series_id: d.frame for d in res.datasets}
+    nq = by_id["val.nasdaq"]
+    assert len(nq) == 84
+    peak = nq.loc[nq["y"].idxmax(), "ds"]
+    assert pd.Timestamp("1999-12-01") <= peak <= pd.Timestamp("2000-03-01")
+    btc = by_id["val.bitcoin"]
+    assert btc.loc[btc["y"].idxmax(), "ds"] == pd.Timestamp("2017-12-01")
+    assert by_id["val.covid_cases"]["ds"].max() == pd.Timestamp("2022-12-01")
+    assert res.events is not None
+    assert (res.events["scope"] == "covid").all()
+
+
+def test_monthly_mean_drops_missing():
+    from kairos.data.sources.validation import monthly_mean
+
+    m = monthly_mean(
+        pd.Series(["2020-01-01", "2020-01-02", "2020-02-01"]), pd.Series(["1", ".", "3"])
+    )
+    assert m["y"].tolist() == [1.0, 3.0]

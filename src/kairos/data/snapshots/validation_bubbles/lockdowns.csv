@@ -1,0 +1,10 @@
+# COVID-19 interventions used as events for the COVID validation case.
+event,ds,type,lower_window,upper_window,source_url,scope,description
+wuhan_lockdown,2020-01-23,intervention,0,60,https://www.who.int/news/item/27-04-2020-who-timeline---covid-19,covid,Wuhan lockdown
+who_pandemic_declared,2020-03-11,intervention,0,30,https://www.who.int/director-general/speeches/detail/who-director-general-s-opening-remarks-at-the-media-briefing-on-covid-19---11-march-2020,covid,WHO declares pandemic
+italy_national_lockdown,2020-03-09,intervention,0,60,https://www.gazzettaufficiale.it/eli/id/2020/03/09/20A01558/sg,covid,Italy national lockdown
+india_national_lockdown,2020-03-25,intervention,0,60,https://www.mha.gov.in/sites/default/files/MHAorder%20copy_0.pdf,covid,India national lockdown
+uk_first_lockdown,2020-03-23,intervention,0,60,https://www.gov.uk/government/speeches/pm-address-to-the-nation-on-coronavirus-23-march-2020,covid,UK first lockdown
+uk_third_lockdown,2021-01-06,intervention,0,60,https://www.legislation.gov.uk/uksi/2021/8/contents/made,covid,UK third lockdown
+first_vaccine_authorised,2020-12-02,intervention,0,90,https://www.gov.uk/government/news/uk-medicines-regulator-gives-approval-for-first-uk-covid-19-vaccine,covid,First COVID vaccine authorised (UK)
+omicron_variant_designated,2021-11-26,intervention,0,60,https://www.who.int/news/item/26-11-2021-classification-of-omicron-(b.1.1.529)-sars-cov-2-variant-of-concern,covid,Omicron designated variant of concern
