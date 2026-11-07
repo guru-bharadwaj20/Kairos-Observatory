@@ -1,0 +1,131 @@
+{
+  "digest": "e9adce7e3e7cd9c7742d07dedae706a00b346c8c75e77ed3932a3781ef1cf9cb",
+  "files": {
+    "processed/events.parquet": {
+      "bytes": 8616,
+      "sha256": "fadb1a420a3721f88be40f9cd865f6e4da3eb72282aa72d582817cfb7a81bc88"
+    },
+    "processed/series/c.ai_research_share.parquet": {
+      "bytes": 7707,
+      "sha256": "a72d502851a64be779e69815deb89cef675127f14d44bda100b1325130b76823"
+    },
+    "processed/series/c.bench.gpqa_diamond.parquet": {
+      "bytes": 7602,
+      "sha256": "4fc27c3dd7baf8e1bd36375f35edb8cbac49ac92c350d8e8251356b35b6a015c"
+    },
+    "processed/series/c.bench.mmlu.parquet": {
+      "bytes": 7500,
+      "sha256": "f72a208519d894a3020cb819fe4ab5b491933071bd76bd59e3fa401447353380"
+    },
+    "processed/series/c.bench.swe_bench_verified.parquet": {
+      "bytes": 7684,
+      "sha256": "0a90a287df0b51a3559c9af6a8239f4bc94a8097230e14f31d4c8b4f14bbe3b8"
+    },
+    "processed/series/c.cost_per_mtok.parquet": {
+      "bytes": 7636,
+      "sha256": "27d947e34d03ccc392cd8bf98d80c923eb61c5d3a38201558024a4f509edc81f"
+    },
+    "processed/series/c.frontier_compute.parquet": {
+      "bytes": 12628,
+      "sha256": "f2a71891d98a400a4218033956d3e2354112c752ceae0d8c244c49bee88c476d"
+    },
+    "processed/series/c.metr_horizon.parquet": {
+      "bytes": 7894,
+      "sha256": "d9a8a1feeee78dc8f1254eb755b1ad6bd60de84d25b6c522a57b82084e221d66"
+    },
+    "processed/series/exo.compute.parquet": {
+      "bytes": 9766,
+      "sha256": "230d595312b941750c8c0576836e8451ba1fd64b1ce7b629c3013ac3e092a136"
+    },
+    "processed/series/exo.investment.parquet": {
+      "bytes": 9755,
+      "sha256": "b2c44d1bc477abfedf17ec0673eab5cbff8ac5aececfaff13d9f951d786ec209"
+    },
+    "processed/series/exo.researchers.parquet": {
+      "bytes": 12105,
+      "sha256": "e626fffeca762221217f7d1f28ddc53a53af14ec7ea7c359b5b4d5d49c043cb9"
+    },
+    "processed/series/h.ai_literacy.parquet": {
+      "bytes": 8400,
+      "sha256": "fb1d8c3dadcd3d2ad7a6ed7eaa3a862fda5044640a97607bbc1ecc618db5ae25"
+    },
+    "processed/series/h.eval_share.parquet": {
+      "bytes": 8578,
+      "sha256": "a99f432605feaf519a71fb1211c927094d09e7bfe8638539aebda2c240a23427"
+    },
+    "processed/series/h.regulatory_lag.parquet": {
+      "bytes": 7540,
+      "sha256": "f977a17c4dd8ab035ed54cfb8a69fe9ed9378ad9306bcc285d20f157285008da"
+    },
+    "processed/series/h.safety_funding.parquet": {
+      "bytes": 7533,
+      "sha256": "2dbe6051560e85c08921a94bb0a40f4bfccfd41c34682897e761ba9fdbcb4fce"
+    },
+    "processed/series/h.safety_papers.parquet": {
+      "bytes": 8945,
+      "sha256": "890c33e349ee4d5b8e9fe9ef824e2aa8f486c6df68fe0b793ebb6260b8a6fa18"
+    },
+    "processed/series/h.safety_researchers.parquet": {
+      "bytes": 7529,
+      "sha256": "47d6d6d7907fca45dda2c8a1f3ca7b3cf8e8512e99140c35a915bf3164eaa8dd"
+    },
+    "processed/series/idx.C.parquet": {
+      "bytes": 14125,
+      "sha256": "832fd82615cb96248c4183a13dd2b58b46c91578090289f8b7231e13373b7209"
+    },
+    "processed/series/idx.H.parquet": {
+      "bytes": 13503,
+      "sha256": "8791b7d5190d7b5f830f40ba672eb0893110e774c1a7cc5206b8b26952a037cb"
+    },
+    "processed/series/val.bitcoin.parquet": {
+      "bytes": 7689,
+      "sha256": "4061963bea877ab68d58a06da63f65e23d2b4e9a76bbf1016d2119d2d460cb73"
+    },
+    "processed/series/val.covid_cases.parquet": {
+      "bytes": 7440,
+      "sha256": "946b5b70aa7a534bea0ec6ab16a58cc3684cf7835e5fa72110d834ca4ab4e04d"
+    },
+    "processed/series/val.nasdaq.parquet": {
+      "bytes": 8347,
+      "sha256": "ec8dae37ae2ac5b62b6ef55e2cb6d25afe35729a3bfcc3d4f04c66f802efe379"
+    },
+    "processed/series/val.population.parquet": {
+      "bytes": 10258,
+      "sha256": "1849cffebd64caa615c2a1f4ea0d1d2acb4c4ae469eedf782a7209a99968b5c6"
+    },
+    "processed/series/val.transistors.parquet": {
+      "bytes": 7496,
+      "sha256": "fdf832f5443535a9126b3d799304e6e136dac40c0fd1a866c1bea883954a7cce"
+    },
+    "processed/tables/benchmark_scores.parquet": {
+      "bytes": 4781,
+      "sha256": "51b750bf99430eb62db88e24a6c10f1fed4fa99b3e91514f5fc06097765c2327"
+    },
+    "processed/tables/epoch_models.parquet": {
+      "bytes": 26656,
+      "sha256": "a5581a38feb291330b2a46cb33d96356b296de5cfc0f276a4c8bf712483b4ef6"
+    },
+    "processed/tables/loo_C.parquet": {
+      "bytes": 3507,
+      "sha256": "732547a10f8dec457a3bf5e7babed939f0f568305dfe0727707236fc6cf8b4ed"
+    },
+    "processed/tables/loo_H.parquet": {
+      "bytes": 3467,
+      "sha256": "94b89b6c0a248efee76c39b92322765ca13b4454b514dc53bf5866283b1f0d82"
+    },
+    "processed/tables/population_history.parquet": {
+      "bytes": 4429,
+      "sha256": "5278fc8e7311c824ecb392750e515399b3d11ffc13493e362dffa5eb4fb7c9da"
+    },
+    "processed/tables/quality_report.parquet": {
+      "bytes": 3157,
+      "sha256": "a077c1464a7f3fe85f3a6e9fd0a6777bdc4980a0a340a801d6047a14614bd958"
+    },
+    "processed/tables/regulatory_lag.parquet": {
+      "bytes": 5354,
+      "sha256": "e8513d7a42f09812e8b50c98889c54a06068761df57fb4727ca6d9f70992b0e7"
+    }
+  },
+  "generated_at": "2026-11-06T18:17:21Z",
+  "schema": 1
+}
