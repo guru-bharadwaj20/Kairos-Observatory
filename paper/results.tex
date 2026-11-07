@@ -1,19 +1,32 @@
-% Result placeholders. Replace each \TBD{...} with the value from the published
-% snapshot (docs/validation.md and the ledger entry it cites). Do not edit
-% numbers anywhere else in the paper.
-\newcommand{\resAsOf}{\TBD{as-of date}}
-\newcommand{\resPopTc}{\TBD{t\_c, e.g.\ Nov 2026}}
-\newcommand{\resPopBendYear}{\TBD{year}}
-\newcommand{\resDotcomTc}{\TBD{t\_c vs.\ published}}
-\newcommand{\resBtcLead}{\TBD{days}}
-\newcommand{\resCovidCrps}{\TBD{\%}}
-\newcommand{\resMooreFAR}{\TBD{rate}}
-\newcommand{\resAiChangepoints}{\TBD{years}}
-\newcommand{\resCoverage}{\TBD{\%}}
-\newcommand{\resDelta}{\TBD{value (90\% CI)}}
-\newcommand{\resKappa}{\TBD{value}}
-\newcommand{\resHstar}{\TBD{months}}
-\newcommand{\resGapVelocity}{\TBD{per year}}
-\newcommand{\resLevel}{\TBD{0--4}}
-\newcommand{\resLeadTime}{\TBD{N months (90\% CI)}}
-\newcommand{\resLedgerHash}{\TBD{sha256}}
+% Result values. Validation numbers come from docs/validation.md (kairos run
+% validation, 2026-11-07); dial numbers come from build/snapshot.json and
+% ledger entry 0 (KAIROS_OFFLINE=1 kairos run weekly --cpu-only, run_id
+% ee1ce4c79149). Do not edit numbers anywhere else in the paper.
+\newcommand{\resAsOf}{1~September 2026}
+% population: t_c_1960 = 2052.210, 95% interval (2018.980, 2113.880).
+\newcommand{\resPopTc}{2052.2 (95\% interval 2019.0--2113.9)}
+% population: local delta 3.737 in 1960, -0.685 in 1980 (trend -0.168/yr).
+\newcommand{\resPopBendYear}{1980}
+% dotcom: t_c_last_pre_peak = 2000.423; published window 2000.0--2000.5
+% (Johansen & Sornette 2000).
+\newcommand{\resDotcomTc}{2000.42 vs.\ 2000.0--2000.5}
+% bitcoin: lead_time_days = 350 (upper bound: baseline LPPLS alarms persistently).
+\newcommand{\resBtcLead}{350 days}
+% n/a: the COVID case scores mean absolute log error, not CRPS. Lockdown-
+% conditioned MAE(log) 1.062 vs. no-event counterfactual 14.78.
+\newcommand{\resCovidCrps}{n/a}
+% moore: 0 alarms over 37 yearly as-of dates.
+\newcommand{\resMooreFAR}{0/37}
+% ai_history: latest_breaks = (2017.080, 2018.580).
+\newcommand{\resAiChangepoints}{2017.1, 2018.6}
+% n/a: no validation case computes interval coverage (scoring.interval_coverage
+% exists but the runner does not call it).
+\newcommand{\resCoverage}{n/a}
+\newcommand{\resDelta}{0.081 (90\% CI 0.026--0.085)}
+\newcommand{\resKappa}{0.369 (90\% CI 0.111--0.549)}
+\newcommand{\resHstar}{23.0 months (90\% CI 22.2--23.8)}
+\newcommand{\resGapVelocity}{0.443 per year}
+\newcommand{\resLevel}{0}
+% n/a: snapshot alert.lead_time is null at level 0 (no lead time is issued).
+\newcommand{\resLeadTime}{n/a}
+\newcommand{\resLedgerHash}{eb3dc2c7bb932ba1127936f6127a30a8a0f43003d7e53b84aae00d889b23367c}

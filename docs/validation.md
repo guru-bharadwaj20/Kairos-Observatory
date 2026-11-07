@@ -1,6 +1,6 @@
 # Historical validation
 
-Generated 2026-11-06 by `kairos validate report`. Each case replays the detectors on a curve whose ending is known, using only data available at each as-of date (Phase 9, K-9.01 to K-9.08).
+Generated 2026-11-07 by `kairos validate report`. Each case replays the detectors on a curve whose ending is known, using only data available at each as-of date (Phase 9, K-9.01 to K-9.08).
 
 Detectors are the self-contained baselines in `kairos.validation` (`HyperbolicDetector`, `LPPLSDetector`, `LocalDeltaDetector`) until the Phase 5 detectors are registered in `kairos.validation.detectors.DETECTORS`.
 
