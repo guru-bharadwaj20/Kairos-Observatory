@@ -7,15 +7,19 @@ report exists to show where the detectors are wrong.
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from datetime import date
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
 
 import pandas as pd
 
 from kairos.validation.cases import CaseResult, list_cases, run_case
 
-__all__ = ["draw_figure", "render_markdown", "write_report"]
+if TYPE_CHECKING:
+    from kairos.commands.run import RunContext
+
+__all__ = ["draw_figure", "render_markdown", "run_stage", "write_report"]
 
 FIGURE_DIR = Path("figures") / "validation"
 
@@ -141,3 +145,10 @@ def write_report(
     text = render_markdown(results, figures, generated=date.today())
     out.write_text(text, encoding="utf-8", newline="\n")
     return out, results
+
+
+def run_stage(ctx: RunContext) -> Mapping[str, Any] | None:
+    """``kairos run validation`` report stage; see :mod:`kairos.validation.runner`."""
+    from kairos.validation.runner import run_report_stage
+
+    return run_report_stage(ctx)
