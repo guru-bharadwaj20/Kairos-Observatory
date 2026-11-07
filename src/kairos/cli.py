@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import importlib
 import pkgutil
+import sys
 from types import ModuleType
 
 import typer
@@ -69,6 +70,10 @@ discover_commands(app)
 
 def main() -> None:
     """Console-script entry point."""
+    for stream in (sys.stdout, sys.stderr):
+        # Windows consoles default to a legacy code page that cannot print symbols such as δ.
+        if hasattr(stream, "reconfigure") and (stream.encoding or "").lower() != "utf-8":
+            stream.reconfigure(encoding="utf-8", errors="replace")
     app()
 
 

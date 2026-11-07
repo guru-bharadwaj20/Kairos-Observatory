@@ -55,6 +55,8 @@ SCHEMA_VERSION = 1
 
 DialName = Literal["acceleration", "recursion", "vinge_horizon", "jonas_gap"]
 DIAL_ORDER: tuple[DialName, ...] = ("acceleration", "recursion", "vinge_horizon", "jonas_gap")
+#: Names used by the dial modules (``DialReading.dial``) mapped to dashboard names.
+DIAL_ALIASES: dict[str, DialName] = {"vinge": "vinge_horizon", "jonas": "jonas_gap"}
 DialState = Literal["calm", "danger"]
 ProofStatus = Literal["verified", "pending", "failed"]
 
@@ -267,6 +269,7 @@ def _series(raw: object, where: str, name: str | None = None) -> SeriesFrame:
 def _dial(raw: object, where: str) -> DialReading:
     m = _obj(raw, where)
     name = _str(m, "dial", where)
+    name = DIAL_ALIASES.get(name, name)
     if name not in DIAL_ORDER:
         raise SnapshotError(f"{where}.dial: unknown dial '{name}'")
     state = _str(m, "state", where)

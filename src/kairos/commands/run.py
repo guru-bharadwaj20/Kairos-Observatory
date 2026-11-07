@@ -33,6 +33,8 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
+import typer
+
 __all__ = [
     "VALIDATION_STAGES",
     "WEEKLY_STAGES",
@@ -345,3 +347,19 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(main())
+
+
+def register(root: typer.Typer) -> None:
+    """Attach ``kairos run`` (arguments are forwarded to :func:`main`)."""
+
+    @root.command(
+        "run",
+        context_settings={
+            "allow_extra_args": True,
+            "ignore_unknown_options": True,
+            "help_option_names": [],
+        },
+        help="Run a pipeline (weekly, ...) and write a JSON run report.",
+    )
+    def run(ctx: typer.Context) -> None:
+        raise typer.Exit(main(list(ctx.args)))
