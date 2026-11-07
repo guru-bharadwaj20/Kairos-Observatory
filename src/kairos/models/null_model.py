@@ -53,6 +53,8 @@ __all__ = [
     "fit_null_model",
     "get_prophet_config",
     "is_frontier",
+    "numpy_seed",
+    "rates_per_year",
     "select_series",
     "series_seed",
 ]
@@ -163,7 +165,7 @@ def select_series(frame: SeriesFrame, series_id: str | None = None) -> tuple[str
 
 
 @contextmanager
-def _numpy_seed(seed: int) -> Iterator[None]:
+def numpy_seed(seed: int) -> Iterator[None]:
     """Seed NumPy's legacy global state (Prophet's predictive draws) and restore it."""
     state = np.random.get_state()  # noqa: NPY002
     np.random.seed(seed % 2**32)  # noqa: NPY002 - Prophet samples from the global state
@@ -234,7 +236,7 @@ class NullModelFit:
         )
 
 
-def _rates_per_year(model: Prophet) -> tuple[float, np.ndarray[Any, np.dtype[np.float64]]]:
+def rates_per_year(model: Prophet) -> tuple[float, np.ndarray[Any, np.dtype[np.float64]]]:
     """Base rate ``k`` and changepoint ``delta`` in ln-y units per year."""
     params = model.params
     t_scale_years = pd.Timedelta(model.t_scale).total_seconds() / 86400.0 / DAYS_PER_YEAR
@@ -280,11 +282,11 @@ def fit_null_model(
 
     start = time.perf_counter()
     model = LogProphet(**kwargs).fit(rows[["ds", "y"]], seed=fit_seed)
-    with _numpy_seed(fit_seed):
+    with numpy_seed(fit_seed):
         forecast = model.predict(model.make_future_dataframe(horizon))
     elapsed = time.perf_counter() - start
 
-    base_rate, deltas = _rates_per_year(model.model)
+    base_rate, deltas = rates_per_year(model.model)
     changepoints = pd.DatetimeIndex(model.model.changepoints)
     return NullModelFit(
         series_id=series_id,
