@@ -159,6 +159,15 @@ on `get_device()`, the one GPU job in this phase. `compare_global_local()`
 scores it against one model per series (CPU pool) on identical per-series
 hold-outs and reports `gain = 1 − MAE_global / MAE_local`.
 
+## Event effect table (`kairos.neural.effects`)
+
+`event_effect_table()` fits drivers + events over a seed ensemble (CPU pool)
+and reports, per event, the mean `event_<name>` component at the occurrence
+months (log units), a 90 % seed interval, the peak inside the window, and
+`factor = exp(effect)` as the multiplicative change in raw units.
+`excludes_zero` flags intervals that don't cover 0. The interval measures
+training noise only, so treat it as a screen, not proof that a policy works.
+
 CLI: `kairos kappa synthetic --coupling 0.8` (offline demo) and
 `kairos kappa estimate data.parquet --target <series_id>` print the reading
 as JSON.
