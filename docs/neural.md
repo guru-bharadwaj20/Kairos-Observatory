@@ -130,6 +130,17 @@ positive `κ`. Early stopping is off for `κ`: without a validation split it
 watches the training loss and stopped high-learning-rate fits too early, and
 overfitting is already handled by scoring out of sample against the null.
 
+## Rolling κ(t) (`kairos.neural.rolling`)
+
+`rolling_kappa()` re-estimates `κ` on trailing windows (default 120 months)
+ending every `step` months (default = `test_months`, so hold-outs don't
+overlap); all fits of all windows go to the pool as one batch. `trend_test()`
+runs a one-sided Mann–Kendall test and a Theil–Sen slope with interval; `κ(t)`
+is "rising" when `p < 0.05` and the slope is positive. `rolling_reading()`
+gives the dial for the latest window with the trend and window table in
+`detail`. Caveat: windows share data, so window estimates are positively
+correlated and the trend p-value is optimistic; read it with the interval.
+
 CLI: `kairos kappa synthetic --coupling 0.8` (offline demo) and
 `kairos kappa estimate data.parquet --target <series_id>` print the reading
 as JSON.
