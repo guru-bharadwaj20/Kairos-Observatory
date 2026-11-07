@@ -1,0 +1,7 @@
+# Frontier models (names as in Epoch AI's table) with a publicly documented
+# independent pre-deployment evaluation by an organisation outside the developer.
+# Only evaluations disclosed by the developer or the evaluator count.
+model,evaluator,source_url
+GPT-4 (Mar 2023),ARC Evals (now METR),https://cdn.openai.com/papers/gpt-4-system-card.pdf
+Claude 3.5 Sonnet,UK AI Safety Institute,https://www.anthropic.com/news/claude-3-5-sonnet
+GPT-4.5,METR,https://evaluations.metr.org/gpt-4.5-report/

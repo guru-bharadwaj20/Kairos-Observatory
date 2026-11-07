@@ -42,6 +42,7 @@ and SeriesMeta.url) and is checked when a source is added.
 | OWID / Quid, private investment in AI       | Investment driver                 | CC BY 4.0              |
 | NeurIPS conference statistics (curated)     | Researcher-count driver proxy     | Facts; cited per row   |
 | AI safety field surveys, grant databases    | Safety headcount and funding      | Estimates; cited       |
+| System cards and evaluator reports (curated) | Third-party evaluation share     | Facts; cited per row   |
 
 Each new source added under src/kairos/data/sources/ must add a row here in
 the same commit.
