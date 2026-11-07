@@ -194,7 +194,7 @@ def gap_velocity(
     if n_boot > 0:
         root = get_settings().seed if seed is None else seed
         task = _Replicate(frame, base_year, window, root, weights)
-        log.info("jonas velocity bootstrap: %d replicates", n_boot)
+        log.debug("jonas velocity bootstrap: %d replicates", n_boot)
         reps = pmap(task, range(n_boot), n_jobs=n_jobs)
         # A resample may cover fewer months than the full frame; align on ds.
         arr = np.column_stack([s.reindex(ds_index).to_numpy(dtype="float64") for s in reps])

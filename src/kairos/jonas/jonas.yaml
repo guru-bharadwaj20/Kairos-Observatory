@@ -1,0 +1,28 @@
+# Published parameters of the Jonas Gap dial (K-7.06).
+# Changing any value changes the dial's behaviour: bump `version` and record why
+# in the commit message. Thresholds live here, never as literals in code.
+version: 1
+
+# Year at which every C and H component is normalised to 1 (D8).
+base_year: 2016
+
+# dG/dt: trailing months per slope fit, bootstrap replicates, interval coverage.
+window: 12
+n_boot: 500
+level: 0.90
+
+# Sustained-positive test (K-7.03).
+min_run: 6        # consecutive months with dG/dt > 0
+alpha: 0.05       # one-sided HAC t-test level
+test_months: 36   # trailing months of increments in the HAC test
+
+# Window for attribution and closing scenarios.
+scenario_months: 36
+
+# Dial state -> tripwire contribution (0 Normal ... 4 Kairos).
+levels:
+  closing: 0          # dG/dt <= 0
+  widening: 1         # dG/dt > 0
+  persistent: 2       # run-length rule met
+  sustained: 3        # run-length rule and HAC test both met
+  sustained_robust: 4 # sustained, and the whole dG/dt interval is above 0

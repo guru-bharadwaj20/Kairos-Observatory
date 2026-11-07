@@ -79,3 +79,23 @@ Because `dG/dt = g_C − g_H`, the gap stops widening when H grows as fast as C.
   rate.
 
 Rates are continuous log growth per year; `required_pct` is `100·(e^g − 1)`.
+
+## Jonas dial (K-7.06)
+
+`jonas_dial(frame)` returns a `DialReading` with `value = dG/dt` (log units per
+year) at the latest month, `ci_lo`/`ci_hi` from K-7.02, and `detail` holding the
+state, run length, HAC test, relative `G`, the most-lagging H component and the
+closing rate. All parameters (base year, windows, thresholds, state → level map)
+are published in `src/kairos/jonas/jonas.yaml`; `--config` swaps in another file.
+
+| State | Condition | Default level |
+|---|---|:-:|
+| `closing` | `dG/dt <= 0` | 0 |
+| `widening` | `dG/dt > 0` | 1 |
+| `persistent` | run-length rule met | 2 |
+| `sustained` | run-length rule and HAC test met | 3 |
+| `sustained_robust` | sustained and `dgdt_lo > 0` | 4 |
+
+```bash
+kairos jonas dial data/processed/ch_series.parquet --seed 1
+```

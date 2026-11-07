@@ -31,13 +31,13 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 4 | NeuralProphet and the recursion dial `κ` | 5–6 | 12 | 12 | ✅ |
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 14 | ✅ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 7 | ✅ |
-| 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 5 | ❌ |
+| 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 6 | ✅ |
 | 8 | Ethical governor and tripwires | 10 | 9 | 7 | ❌ |
 | 9 | Historical validation | 8, 10 | 9 | 2 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **118** | **86%** |
+| | **Total** | | **137** | **119** | **87%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -346,7 +346,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-7.03 | Sustained-positive test | Run-length rule plus HAC (Newey–West) t-test on `dG/dt > 0` | CPU | 7.02 | ✅ |
 | K-7.04 | Component attribution | Which H sub-series lags the most: the funders' view | CPU | 7.02 | ✅ |
 | K-7.05 | Closing scenarios | H growth rate needed to bring `dG/dt` to 0, with interval | CPU | 7.02 | ✅ |
-| K-7.06 | Jonas dial | Dial object: `dG/dt`, interval, run length, state | CPU | 7.03 | ❌ |
+| K-7.06 | Jonas dial | Dial object: `dG/dt`, interval, run length, state | CPU | 7.03 | ✅ |
 
 ### Phase 8: Ethical governor and tripwires
 
