@@ -32,12 +32,12 @@ This file is the build plan and the contribution guide. It breaks the project in
 | 5 | Singularity math: `δ`, `t_c`, LPPLS | 7–8 | 14 | 14 | ✅ |
 | 6 | Vinge Horizon `h*` | 9 | 7 | 7 | ✅ |
 | 7 | Jonas Gap `G`, `dG/dt` | 9–10 | 6 | 6 | ✅ |
-| 8 | Ethical governor and tripwires | 10 | 9 | 7 | ❌ |
+| 8 | Ethical governor and tripwires | 10 | 9 | 8 | ❌ |
 | 9 | Historical validation | 8, 10 | 9 | 2 | ❌ |
 | 10 | Pre-registration ledger | 11 | 7 | 4 | ❌ |
 | 11 | Public dashboard | 11–12 | 9 | 6 | ❌ |
 | 12 | Automation, release, paper | 12 | 9 | 6 | ❌ |
-| | **Total** | | **137** | **119** | **87%** |
+| | **Total** | | **137** | **120** | **88%** |
 
 A phase is ✅ only when every subtask in it is ✅.
 
@@ -359,7 +359,7 @@ Sanity check on the hook: 13 November 2026 really is a Friday, so the von Foerst
 | K-8.05 | Collingridge lead time | Months until the upper quantile crosses the threshold, with 90% interval, e.g. "31 months (18–52)" | CPU | 8.03 | ✅ |
 | K-8.06 | Intervention-cost curve | Parametric cost-versus-lead-time curve with documented assumptions | — | 8.05 | ✅ |
 | K-8.07 | Goodhart divergence detector | Gap between public and held-out metric trends flagged as a gaming signal | CPU | 2.08 | ✅ |
-| K-8.08 | Tripwire aggregator and spec | Levels 0–4 from §8 in versioned `tripwires.yaml`; property tests cover every level boundary | — | 8.02, 5.13 | ❌ |
+| K-8.08 | Tripwire aggregator and spec | Levels 0–4 from §8 in versioned `tripwires.yaml`; property tests cover every level boundary | — | 8.02, 5.13 | ✅ |
 | K-8.09 | Löb independence report | Fails the run if any dial depends only on a single lab-controlled source | — | 8.08 | ❌ |
 
 ### Phase 9: Historical validation

@@ -1,0 +1,44 @@
+# KAIROS tripwire specification (KAIROS_Project_Idea.md section 8).
+#
+# Responses are agreed in advance, like a fire code. Changing anything here is a
+# policy change: bump `version`, add a changelog entry, register it in the ledger.
+# KAIROS recommends; humans decide.
+version: "1.0.0"
+changelog:
+  - version: "1.0.0"
+    date: 2026-11-06
+    note: Initial levels 0-4 as written in the project idea, section 8.
+
+# The four dials that count towards the level. Other readings (e.g. "goodhart") are
+# reported but do not move the level.
+dials: [acceleration, recursion, vinge, jonas]
+
+# "Confirmed on 3 or more independent metrics" (D10, K-5.13): a dial in danger whose
+# reading reports detail[n_independent_groups] >= min_independent_groups.
+confirmation:
+  detail_key: n_independent_groups
+  min_independent_groups: 3
+
+levels:
+  - level: 0
+    name: Normal
+    trigger: All dials calm
+    response: Weekly publication
+  - level: 1
+    name: Watch
+    trigger: One dial in the danger zone
+    response: More data collection, public notice
+  - level: 2
+    name: Warning
+    trigger: Two dials, or one confirmed on 3 or more independent metrics
+    response: Mandatory third-party evaluation before new frontier deployments
+  - level: 3
+    name: Alarm
+    trigger: Three dials
+    response: >-
+      Pause scaling past the current frontier until H catches up; emergency funding
+      for the H side
+  - level: 4
+    name: Kairos
+    trigger: All four dials
+    response: The decisive moment, the last window in which intervention is still cheap
